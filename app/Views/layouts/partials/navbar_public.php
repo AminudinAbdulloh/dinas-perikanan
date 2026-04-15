@@ -44,6 +44,10 @@
         background-color: #101828 !important;
         border-bottom: 1px solid #1f2937;
     }
+
+    [data-bs-theme="dark"] .dropdown-menu {
+        background-color: #1e2939;
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg bg-white sticky-top">

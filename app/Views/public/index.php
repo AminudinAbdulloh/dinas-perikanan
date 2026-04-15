@@ -227,88 +227,19 @@
         </div>
 
         <div class="row g-4">
-
+            <?php foreach ($services as $service): ?>
             <div class="col-md-6 col-lg-3">
-                <a href="/informasi/alur-permohonan" class="service-card shadow-sm">
+                <a href="<?= base_url($service['link']) ?>" class="service-card shadow-sm">
                     <div class="icon-box">
-                        <i class="bi bi-clipboard-check fs-3"></i>
+                        <i class="bi <?= esc($service['icon']) ?> fs-3"></i>
                     </div>
-                    <h3 class="fw-bold">Alur Permohonan Informasi Publik</h3>
-                    <p class="service-description">Panduan dan prosedur pengajuan permohonan informasi publik</p>
+                    <h3 class="fw-bold"><?= esc($service['title']) ?></h3>
+                    <p class="service-description"><?= esc($service['description']) ?></p>
                 </a>
             </div>
-
-            <div class="col-md-6 col-lg-3">
-                <a href="/informasi/form-permohonan" class="service-card shadow-sm">
-                    <div class="icon-box">
-                        <i class="bi bi-file-earmark-text fs-3"></i>
-                    </div>
-                    <h3 class="fw-bold">Form Permohonan Informasi</h3>
-                    <p class="service-description">Formulir pengajuan permohonan informasi publik secara online</p>
-                </a>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <a href="/informasi/form-keberatan" class="service-card shadow-sm">
-                    <div class="icon-box">
-                        <i class="bi bi-shield-exclamation fs-3"></i>
-                    </div>
-                    <h3 class="fw-bold">Form Keberatan Informasi</h3>
-                    <p class="service-description">Formulir pengajuan keberatan atas permohonan informasi</p>
-                </a>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <a href="/informasi/daftar-informasi" class="service-card shadow-sm">
-                    <div class="icon-box">
-                        <i class="bi bi-folder2-open fs-3"></i>
-                    </div>
-                    <h3 class="fw-bold">Daftar Informasi Publik</h3>
-                    <p class="service-description">Katalog dan daftar informasi publik yang tersedia</p>
-                </a>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <a href="/informasi/informasi-dikecualikan" class="service-card shadow-sm">
-                    <div class="icon-box">
-                        <i class="bi bi-lock fs-3"></i>
-                    </div>
-                    <h3 class="fw-bold">Daftar Informasi Dikecualikan</h3>
-                    <p class="service-description">Informasi publik yang dikecualikan dari layanan informasi</p>
-                </a>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <a href="/informasi/informasi-setiap-saat" class="service-card shadow-sm">
-                    <div class="icon-box">
-                        <i class="bi bi-clock-history fs-3"></i>
-                    </div>
-                    <h3 class="fw-bold">Informasi Setiap Saat</h3>
-                    <p class="service-description">Informasi publik yang dapat diakses setiap saat</p>
-                </a>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <a href="/informasi/informasi-berkala" class="service-card shadow-sm">
-                    <div class="icon-box">
-                        <i class="bi bi-calendar-event fs-3"></i>
-                    </div>
-                    <h3 class="fw-bold">Informasi Berkala</h3>
-                    <p class="service-description">Informasi publik yang disediakan secara berkala</p>
-                </a>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <a href="/informasi/laporan-layanan" class="service-card shadow-sm">
-                    <div class="icon-box">
-                        <i class="bi bi-bar-chart-line fs-3"></i>
-                    </div>
-                    <h3 class="fw-bold">Laporan Layanan Informasi</h3>
-                    <p class="service-description">Laporan dan statistik layanan informasi publik</p>
-                </a>
-            </div>
-
+            <?php endforeach; ?>
         </div>
+
     </div>
 </section>
 

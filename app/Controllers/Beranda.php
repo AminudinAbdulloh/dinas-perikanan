@@ -63,49 +63,49 @@ class Beranda extends BaseController
 
         $data['services'] = [
             [
-                'icon' => 'bi-clipboard-data', // Icon: ClipboardList
+                'icon' => 'bi-clipboard-check',
                 'title' => 'Alur Permohonan Informasi Publik',
                 'description' => 'Panduan dan prosedur pengajuan permohonan informasi publik',
                 'link' => 'informasi/alur-permohonan'
             ],
             [
-                'icon' => 'bi-file-earmark-text', // Icon: FileText
+                'icon' => 'bi-file-earmark-text',
                 'title' => 'Form Permohonan Informasi',
                 'description' => 'Formulir pengajuan permohonan informasi publik secara online',
                 'link' => 'informasi/form-permohonan'
             ],
             [
-                'icon' => 'bi-shield-exclamation', // Icon: ShieldAlert
-                'title' => 'Form Keberatan atas Permohonan Informasi',
+                'icon' => 'bi-shield-exclamation',
+                'title' => 'Form Keberatan Informasi',
                 'description' => 'Formulir pengajuan keberatan atas permohonan informasi',
                 'link' => 'informasi/form-keberatan'
             ],
             [
-                'icon' => 'bi-file-earmark-medical', // Icon: FileSearch
+                'icon' => 'bi-folder2-open',
                 'title' => 'Daftar Informasi Publik',
                 'description' => 'Katalog dan daftar informasi publik yang tersedia',
                 'link' => 'informasi/daftar-informasi'
             ],
             [
-                'icon' => 'bi-lock', // Icon: Lock
-                'title' => 'Daftar Informasi yang Dikecualikan',
+                'icon' => 'bi-lock',
+                'title' => 'Daftar Informasi Dikecualikan',
                 'description' => 'Informasi publik yang dikecualikan dari layanan informasi',
                 'link' => 'informasi/informasi-dikecualikan'
             ],
             [
-                'icon' => 'bi-clock-history', // Icon: Clock
+                'icon' => 'bi-clock-history',
                 'title' => 'Informasi Setiap Saat',
                 'description' => 'Informasi publik yang dapat diakses setiap saat',
                 'link' => 'informasi/informasi-setiap-saat'
             ],
             [
-                'icon' => 'bi-calendar3', // Icon: Calendar
+                'icon' => 'bi-calendar-event',
                 'title' => 'Informasi Berkala',
                 'description' => 'Informasi publik yang disediakan secara berkala',
                 'link' => 'informasi/informasi-berkala'
             ],
             [
-                'icon' => 'bi-graph-up-arrow', // Icon: BarChart3
+                'icon' => 'bi-bar-chart-line',
                 'title' => 'Laporan Layanan Informasi',
                 'description' => 'Laporan dan statistik layanan informasi publik',
                 'link' => 'informasi/laporan-layanan'
