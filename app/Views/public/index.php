@@ -1,0 +1,1 @@
+<?php echo $this->extend('layouts/template_public');
