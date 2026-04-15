@@ -41,7 +41,7 @@
     }
 
     [data-bs-theme="dark"] .navbar {
-        background-color: #111827 !important;
+        background-color: #101828 !important;
         border-bottom: 1px solid #1f2937;
     }
 </style>

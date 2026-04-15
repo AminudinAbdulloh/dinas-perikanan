@@ -126,7 +126,7 @@
     }
 
     .service-card:hover .icon-box {
-        background-color: var(--bs-blue-600);
+        background-color: #2563eb;
         color: #fff;
     }
 
@@ -147,33 +147,39 @@
         margin-bottom: 0;
     }
 
-    /* Dark Mode Support (Manual) */
-    @media (prefers-color-scheme: dark) {
-        body {
-            background-color: #0f172a;
-        }
+    [data-bs-theme="dark"] .service-card {
+        background-color: #0f172a !important;
+        border-color: #1e293b !important;
+    }
 
-        .service-card {
-            background-color: #1e293b;
-            border-color: #334155;
-        }
+    [data-bs-theme="dark"] .service-card:hover {
+        border-color: #3b82f6 !important;
+        background-color: #1e293b !important;
+    }
 
-        .service-card h3 {
-            color: #f8fafc;
-        }
+    [data-bs-theme="dark"] .service-card h3 {
+        color: #f8fafc;
+    }
 
-        .service-description {
-            color: #94a3b8;
-        }
+    [data-bs-theme="dark"] .service-description {
+        color: #94a3b8;
+    }
 
-        .icon-box {
-            background-color: rgba(37, 99, 235, 0.1);
-            color: #60a5fa;
-        }
+    [data-bs-theme="dark"] .icon-box {
+        background-color: rgba(37, 99, 235, 0.15);
+        color: #60a5fa;
+    }
 
-        .text-dark-white {
-            color: white !important;
-        }
+    [data-bs-theme="dark"] #layanan {
+        background-color: #030712;
+    }
+
+    [data-bs-theme="dark"] .text-dark-white {
+        color: white !important;
+    }
+
+    [data-bs-theme="dark"] .text-muted {
+        color: #94a3b8 !important;
     }
 </style>
 
@@ -255,7 +261,7 @@
             <div class="col-md-6 col-lg-3">
                 <a href="/informasi/daftar-informasi" class="service-card shadow-sm">
                     <div class="icon-box">
-                        <i class="bi bi-file-earmark-search fs-3"></i>
+                        <i class="bi bi-folder2-open fs-3"></i>
                     </div>
                     <h3 class="fw-bold">Daftar Informasi Publik</h3>
                     <p class="service-description">Katalog dan daftar informasi publik yang tersedia</p>
