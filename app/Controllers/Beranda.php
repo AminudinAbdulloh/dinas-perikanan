@@ -42,11 +42,18 @@ class Beranda extends BaseController
                 'link' => '#',
                 'aktif' => 'informasi',
                 'submenu' => [
-                    ['nama' => 'Alur Permohonan', 'link' => base_url('informasi/alur-permohonan')],
-                    ['nama' => 'Form Permohonan', 'link' => base_url('informasi/form-permohonan')],
-                    ['nama' => 'Form Keberatan', 'link' => base_url('informasi/form-keberatan')],
-                    ['nama' => 'Daftar Informasi Publik', 'link' => base_url('informasi/daftar-informasi')],
-                    ['nama' => 'Informasi Dikecualikan', 'link' => base_url('informasi/informasi-dikecualikan')],
+                    [
+                        'nama' => 'Layanan Publik',
+                        'link' => '#',
+                        'submenu' => [
+                            ['nama' => 'Alur Permohonan', 'link' => base_url('informasi/alur-permohonan')],
+                            ['nama' => 'Form Permohonan', 'link' => base_url('informasi/form-permohonan')],
+                            ['nama' => 'Form Keberatan', 'link' => base_url('informasi/form-keberatan')],
+                            ['nama' => 'Daftar Informasi Publik', 'link' => base_url('informasi/daftar-informasi')],
+                            ['nama' => 'Informasi Dikecualikan', 'link' => base_url('informasi/informasi-dikecualikan')],
+                            ['nama' => 'Informasi Berkala', 'link' => base_url('informasi/informasi-berkala')],
+                        ]
+                    ],
                     ['nama' => 'Berita', 'link' => base_url('berita')],
                 ]
             ],
@@ -57,6 +64,15 @@ class Beranda extends BaseController
                 'submenu' => [
                     ['nama' => 'Foto', 'link' => base_url('galeri/foto')],
                     ['nama' => 'Video', 'link' => base_url('galeri/video')],
+                ]
+            ],
+            [
+                'nama' => 'Menu Lainnya',
+                'link' => '#',
+                'aktif' => 'lainnya',
+                'submenu' => [
+                    ['nama' => 'FAQ', 'link' => base_url('faq')],
+                    ['nama' => 'Kebijakan Privasi', 'link' => base_url('kebijakan-privasi')],
                 ]
             ],
         ];
