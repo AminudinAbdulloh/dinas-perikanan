@@ -1,13 +1,60 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow-sm py-3">
+<style>
+    :root {
+        --dkp-blue: #2563eb;
+        --dkp-cyan: #06b6d4;
+    }
+
+    .logo-box {
+        width: 60px;
+        height: 60px;
+    }
+
+    .navbar {
+        padding: 0.75rem 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (min-width: 992px) {
+        .dropdown-menu .dropdown-submenu {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: -7px;
+            min-width: 280px;
+        }
+
+        .dropdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .dropdown:hover>.dropdown-menu {
+            display: block;
+        }
+
+        .dropend:hover>.dropdown-submenu {
+            display: block;
+        }
+    }
+
+    [data-bs-theme="dark"] .navbar {
+        background-color: #111827 !important;
+        border-bottom: 1px solid #1f2937;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-white sticky-top">
     <div class="container-fluid px-lg-5">
-        <a class="navbar-brand d-flex align-items-center gap-3" href="/">
-            <div class="bg-primary bg-gradient rounded-3 d-flex align-items-center justify-center text-white fw-bold shadow-sm"
-                style="width: 50px; height: 50px; display: flex; justify-content: center;">
-                <img src="<?= base_url('img/logo_prov_papua_tengah.png') ?>" alt="Logo" class="w-100 h-auto">
+        <a class="navbar-brand d-flex align-items-center" href="<?= base_url('/') ?>">
+            <div class="logo-box d-flex align-items-center justify-content-center me-3">
+                <img src="<?= base_url('images/logo_prov_papua_tengah.png')?>" alt="Logo" class="h-100">
             </div>
-            <div class="d-none d-sm-block">
-                <div class="fw-bold text-dark lh-1" style="font-size: 1.1rem;">Dinas Perikanan dan Kelautan</div>
-                <small class="text-muted">Provinsi Papua Tengah</small>
+            <div class="d-flex flex-column gap-1">
+                <span class="fw-bold fs-5 lh-1">Dinas Kelautan dan Perikanan</span>
+                <small class="text-secondary opacity-90 fs-9">Provinsi Papua Tengah</small>
             </div>
         </a>
 
@@ -18,31 +65,114 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
-                <?php foreach ($menu_navigasi as $m): ?>
-                    <?php if (isset($m['submenu'])): ?>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle fw-medium px-3" href="#" role="button" data-bs-toggle="dropdown">
-                                <?= $m['nama'] ?>
+                <li class="nav-item">
+                    <a class="nav-link px-3 fw-medium" href="<?= base_url('/') ?>">Beranda</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-3 fw-medium" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Profil</a>
+                    <ul class="dropdown-menu border-0 shadow">
+                        <li><a class="dropdown-item" href="<?= base_url('profil/sejarah') ?>">Sejarah</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('profil/visi-misi') ?>">Visi dan Misi</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('profil/tupoksi') ?>">Tugas Pokok dan Fungsi</a>
+                        </li>
+                        <li><a class="dropdown-item" href="<?= base_url('profil/struktur') ?>">Struktur Organisasi</a>
+                        </li>
+                        <li><a class="dropdown-item" href="<?= base_url('profil/pejabat') ?>">Profil Pejabat
+                                Struktural</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('profil/pegawai') ?>">Daftar Pegawai</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('profil/kontak') ?>">Alamat dan Kontak</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-3 fw-medium" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Program</a>
+                    <ul class="dropdown-menu border-0 shadow">
+                        <li><a class="dropdown-item" href="<?= base_url('program/renstra') ?>">Rencana Strategis</a>
+                        </li>
+                        <li><a class="dropdown-item" href="<?= base_url('program/renja') ?>">Rencana Kerja</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('program/lakip') ?>">Laporan Kinerja</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('program/pk') ?>">Perjanjian Kinerja</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-3 fw-medium" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Data &amp; Informasi</a>
+                    <ul class="dropdown-menu border-0 shadow">
+                        <li class="dropend">
+                            <a class="dropdown-item" href="#">
+                                Layanan Publik <i class="bi bi-chevron-right ms-2" style="font-size: 0.7rem;"></i>
                             </a>
-                            <ul class="dropdown-menu shadow-sm border-0 mt-2">
-                                <?php foreach ($m['submenu'] as $s): ?>
-                                    <li><a class="dropdown-item py-2" href="<?= $s['link'] ?>"><?= $s['nama'] ?></a></li>
-                                <?php endforeach; ?>
+                            <ul class="dropdown-menu dropdown-submenu border-0 shadow">
+                                <li><a class="dropdown-item" href="<?= base_url('informasi/alur-permohonan') ?>">Alur
+                                        Permohonan</a></li>
+                                <li><a class="dropdown-item" href="<?= base_url('informasi/form-permohonan') ?>">Form
+                                        Permohonan</a></li>
+                                <li><a class="dropdown-item" href="<?= base_url('informasi/form-keberatan') ?>">Form
+                                        Keberatan</a></li>
+                                <li><a class="dropdown-item" href="<?= base_url('informasi/daftar-informasi') ?>">Daftar
+                                        Informasi Publik</a></li>
+                                <li><a class="dropdown-item"
+                                        href="<?= base_url('informasi/informasi-dikecualikan') ?>">Informasi
+                                        Dikecualikan</a></li>
+                                <li><a class="dropdown-item"
+                                        href="<?= base_url('informasi/informasi-berkala') ?>">Informasi Berkala</a></li>
                             </ul>
                         </li>
-                    <?php else: ?>
-                        <li class="nav-item">
-                            <a class="nav-link fw-medium px-3" href="<?= $m['link'] ?>"><?= $m['nama'] ?></a>
-                        </li>
-                    <?php endif; ?>
-                <?php endforeach; ?>
+                        <li><a class="dropdown-item" href="<?= base_url('berita') ?>">Berita</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-3 fw-medium" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Galeri</a>
+                    <ul class="dropdown-menu border-0 shadow">
+                        <li><a class="dropdown-item" href="<?= base_url('galeri/foto') ?>">Foto</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('galeri/video') ?>">Video</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-3 fw-medium" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Menu Lainnya</a>
+                    <ul class="dropdown-menu border-0 shadow">
+                        <li><a class="dropdown-item" href="<?= base_url('faq') ?>">FAQ</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('kebijakan-privasi') ?>">Kebijakan Privasi</a></li>
+                    </ul>
+                </li>
             </ul>
 
-            <div class="d-flex align-items-center gap-3 ms-lg-3">
-                <a href="#login" class="btn btn-primary px-4 py-2 rounded-3 fw-medium">
-                    <i class="bi bi-box-arrow-in-right me-2"></i>Login
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-light rounded-3 border-0" id="themeToggle" title="Toggle Theme">
+                    <i class="bi bi-moon-stars" id="themeIcon"></i>
+                </button>
+                <a href="<?= base_url('login') ?>"
+                    class="btn btn-primary px-4 rounded-3 fw-medium d-flex align-items-center gap-2">
+                    <i class="bi bi-box-arrow-in-right"></i> Login
                 </a>
             </div>
         </div>
     </div>
 </nav>
+
+<script>
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const htmlElement = document.documentElement;
+
+    // Terapkan tema tersimpan saat halaman dimuat
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElement.setAttribute('data-bs-theme', savedTheme);
+    themeIcon.className = savedTheme === 'light' ? 'bi bi-moon-stars' : 'bi bi-sun';
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-bs-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        htmlElement.setAttribute('data-bs-theme', newTheme);
+        themeIcon.className = newTheme === 'light' ? 'bi bi-moon-stars' : 'bi bi-sun';
+        localStorage.setItem('theme', newTheme);
+    });
+</script>

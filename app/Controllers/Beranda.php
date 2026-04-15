@@ -61,6 +61,57 @@ class Beranda extends BaseController
             ],
         ];
 
+        $data['services'] = [
+            [
+                'icon' => 'bi-clipboard-data', // Icon: ClipboardList
+                'title' => 'Alur Permohonan Informasi Publik',
+                'description' => 'Panduan dan prosedur pengajuan permohonan informasi publik',
+                'link' => 'informasi/alur-permohonan'
+            ],
+            [
+                'icon' => 'bi-file-earmark-text', // Icon: FileText
+                'title' => 'Form Permohonan Informasi',
+                'description' => 'Formulir pengajuan permohonan informasi publik secara online',
+                'link' => 'informasi/form-permohonan'
+            ],
+            [
+                'icon' => 'bi-shield-exclamation', // Icon: ShieldAlert
+                'title' => 'Form Keberatan atas Permohonan Informasi',
+                'description' => 'Formulir pengajuan keberatan atas permohonan informasi',
+                'link' => 'informasi/form-keberatan'
+            ],
+            [
+                'icon' => 'bi-file-earmark-medical', // Icon: FileSearch
+                'title' => 'Daftar Informasi Publik',
+                'description' => 'Katalog dan daftar informasi publik yang tersedia',
+                'link' => 'informasi/daftar-informasi'
+            ],
+            [
+                'icon' => 'bi-lock', // Icon: Lock
+                'title' => 'Daftar Informasi yang Dikecualikan',
+                'description' => 'Informasi publik yang dikecualikan dari layanan informasi',
+                'link' => 'informasi/informasi-dikecualikan'
+            ],
+            [
+                'icon' => 'bi-clock-history', // Icon: Clock
+                'title' => 'Informasi Setiap Saat',
+                'description' => 'Informasi publik yang dapat diakses setiap saat',
+                'link' => 'informasi/informasi-setiap-saat'
+            ],
+            [
+                'icon' => 'bi-calendar3', // Icon: Calendar
+                'title' => 'Informasi Berkala',
+                'description' => 'Informasi publik yang disediakan secara berkala',
+                'link' => 'informasi/informasi-berkala'
+            ],
+            [
+                'icon' => 'bi-graph-up-arrow', // Icon: BarChart3
+                'title' => 'Laporan Layanan Informasi',
+                'description' => 'Laporan dan statistik layanan informasi publik',
+                'link' => 'informasi/laporan-layanan'
+            ],
+        ];
+
         return view('public/index', $data);
     }
 }
