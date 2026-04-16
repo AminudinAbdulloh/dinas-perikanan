@@ -15,6 +15,7 @@
     <?= $this->include('layouts/partials/navbar_public') ?>
 
     <?= $this->renderSection('content') ?>
+    <?= $this->include('layouts/partials/footer') ?>
 
     <!-- Jquery dan Bootsrap JS -->
     <script src="<?= base_url('js/jquery.min.js') ?>"></script>

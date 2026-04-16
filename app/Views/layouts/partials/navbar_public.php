@@ -197,6 +197,78 @@
     }
 </style>
 
+<?php
+    $menu_navigasi = [
+        [
+            'nama' => 'Beranda',
+            'link' => base_url('/'),
+            'aktif' => 'home'
+        ],
+        [
+            'nama' => 'Profil',
+            'link' => '#',
+            'aktif' => 'profil',
+            'submenu' => [
+                ['nama' => 'Sejarah', 'link' => base_url('profil/sejarah')],
+                ['nama' => 'Visi dan Misi', 'link' => base_url('profil/visi-misi')],
+                ['nama' => 'Tugas Pokok dan Fungsi', 'link' => base_url('profil/tupoksi')],
+                ['nama' => 'Struktur Organisasi', 'link' => base_url('profil/struktur')],
+                ['nama' => 'Profil Pejabat Struktural', 'link' => base_url('profil/pejabat')],
+                ['nama' => 'Daftar Pegawai', 'link' => base_url('profil/pegawai')],
+                ['nama' => 'Alamat dan Kontak', 'link' => base_url('profil/kontak')],
+            ]
+        ],
+        [
+            'nama' => 'Program',
+            'link' => '#',
+            'aktif' => 'program',
+            'submenu' => [
+                ['nama' => 'Rencana Strategis', 'link' => base_url('program/renstra')],
+                ['nama' => 'Rencana Kerja', 'link' => base_url('program/renja')],
+                ['nama' => 'Laporan Kinerja', 'link' => base_url('program/lakip')],
+                ['nama' => 'Perjanjian Kinerja', 'link' => base_url('program/pk')],
+            ]
+        ],
+        [
+            'nama' => 'Data & Informasi',
+            'link' => '#',
+            'aktif' => 'informasi',
+            'submenu' => [
+                [
+                    'nama' => 'Layanan Publik',
+                    'link' => '#',
+                    'submenu' => [
+                        ['nama' => 'Alur Permohonan', 'link' => base_url('informasi/alur-permohonan')],
+                        ['nama' => 'Form Permohonan', 'link' => base_url('informasi/form-permohonan')],
+                        ['nama' => 'Form Keberatan', 'link' => base_url('informasi/form-keberatan')],
+                        ['nama' => 'Daftar Informasi Publik', 'link' => base_url('informasi/daftar-informasi')],
+                        ['nama' => 'Informasi Dikecualikan', 'link' => base_url('informasi/informasi-dikecualikan')],
+                        ['nama' => 'Informasi Berkala', 'link' => base_url('informasi/informasi-berkala')],
+                    ]
+                ],
+                ['nama' => 'Berita', 'link' => base_url('berita')],
+            ]
+        ],
+        [
+            'nama' => 'Galeri',
+            'link' => '#',
+            'aktif' => 'galeri',
+            'submenu' => [
+                ['nama' => 'Foto', 'link' => base_url('galeri/foto')],
+                ['nama' => 'Video', 'link' => base_url('galeri/video')],
+            ]
+        ],
+        [
+            'nama' => 'Menu Lainnya',
+            'link' => '#',
+            'aktif' => 'lainnya',
+            'submenu' => [
+                ['nama' => 'FAQ', 'link' => base_url('faq')],
+                ['nama' => 'Kebijakan Privasi', 'link' => base_url('kebijakan-privasi')],
+            ]
+        ],
+    ];
+?>
 <nav class="navbar navbar-expand-lg bg-white sticky-top">
     <div class="container-fluid px-lg-5">
         <a class="navbar-brand d-flex align-items-center" href="<?= base_url('/') ?>">

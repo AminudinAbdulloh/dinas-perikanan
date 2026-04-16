@@ -91,6 +91,7 @@
 
     .section-padding {
         padding: 80px 0;
+        background-color: #f1f5f9;
     }
 
     /* Card Style */
@@ -115,7 +116,7 @@
     .icon-box {
         width: 56px;
         height: 56px;
-        background-color: #eff6ff;
+        background-color: #c7dfff;
         color: var(--bs-blue-600);
         border-radius: 0.5rem;
         display: flex;
@@ -185,10 +186,11 @@
     /* News Section */
     .news-section {
         padding: 80px 0;
+        background-color: #ffffff;
     }
 
     .news-card {
-        background-color: #ffffff;
+        background-color: #f1f5f9;
         border: 1px solid #e5e7eb;
         border-radius: 0.75rem;
         overflow: hidden;
@@ -224,6 +226,204 @@
 
     .news-content {
         padding: 1.5rem;
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+        padding: 80px 0;
+        background-color: #f1f5f9;
+    }
+
+    .gallery-link {
+        color: #2563eb;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .gallery-link:hover {
+        text-decoration: underline;
+    }
+
+    .gallery-item {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 0.75rem;
+        text-decoration: none;
+        display: block;
+    }
+
+    .gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover .gallery-image {
+        transform: scale(1.08);
+    }
+
+    .gallery-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+    }
+
+    .gallery-caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1rem;
+    }
+
+    .gallery-category {
+        font-size: 0.75rem;
+        color: #60a5fa;
+        margin-bottom: 0.25rem;
+    }
+
+    .gallery-title {
+        margin: 0;
+        color: #ffffff;
+        font-size: 0.95rem;
+        font-weight: 600;
+    }
+
+    /* Video Section */
+    .video-section {
+        padding: 80px 0;
+        background-color: #ffffff;
+    }
+
+    .video-link {
+        color: #2563eb;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .video-link:hover {
+        text-decoration: underline;
+    }
+
+    .video-card {
+        text-decoration: none;
+        display: block;
+        height: 100%;
+        cursor: pointer;
+        background-color: #f1f5f9;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.75rem;
+        padding: 1rem;
+        transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .video-card:hover {
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+        border-color: #2563eb;
+        transform: translateY(-4px);
+    }
+
+    .video-thumb-wrap {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        margin-bottom: 1rem;
+    }
+
+    .video-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .video-card:hover .video-thumb {
+        transform: scale(1.05);
+    }
+
+    .video-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        transition: background-color 0.3s ease;
+    }
+
+    .video-card:hover .video-overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .video-play-center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .video-play-btn {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #2563eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .video-card:hover .video-play-btn {
+        transform: scale(1.1);
+        background-color: #ffffff;
+    }
+
+    .video-duration {
+        position: absolute;
+        bottom: 0.75rem;
+        right: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.35rem;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #ffffff;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .video-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #6b7280;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .video-title {
+        margin: 0;
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #111827;
+        transition: color 0.3s ease;
+    }
+
+    .video-card:hover .video-title {
+        color: #2563eb;
     }
 
     @media (max-width: 991.98px) {
@@ -310,6 +510,54 @@
     [data-bs-theme="dark"] .news-title {
         color: #f9fafb;
     }
+
+    [data-bs-theme="dark"] .gallery-section {
+        background-color: #030712;
+    }
+
+    [data-bs-theme="dark"] .gallery-link {
+        color: #60a5fa;
+    }
+
+    [data-bs-theme="dark"] .video-section {
+        background-color: #111827;
+    }
+
+    [data-bs-theme="dark"] .video-link {
+        color: #60a5fa;
+    }
+
+    [data-bs-theme="dark"] .video-meta {
+        color: #9ca3af;
+    }
+
+    [data-bs-theme="dark"] .video-card {
+        background-color: #1e2939;
+        border-color: #1f2937;
+    }
+
+    [data-bs-theme="dark"] .video-card:hover {
+        border-color: #3b82f6;
+        background-color: #253042;
+    }
+
+    [data-bs-theme="dark"] .video-title {
+        color: #f9fafb;
+    }
+
+    [data-bs-theme="dark"] .video-card:hover .video-title {
+        color: #60a5fa;
+    }
+
+    .video-modal .modal-content {
+        background-color: #000;
+        border: 0;
+        border-radius: 0.75rem;
+    }
+
+    .video-modal .btn-close {
+        filter: invert(1) grayscale(100%);
+    }
 </style>
 
 <!-- Hero Section -->
@@ -318,7 +566,7 @@
         alt="Perikanan Papua Tengah" class="hero-bg-img">
     <div class="hero-overlay"></div>
 
-    <div class="container px-4 px-lg-5">
+    <div class="container px-4 px-lg-2">
         <div class="row">
             <div class="col-lg-8 animate-up">
                 <div class="mb-4">
@@ -327,7 +575,7 @@
                 <h1 class="display-4 fw-bold text-white mb-4">
                     Dinas Kelautan dan Perikanan Provinsi Papua Tengah
                 </h1>
-                <p class="lead text-light mb-5 fs-5">
+                <p class="text-light mb-5 fs-5">
                     Mengelola dan mengembangkan potensi perikanan dan kelautan untuk kesejahteraan masyarakat Papua
                     Tengah
                 </p>
@@ -346,7 +594,7 @@
 
 <!-- Services Section -->
 <section id="layanan" class="section-padding">
-    <div class="container px-4 px-lg-5">
+    <div class="container px-4 px-lg-2">
 
         <div class="text-center mb-5 mx-auto" style="max-width: 700px;">
             <h2 class="fw-bold display-6 mb-3 text-dark-white">Layanan Utama</h2>
@@ -374,7 +622,7 @@
 
 <!-- News Section -->
 <section id="berita" class="news-section">
-    <div class="container px-4 px-lg-5">
+    <div class="container px-4 px-lg-2">
         <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-5">
             <div>
                 <h2 class="fw-bold display-6 mb-3 text-dark-white">Berita Terkini</h2>
@@ -408,4 +656,137 @@
         </div>
     </div>
 </section>
+
+<!-- Galeri Foto -->
+<section id="galeri" class="gallery-section">
+    <div class="container px-4 px-lg-2">
+        <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-5">
+            <div>
+                <h2 class="fw-bold display-6 mb-3 text-dark-white">Galeri Foto</h2>
+                <p class="text-muted fs-5 mb-0">Dokumentasi kegiatan dan potensi perikanan Papua Tengah</p>
+            </div>
+            <a href="<?= base_url('galeri/foto') ?>" class="gallery-link">
+                <i class="bi bi-image fs-5"></i>
+                Lihat Semua
+            </a>
+        </div>
+
+        <div class="row g-3 g-md-4">
+            <?php foreach ($galleryPhotos as $photo): ?>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="<?= base_url('galeri/foto/' . $photo['id']) ?>" class="gallery-item">
+                        <img src="<?= esc($photo['image']) ?>" alt="<?= esc($photo['title']) ?>" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-caption">
+                                <div class="gallery-category"><?= esc($photo['category']) ?></div>
+                                <p class="gallery-title"><?= esc($photo['title']) ?></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- Video Terbaru -->
+<section id="video" class="video-section">
+    <div class="container px-4 px-lg-2">
+        <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-5">
+            <div>
+                <h2 class="fw-bold display-6 mb-3 text-dark-white">Video Terbaru</h2>
+                <p class="text-muted fs-5 mb-0">Video dokumentasi dan profil perikanan Papua Tengah</p>
+            </div>
+            <a href="<?= base_url('galeri/video') ?>" class="video-link">
+                <i class="bi bi-play-fill fs-5"></i>
+                Lihat Semua
+            </a>
+        </div>
+
+        <div class="row g-4 g-lg-5">
+            <?php foreach ($latestVideos as $video): ?>
+                <div class="col-md-6 col-lg-4">
+                    <a href="#" class="video-card js-video-trigger" data-youtube-id="<?= esc($video['youtube_id']) ?>"
+                        data-video-title="<?= esc($video['title']) ?>">
+                        <div class="video-thumb-wrap">
+                            <img src="<?= esc('https://img.youtube.com/vi/' . $video['youtube_id'] . '/hqdefault.jpg') ?>"
+                                alt="<?= esc($video['title']) ?>" class="video-thumb">
+                            <div class="video-overlay"></div>
+
+                            <div class="video-play-center">
+                                <div class="video-play-btn">
+                                    <i class="bi bi-play-fill"></i>
+                                </div>
+                            </div>
+
+                            <div class="video-duration"><?= esc($video['duration']) ?></div>
+                        </div>
+
+                        <div class="video-meta">
+                            <i class="bi bi-play-circle"></i>
+                            <time><?= esc($video['date']) ?></time>
+                        </div>
+                        <h3 class="video-title"><?= esc($video['title']) ?></h3>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade video-modal" id="videoPlayerModal" tabindex="-1" aria-labelledby="videoPlayerModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title text-white" id="videoPlayerModalLabel">Video</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+            <div class="modal-body pt-2">
+                <div class="ratio ratio-16x9">
+                    <iframe id="youtubePlayerFrame" src="" title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const videoModalEl = document.getElementById('videoPlayerModal');
+        const playerFrame = document.getElementById('youtubePlayerFrame');
+        const modalTitle = document.getElementById('videoPlayerModalLabel');
+        const triggers = document.querySelectorAll('.js-video-trigger');
+
+        if (!videoModalEl || !playerFrame || !modalTitle || !triggers.length || typeof bootstrap === 'undefined') {
+            return;
+        }
+
+        const videoModal = new bootstrap.Modal(videoModalEl);
+
+        triggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                const youtubeId = trigger.getAttribute('data-youtube-id');
+                const videoTitle = trigger.getAttribute('data-video-title') || 'Video';
+
+                if (!youtubeId) {
+                    return;
+                }
+
+                modalTitle.textContent = videoTitle;
+                playerFrame.src = 'https://www.youtube.com/embed/' + encodeURIComponent(youtubeId) + '?autoplay=1&rel=0';
+                videoModal.show();
+            });
+        });
+
+        videoModalEl.addEventListener('hidden.bs.modal', function () {
+            playerFrame.src = '';
+            modalTitle.textContent = 'Video';
+        });
+    });
+</script>
 <?= $this->endSection() ?>
