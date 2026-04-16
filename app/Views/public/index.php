@@ -226,6 +226,73 @@
         padding: 1.5rem;
     }
 
+    @media (max-width: 991.98px) {
+        .hero-section {
+            height: auto;
+            min-height: 560px;
+            padding: 100px 0 70px;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(30, 58, 138, 0.88), rgba(30, 64, 175, 0.82), rgba(30, 58, 138, 0.65));
+        }
+
+        .hero-section .display-4 {
+            font-size: 2rem;
+        }
+
+        .hero-section .lead {
+            font-size: 1rem !important;
+        }
+
+        .hero-section .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .section-padding,
+        .news-section {
+            padding: 64px 0;
+        }
+
+        .news-image {
+            height: 200px;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .hero-section {
+            min-height: 500px;
+            padding: 90px 0 56px;
+        }
+
+        .hero-section .display-4 {
+            font-size: 1.65rem;
+        }
+
+        .badge-custom {
+            font-size: 0.75rem;
+            padding: 0.4rem 0.8rem;
+        }
+
+        .service-card,
+        .news-content {
+            padding: 1.15rem;
+        }
+
+        .news-title {
+            font-size: 1.1rem;
+        }
+
+        .news-image {
+            height: 180px;
+        }
+
+        #berita .d-flex.align-items-end {
+            align-items: flex-start !important;
+        }
+    }
+
     [data-bs-theme="dark"] .news-section {
         background-color: #101828;
     }
