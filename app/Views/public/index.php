@@ -181,6 +181,68 @@
     [data-bs-theme="dark"] .text-muted {
         color: #94a3b8 !important;
     }
+
+    /* News Section */
+    .news-section {
+        padding: 80px 0;
+    }
+
+    .news-card {
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        height: 100%;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .news-card:hover {
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+        transform: translateY(-4px);
+    }
+
+    .news-meta {
+        color: #6b7280;
+        font-size: 0.875rem;
+    }
+
+    .news-title {
+        color: #111827;
+        font-size: 1.25rem;
+    }
+
+    .news-excerpt {
+        color: #4b5563;
+    }
+
+    .news-image {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .news-content {
+        padding: 1.5rem;
+    }
+
+    [data-bs-theme="dark"] .news-section {
+        background-color: #101828;
+    }
+
+    [data-bs-theme="dark"] .news-card {
+        background-color: #1e2939;
+        border-color: #1f2937;
+    }
+
+    [data-bs-theme="dark"] .news-meta,
+    [data-bs-theme="dark"] .news-excerpt {
+        color: #9ca3af;
+    }
+
+    [data-bs-theme="dark"] .news-title {
+        color: #f9fafb;
+    }
 </style>
 
 <!-- Hero Section -->
@@ -228,19 +290,55 @@
 
         <div class="row g-4">
             <?php foreach ($services as $service): ?>
-            <div class="col-md-6 col-lg-3">
-                <a href="<?= base_url($service['link']) ?>" class="service-card shadow-sm">
-                    <div class="icon-box">
-                        <i class="bi <?= esc($service['icon']) ?> fs-3"></i>
-                    </div>
-                    <h3 class="fw-bold"><?= esc($service['title']) ?></h3>
-                    <p class="service-description"><?= esc($service['description']) ?></p>
-                </a>
-            </div>
+                <div class="col-md-6 col-lg-3">
+                    <a href="<?= base_url($service['link']) ?>" class="service-card shadow-sm">
+                        <div class="icon-box">
+                            <i class="bi <?= esc($service['icon']) ?> fs-3"></i>
+                        </div>
+                        <h3 class="fw-bold"><?= esc($service['title']) ?></h3>
+                        <p class="service-description"><?= esc($service['description']) ?></p>
+                    </a>
+                </div>
             <?php endforeach; ?>
         </div>
 
     </div>
 </section>
 
+<!-- News Section -->
+<section id="berita" class="news-section">
+    <div class="container px-4 px-lg-5">
+        <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-5">
+            <div>
+                <h2 class="fw-bold display-6 mb-3 text-dark-white">Berita Terkini</h2>
+                <p class="text-muted fs-5 mb-0">Informasi dan kegiatan terbaru Dinas Perikanan dan Kelautan</p>
+            </div>
+            <a href="<?= base_url('berita') ?>" class="link-primary fw-semibold text-decoration-none">
+                Lihat Semua
+            </a>
+        </div>
+
+        <div class="row g-4">
+            <?php foreach ($newsList as $news): ?>
+                <div class="col-md-6 col-lg-4">
+                    <article class="news-card">
+                        <img src="<?= esc($news['image']) ?>" alt="<?= esc($news['title']) ?>" class="news-image">
+                        <div class="news-content">
+                            <div class="d-flex align-items-center gap-2 news-meta mb-3">
+                                <i class="bi bi-file-earmark-text"></i>
+                                <time><?= esc($news['date']) ?></time>
+                            </div>
+                            <h3 class="fw-bold mb-3 news-title"><?= esc($news['title']) ?></h3>
+                            <p class="mb-4 news-excerpt"><?= esc($news['excerpt']) ?></p>
+                            <a href="<?= base_url('berita/' . $news['id']) ?>"
+                                class="link-primary fw-semibold text-decoration-none">
+                                Baca Selengkapnya <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
 <?= $this->endSection() ?>
