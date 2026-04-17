@@ -95,7 +95,8 @@
                             </div>
                             <h3 class="fw-bold mb-3 news-title"><?= esc($news['title']) ?></h3>
                             <p class="mb-4 news-excerpt"><?= esc($news['excerpt']) ?></p>
-                            <a href="<?= base_url('berita/' . (int) $news['id']) ?>" class="btn btn-primary mt-3 d-inline-flex align-items-center gap-2">
+                            <a href="<?= base_url('berita/' . (int) $news['id']) ?>"
+                                class="btn btn-primary mt-3 d-inline-flex align-items-center gap-2">
                                 <span>Baca Selengkapnya</span>
                                 <i class="bi bi-arrow-right"></i>
                             </a>
@@ -182,24 +183,6 @@
     </div>
 </section>
 
-<!-- Modal Video Player -->
-<div class="modal fade video-modal" id="videoPlayerModal" tabindex="-1" aria-labelledby="videoPlayerModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-0 pb-0">
-                <h5 class="modal-title text-white" id="videoPlayerModalLabel">Video</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-            </div>
-            <div class="modal-body pt-2">
-                <div class="ratio ratio-16x9">
-                    <iframe id="youtubePlayerFrame" src="" title="YouTube video player"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<?= $this->include('public/partials/video_player_modal') ?>
 
 <?= $this->endSection() ?>

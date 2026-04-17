@@ -9,7 +9,7 @@ if ($heroBackgroundImage !== '') {
 }
 ?>
 
-<section class="public-page-hero<?= $heroBackgroundImage !== '' ? ' public-page-hero--with-image' : '' ?>"<?= $heroStyle ?>>
+<section class="public-page-hero<?= $heroBackgroundImage !== '' ? ' public-page-hero--with-image' : '' ?>" <?= $heroStyle ?>>
     <div class="hero-orbs">
         <div class="orb orb-cyan orb-top-right"></div>
         <div class="orb orb-blue orb-bottom-left"></div>

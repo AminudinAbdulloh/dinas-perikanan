@@ -36,16 +36,21 @@
                             <h3 class="photo-related-title"><i class="bi bi-images me-2"></i>Foto Lainnya</h3>
                             <div class="photo-related-list">
                                 <?php foreach ($relatedPhotos as $relatedPhoto): ?>
-                                    <a href="<?= base_url('galeri/foto/' . (int) $relatedPhoto['id']) ?>" class="photo-related-item">
-                                        <img src="<?= esc($relatedPhoto['image']) ?>" alt="<?= esc($relatedPhoto['title']) ?>">
+                                    <a href="<?= base_url('galeri/foto/' . (int) $relatedPhoto['id']) ?>"
+                                        class="photo-related-item">
+                                        <img src="<?= esc($relatedPhoto['image']) ?>"
+                                            alt="<?= esc($relatedPhoto['title']) ?>">
                                         <div>
                                             <h4><?= esc($relatedPhoto['title']) ?></h4>
-                                            <p class="mb-0"><i class="bi bi-calendar-event me-1"></i><?= esc($relatedPhoto['date']) ?></p>
+                                            <p class="mb-0"><i
+                                                    class="bi bi-calendar-event me-1"></i><?= esc($relatedPhoto['date']) ?>
+                                            </p>
                                         </div>
                                     </a>
                                 <?php endforeach; ?>
                             </div>
-                            <a href="<?= base_url('galeri/foto') ?>" class="photo-related-all-link">Kembali ke Galeri Foto <i class="bi bi-arrow-right"></i></a>
+                            <a href="<?= base_url('galeri/foto') ?>" class="photo-related-all-link">Kembali ke Galeri
+                                Foto <i class="bi bi-arrow-right"></i></a>
                         </aside>
                     </div>
                 </div>

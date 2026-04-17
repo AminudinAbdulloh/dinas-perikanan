@@ -7,6 +7,10 @@
 <link rel="stylesheet" href="<?= base_url('css/beranda.css') ?>">
 <?= $this->endSection() ?>
 
+<?= $this->section('scripts') ?>
+<script src="<?= base_url('js/beranda.js') ?>"></script>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 <div class="public-page-wrapper">
     <?= $this->include('public/partials/hero_header') ?>
@@ -17,7 +21,9 @@
                 <div class="row g-4 g-lg-5">
                     <?php foreach ($latestVideos as $video): ?>
                         <div class="col-md-6 col-lg-4">
-                            <a href="<?= esc($video['youtube_url']) ?>" target="_blank" rel="noopener noreferrer" class="video-card">
+                            <a href="#" class="video-card js-video-trigger"
+                                data-youtube-id="<?= esc($video['youtube_id']) ?>"
+                                data-video-title="<?= esc($video['title']) ?>">
                                 <div class="video-thumb-wrap">
                                     <img src="https://img.youtube.com/vi/<?= esc($video['youtube_id']) ?>/hqdefault.jpg"
                                         alt="<?= esc($video['title']) ?>" class="video-thumb">
@@ -42,5 +48,7 @@
             </div>
         </div>
     </section>
+
+    <?= $this->include('public/partials/video_player_modal') ?>
 </div>
 <?= $this->endSection() ?>

@@ -18,7 +18,8 @@
                     <?php foreach ($galleryPhotos as $photo): ?>
                         <div class="col-6 col-md-4 col-lg-3">
                             <a href="<?= base_url('galeri/foto/' . (int) $photo['id']) ?>" class="gallery-item">
-                                <img src="<?= esc($photo['image']) ?>" alt="<?= esc($photo['title']) ?>" class="gallery-image">
+                                <img src="<?= esc($photo['image']) ?>" alt="<?= esc($photo['title']) ?>"
+                                    class="gallery-image">
                                 <div class="gallery-overlay">
                                     <div class="gallery-caption">
                                         <div class="gallery-date"><?= esc($photo['date']) ?></div>

@@ -1,6 +1,7 @@
 <?= $this->extend('layouts/template_public') ?>
 
-<?= $this->section('title') ?><?= esc($news['title']) ?> - Dinas Kelautan dan Perikanan Papua Tengah<?= $this->endSection() ?>
+<?= $this->section('title') ?><?= esc($news['title']) ?> - Dinas Kelautan dan Perikanan Papua
+Tengah<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
 <link rel="stylesheet" href="<?= base_url('css/public-page.css') ?>">
@@ -23,7 +24,8 @@
                                     <span><i class="bi bi-calendar-event me-1"></i><?= esc($news['date']) ?></span>
                                     <span><i class="bi bi-person me-1"></i><?= esc($news['author'] ?? 'Admin') ?></span>
                                     <span><i class="bi bi-eye me-1"></i><?= esc($news['views'] ?? '0') ?> views</span>
-                                    <span><i class="bi bi-clock me-1"></i><?= esc($news['readTime'] ?? '0 min') ?> read</span>
+                                    <span><i class="bi bi-clock me-1"></i><?= esc($news['readTime'] ?? '0 min') ?>
+                                        read</span>
                                 </div>
                             </div>
 
@@ -33,19 +35,24 @@
                                 $shareUrl = urlencode(current_url());
                                 $shareTitle = urlencode((string) ($news['title'] ?? ''));
                                 ?>
-                                <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $shareUrl ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $shareUrl ?>" target="_blank"
+                                    rel="noopener noreferrer" class="btn btn-sm btn-outline-primary">
                                     <i class="bi bi-facebook"></i>
                                 </a>
-                                <a href="https://twitter.com/intent/tweet?url=<?= $shareUrl ?>&text=<?= $shareTitle ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-info">
+                                <a href="https://twitter.com/intent/tweet?url=<?= $shareUrl ?>&text=<?= $shareTitle ?>"
+                                    target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-info">
                                     <i class="bi bi-twitter-x"></i>
                                 </a>
-                                <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?= $shareUrl ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary">
+                                <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?= $shareUrl ?>"
+                                    target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary">
                                     <i class="bi bi-linkedin"></i>
                                 </a>
-                                <a href="https://wa.me/?text=<?= $shareTitle . '%20' . $shareUrl ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-success">
+                                <a href="https://wa.me/?text=<?= $shareTitle . '%20' . $shareUrl ?>" target="_blank"
+                                    rel="noopener noreferrer" class="btn btn-sm btn-outline-success">
                                     <i class="bi bi-whatsapp"></i>
                                 </a>
-                                <a href="mailto:?subject=<?= $shareTitle ?>&body=<?= $shareUrl ?>" class="btn btn-sm btn-outline-secondary">
+                                <a href="mailto:?subject=<?= $shareTitle ?>&body=<?= $shareUrl ?>"
+                                    class="btn btn-sm btn-outline-secondary">
                                     <i class="bi bi-envelope"></i>
                                 </a>
                             </div>
@@ -78,13 +85,15 @@
                                         <img src="<?= esc($article['image']) ?>" alt="<?= esc($article['title']) ?>">
                                         <div>
                                             <h4><?= esc($article['title']) ?></h4>
-                                            <p class="mb-1"><i class="bi bi-calendar-event me-1"></i><?= esc($article['date']) ?></p>
+                                            <p class="mb-1"><i
+                                                    class="bi bi-calendar-event me-1"></i><?= esc($article['date']) ?></p>
                                             <p class="mb-0"><i class="bi bi-eye me-1"></i><?= esc($article['views']) ?></p>
                                         </div>
                                     </a>
                                 <?php endforeach; ?>
                             </div>
-                            <a href="<?= base_url('berita') ?>" class="popular-all-link">Lihat Semua Berita <i class="bi bi-arrow-right"></i></a>
+                            <a href="<?= base_url('berita') ?>" class="popular-all-link">Lihat Semua Berita <i
+                                    class="bi bi-arrow-right"></i></a>
                         </aside>
                     </div>
                 </div>
