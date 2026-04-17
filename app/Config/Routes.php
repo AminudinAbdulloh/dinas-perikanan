@@ -6,6 +6,11 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Beranda::index');
+$routes->get('berita', 'Beranda::berita');
+$routes->group('galeri', static function ($routes) {
+    $routes->get('foto', 'Beranda::galeriFoto');
+    $routes->get('video', 'Beranda::galeriVideo');
+});
 
 $routes->group('profil', static function ($routes) {
     $routes->get('sejarah', 'Beranda::page/profil/sejarah');

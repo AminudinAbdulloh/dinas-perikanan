@@ -9,67 +9,7 @@ Tengah<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 <div class="public-page-wrapper">
-    <section class="public-page-hero">
-        <div class="hero-orbs">
-            <div class="orb orb-cyan orb-top-right"></div>
-            <div class="orb orb-blue orb-bottom-left"></div>
-            <div class="orb orb-indigo orb-center"></div>
-        </div>
-        <div class="hero-grid-pattern"></div>
-        <div class="hero-stripes"></div>
-
-        <div class="hero-floating-icons" aria-hidden="true">
-            <i class="bi bi-water icon-float float-1"></i>
-            <i class="bi bi-water icon-float float-2"></i>
-            <i class="bi bi-anchor icon-float float-3"></i>
-            <i class="bi bi-droplet icon-float float-4"></i>
-        </div>
-
-        <div class="container px-4 px-sm-5 px-lg-5 hero-content-wrap">
-            <a href="<?= base_url('/') ?>" class="hero-back-link">
-                <i class="bi bi-arrow-left"></i>
-                <span>Kembali</span>
-            </a>
-
-            <?php $breadcrumbs = $pageData['breadcrumbs'] ?? []; ?>
-            <?php if (!empty($breadcrumbs)): ?>
-                <div class="hero-breadcrumbs">
-                    <?php foreach ($breadcrumbs as $index => $crumb): ?>
-                        <?php if ($index > 0): ?>
-                            <span class="crumb-separator">/</span>
-                        <?php endif ?>
-                        <?php if (!empty($crumb['href']) && $index < count($breadcrumbs) - 1): ?>
-                            <a href="<?= esc($crumb['href']) ?>"><?= esc($crumb['label']) ?></a>
-                        <?php else: ?>
-                            <span class="active"><?= esc($crumb['label']) ?></span>
-                        <?php endif ?>
-                    <?php endforeach ?>
-                </div>
-            <?php endif ?>
-
-            <div class="hero-text-block">
-                <div class="hero-title-line"></div>
-                <h1><?= esc($pageData['title'] ?? 'Halaman Informasi') ?></h1>
-                <p><?= esc($pageData['description'] ?? '') ?></p>
-                <div class="hero-dots" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="hero-wave-divider" aria-hidden="true">
-            <svg class="wave wave-back" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path
-                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z">
-                </path>
-            </svg>
-            <svg class="wave wave-front" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path
-                    d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z">
-                </path>
-            </svg>
-        </div>
-    </section>
+    <?= $this->include('public/partials/hero_header') ?>
 
     <section class="public-page-content">
         <div class="container px-sm-5 px-lg-0">
