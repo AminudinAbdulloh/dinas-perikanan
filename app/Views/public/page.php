@@ -14,16 +14,22 @@ Tengah<?= $this->endSection() ?>
     <section class="public-page-content">
         <div class="container px-sm-5 px-lg-0">
             <div class="content-card">
-                <?php
-                $contentText = trim((string) ($pageData['content'] ?? ''));
-                $paragraphs = preg_split("/\R{2,}/", $contentText) ?: [];
-                ?>
+                <?php if (($pageData['path'] ?? '') === 'informasi/form-permohonan'): ?>
+                    <?= $this->include('public/partials/form_permohonan_informasi') ?>
+                <?php elseif (($pageData['path'] ?? '') === 'informasi/form-keberatan'): ?>
+                    <?= $this->include('public/partials/form_keberatan_informasi') ?>
+                <?php else: ?>
+                    <?php
+                    $contentText = trim((string) ($pageData['content'] ?? ''));
+                    $paragraphs = preg_split("/\R{2,}/", $contentText) ?: [];
+                    ?>
 
-                <?php foreach ($paragraphs as $paragraph): ?>
-                    <article class="content-section">
-                        <p><?= esc($paragraph) ?></p>
-                    </article>
-                <?php endforeach ?>
+                    <?php foreach ($paragraphs as $paragraph): ?>
+                        <article class="content-section">
+                            <p><?= esc($paragraph) ?></p>
+                        </article>
+                    <?php endforeach ?>
+                <?php endif ?>
             </div>
         </div>
     </section>
