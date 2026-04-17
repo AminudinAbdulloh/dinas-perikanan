@@ -24,4 +24,22 @@ class Beranda extends BaseController
 
         return view('public/index', $data);
     }
+
+    public function page(string $slug, ?string $subSlug = null): string
+    {
+        $path = $subSlug ? $slug . '/' . $subSlug : $slug;
+        $pageData = $this->berandaModel->getPublicPageData($path);
+
+        if ($pageData === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $data = [
+            'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData' => $this->berandaModel->getPublicFooterData(),
+            'pageData' => $pageData,
+        ];
+
+        return view('public/page', $data);
+    }
 }

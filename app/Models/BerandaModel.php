@@ -129,6 +129,142 @@ class BerandaModel
     }
 
     /**
+     * Mengambil data halaman public non-beranda.
+     *
+     * @param string $path
+     * @return array<string, mixed>|null
+     */
+    public function getPublicPageData(string $path): ?array
+    {
+        $pages = [
+            'profil/sejarah' => [
+                'title' => 'Sejarah Dinas',
+                'description' => 'Perjalanan pembentukan dan pengembangan Dinas Kelautan dan Perikanan Provinsi Papua Tengah.',
+            ],
+            'profil/visi-misi' => [
+                'title' => 'Visi dan Misi',
+                'description' => 'Arah pembangunan sektor kelautan dan perikanan untuk mewujudkan kesejahteraan masyarakat pesisir.',
+            ],
+            'profil/tupoksi' => [
+                'title' => 'Tugas Pokok dan Fungsi',
+                'description' => 'Rincian tugas pokok serta fungsi organisasi dalam pelayanan publik bidang kelautan dan perikanan.',
+            ],
+            'profil/struktur' => [
+                'title' => 'Struktur Organisasi',
+                'description' => 'Susunan unit kerja dan alur koordinasi internal Dinas Kelautan dan Perikanan.',
+            ],
+            'profil/pejabat' => [
+                'title' => 'Profil Pejabat Struktural',
+                'description' => 'Informasi singkat pejabat struktural dan ruang lingkup tanggung jawabnya.',
+            ],
+            'profil/pegawai' => [
+                'title' => 'Daftar Pegawai',
+                'description' => 'Data pegawai berdasarkan unit kerja sebagai bagian dari keterbukaan informasi publik.',
+            ],
+            'profil/kontak' => [
+                'title' => 'Alamat dan Kontak',
+                'description' => 'Informasi alamat kantor, email, dan kanal komunikasi resmi layanan dinas.',
+            ],
+            'program/renstra' => [
+                'title' => 'Rencana Strategis (Renstra)',
+                'description' => 'Dokumen arah kebijakan jangka menengah sektor kelautan dan perikanan.',
+            ],
+            'program/renja' => [
+                'title' => 'Rencana Kerja (Renja)',
+                'description' => 'Program kerja tahunan sebagai turunan dari Renstra dan prioritas daerah.',
+            ],
+            'program/lakip' => [
+                'title' => 'Laporan Kinerja (LAKIP)',
+                'description' => 'Laporan akuntabilitas kinerja instansi pemerintah bidang kelautan dan perikanan.',
+            ],
+            'program/pk' => [
+                'title' => 'Perjanjian Kinerja',
+                'description' => 'Komitmen target kinerja antara pimpinan unit kerja dan kepala perangkat daerah.',
+            ],
+            'informasi/alur-permohonan' => [
+                'title' => 'Alur Permohonan Informasi',
+                'description' => 'Langkah-langkah pengajuan permohonan informasi publik secara mudah dan transparan.',
+            ],
+            'informasi/form-permohonan' => [
+                'title' => 'Form Permohonan Informasi',
+                'description' => 'Unduh dan isi formulir resmi pengajuan informasi publik melalui PPID Pelaksana.',
+            ],
+            'informasi/form-keberatan' => [
+                'title' => 'Form Keberatan Informasi',
+                'description' => 'Formulir pengajuan keberatan atas layanan informasi publik yang telah diberikan.',
+            ],
+            'informasi/daftar-informasi' => [
+                'title' => 'Daftar Informasi Publik',
+                'description' => 'Katalog informasi yang tersedia dan dapat diakses oleh masyarakat.',
+            ],
+            'informasi/informasi-dikecualikan' => [
+                'title' => 'Informasi Dikecualikan',
+                'description' => 'Informasi yang dikecualikan sesuai ketentuan peraturan perundang-undangan.',
+            ],
+            'informasi/informasi-berkala' => [
+                'title' => 'Informasi Berkala',
+                'description' => 'Informasi yang diumumkan secara berkala sebagai bentuk transparansi layanan.',
+            ],
+            'informasi/informasi-setiap-saat' => [
+                'title' => 'Informasi Setiap Saat',
+                'description' => 'Informasi yang tersedia sewaktu-waktu untuk memenuhi kebutuhan publik.',
+            ],
+            'informasi/laporan-layanan' => [
+                'title' => 'Laporan Layanan Informasi',
+                'description' => 'Rekapitulasi statistik dan capaian layanan informasi publik.',
+            ],
+            'faq' => [
+                'title' => 'FAQ',
+                'description' => 'Pertanyaan yang sering diajukan seputar layanan dinas dan informasi publik.',
+            ],
+            'kebijakan-privasi' => [
+                'title' => 'Kebijakan Privasi',
+                'description' => 'Ketentuan perlindungan data pengguna dan kebijakan penggunaan situs resmi dinas.',
+            ],
+        ];
+
+        if (!isset($pages[$path])) {
+            return null;
+        }
+
+        $page = $pages[$path];
+
+        return [
+            'path' => $path,
+            'title' => $page['title'],
+            'description' => $page['description'],
+            'breadcrumbs' => $this->buildBreadcrumbs($path, $page['title']),
+            'content' => $this->buildPageContent($path, $page['title']),
+        ];
+    }
+
+    /**
+     * @return array<int, array<string, string|null>>
+     */
+    private function buildBreadcrumbs(string $path, string $title): array
+    {
+        $segments = explode('/', $path);
+        $breadcrumbs = [
+            ['label' => 'Beranda', 'href' => base_url('/')],
+        ];
+
+        if (count($segments) === 2) {
+            $breadcrumbs[] = ['label' => ucfirst($segments[0]), 'href' => null];
+        }
+
+        $breadcrumbs[] = ['label' => $title, 'href' => null];
+
+        return $breadcrumbs;
+    }
+
+    private function buildPageContent(string $path, string $title): string
+    {
+        return "Halaman {$title} disusun sebagai media informasi resmi Dinas Kelautan dan Perikanan Provinsi Papua Tengah.\n\n"
+            . "Konten pada halaman ini akan diperbarui secara berkala sesuai kebijakan organisasi, perkembangan program, dan kebutuhan layanan publik.\n\n"
+            . "Untuk informasi lebih rinci terkait {$path}, masyarakat dapat menghubungi admin melalui kanal komunikasi resmi yang tersedia pada halaman kontak.";
+    }
+
+    /**
      * Daftar layanan utama yang ditampilkan di beranda.
      *
      * @return array<int, array<string, string>>
