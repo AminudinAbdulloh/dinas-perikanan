@@ -60,11 +60,11 @@
         font-size: 0.9rem;
     }
 
-    .dropdown:hover > .dropdown-menu {
+    .dropdown:hover>.dropdown-menu {
         display: block;
     }
 
-    .dropend:hover > .dropdown-submenu {
+    .dropend:hover>.dropdown-submenu {
         display: block;
     }
 }
@@ -178,7 +178,7 @@
         pointer-events: auto;
     }
 
-    .dropend.show > .submenu-toggle i {
+    .dropend.show>.submenu-toggle i {
         transform: rotate(90deg);
     }
 

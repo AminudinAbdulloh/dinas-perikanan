@@ -4,10 +4,10 @@
  * Menangani klik pada kartu video untuk membuka YouTube di dalam modal Bootstrap.
  */
 document.addEventListener('DOMContentLoaded', function () {
-    const videoModalEl  = document.getElementById('videoPlayerModal');
-    const playerFrame   = document.getElementById('youtubePlayerFrame');
-    const modalTitle    = document.getElementById('videoPlayerModalLabel');
-    const triggers      = document.querySelectorAll('.js-video-trigger');
+    const videoModalEl = document.getElementById('videoPlayerModal');
+    const playerFrame = document.getElementById('youtubePlayerFrame');
+    const modalTitle = document.getElementById('videoPlayerModalLabel');
+    const triggers = document.querySelectorAll('.js-video-trigger');
 
     if (!videoModalEl || !playerFrame || !modalTitle || !triggers.length) {
         return;
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function onVideoTriggerClick(event) {
         event.preventDefault();
 
-        const youtubeId  = this.dataset.youtubeId;
+        const youtubeId = this.dataset.youtubeId;
         const videoTitle = this.dataset.videoTitle || 'Video';
 
         if (!youtubeId) {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         modalTitle.textContent = videoTitle;
-        playerFrame.src        = buildEmbedUrl(youtubeId);
+        playerFrame.src = buildEmbedUrl(youtubeId);
 
         videoModal.show();
     }
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
      * Menghentikan video dan mereset modal saat ditutup.
      */
     function onModalHidden() {
-        playerFrame.src        = '';
+        playerFrame.src = '';
         modalTitle.textContent = 'Video';
     }
 
