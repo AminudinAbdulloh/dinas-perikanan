@@ -9,6 +9,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?= base_url('css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('bootstrap-icons/bootstrap-icons.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/navbar-public.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/footer-public.css') ?>">
 
     <!-- Page-specific CSS -->
     <?= $this->renderSection('styles') ?>

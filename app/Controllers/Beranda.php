@@ -2,21 +2,23 @@
 
 namespace App\Controllers;
 
-use App\Models\BerandaData;
+use App\Models\BerandaModel;
 
 class Beranda extends BaseController
 {
     public function __construct(
-        private readonly BerandaData $berandaData = new BerandaData()
+        private readonly BerandaModel $berandaModel = new BerandaModel()
     ) {}
 
     public function index(): string
     {
         $data = [
-            'services'     => $this->berandaData->getServices(),
-            'newsList'     => $this->berandaData->getNewsList(),
-            'galleryPhotos' => $this->berandaData->getGalleryPhotos(),
-            'latestVideos' => $this->berandaData->getLatestVideos(),
+            'services'      => $this->berandaModel->getServices(),
+            'newsList'     => $this->berandaModel->getNewsList(),
+            'galleryPhotos' => $this->berandaModel->getGalleryPhotos(),
+            'latestVideos' => $this->berandaModel->getLatestVideos(),
+            'menuNavigasi'  => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData'    => $this->berandaModel->getPublicFooterData(),
         ];
 
         return view('public/index', $data);

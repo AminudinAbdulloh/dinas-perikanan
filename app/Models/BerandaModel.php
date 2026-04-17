@@ -3,13 +3,131 @@
 namespace App\Models;
 
 /**
- * BerandaData
+ * BerandaModel
  *
  * Menyediakan data statis untuk halaman beranda.
  * Nantinya dapat diganti dengan query database.
  */
-class BerandaData
+class BerandaModel
 {
+    /**
+     * Data menu navigasi utama untuk navbar public.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public function getPublicNavigationMenu(): array
+    {
+        return [
+            [
+                'nama' => 'Beranda',
+                'link' => base_url('/'),
+                'aktif' => 'home',
+            ],
+            [
+                'nama' => 'Profil',
+                'link' => '#',
+                'aktif' => 'profil',
+                'submenu' => [
+                    ['nama' => 'Sejarah', 'link' => base_url('profil/sejarah')],
+                    ['nama' => 'Visi dan Misi', 'link' => base_url('profil/visi-misi')],
+                    ['nama' => 'Tugas Pokok dan Fungsi', 'link' => base_url('profil/tupoksi')],
+                    ['nama' => 'Struktur Organisasi', 'link' => base_url('profil/struktur')],
+                    ['nama' => 'Profil Pejabat Struktural', 'link' => base_url('profil/pejabat')],
+                    ['nama' => 'Daftar Pegawai', 'link' => base_url('profil/pegawai')],
+                    ['nama' => 'Alamat dan Kontak', 'link' => base_url('profil/kontak')],
+                ],
+            ],
+            [
+                'nama' => 'Program',
+                'link' => '#',
+                'aktif' => 'program',
+                'submenu' => [
+                    ['nama' => 'Rencana Strategis', 'link' => base_url('program/renstra')],
+                    ['nama' => 'Rencana Kerja', 'link' => base_url('program/renja')],
+                    ['nama' => 'Laporan Kinerja', 'link' => base_url('program/lakip')],
+                    ['nama' => 'Perjanjian Kinerja', 'link' => base_url('program/pk')],
+                ],
+            ],
+            [
+                'nama' => 'Data & Informasi',
+                'link' => '#',
+                'aktif' => 'informasi',
+                'submenu' => [
+                    [
+                        'nama' => 'Layanan Publik',
+                        'link' => '#',
+                        'submenu' => [
+                            ['nama' => 'Alur Permohonan', 'link' => base_url('informasi/alur-permohonan')],
+                            ['nama' => 'Form Permohonan', 'link' => base_url('informasi/form-permohonan')],
+                            ['nama' => 'Form Keberatan', 'link' => base_url('informasi/form-keberatan')],
+                            ['nama' => 'Daftar Informasi Publik', 'link' => base_url('informasi/daftar-informasi')],
+                            ['nama' => 'Informasi Dikecualikan', 'link' => base_url('informasi/informasi-dikecualikan')],
+                            ['nama' => 'Informasi Berkala', 'link' => base_url('informasi/informasi-berkala')],
+                        ],
+                    ],
+                    ['nama' => 'Berita', 'link' => base_url('berita')],
+                ],
+            ],
+            [
+                'nama' => 'Galeri',
+                'link' => '#',
+                'aktif' => 'galeri',
+                'submenu' => [
+                    ['nama' => 'Foto', 'link' => base_url('galeri/foto')],
+                    ['nama' => 'Video', 'link' => base_url('galeri/video')],
+                ],
+            ],
+            [
+                'nama' => 'Menu Lainnya',
+                'link' => '#',
+                'aktif' => 'lainnya',
+                'submenu' => [
+                    ['nama' => 'FAQ', 'link' => base_url('faq')],
+                    ['nama' => 'Kebijakan Privasi', 'link' => base_url('kebijakan-privasi')],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Data konten footer halaman public.
+     *
+     * @return array<string, mixed>
+     */
+    public function getPublicFooterData(): array
+    {
+        return [
+            'agency' => [
+                'icon' => 'bi-building',
+                'name' => 'Dinas Kelautan dan Perikanan - Daerah Istimewa Yogyakarta',
+                'contacts' => [
+                    ['icon' => 'bi-geo-alt', 'text' => 'Jalan Sagan No. III/4, Kelurahan Terban, Kemantren Gondokusuman, Kota Yogyakarta, DIY 55223'],
+                    ['icon' => 'bi-envelope', 'text' => 'dislautkan@jogjaprov.go.id'],
+                    ['icon' => 'bi-telephone', 'text' => '(0274) 512386'],
+                ],
+            ],
+            'informationLinks' => [
+                ['label' => 'Berita Terbaru', 'url' => '#'],
+                ['label' => 'Galeri Foto', 'url' => '#'],
+                ['label' => 'Galeri Video', 'url' => '#'],
+                ['label' => 'Pemberitahuan Privasi', 'url' => '#'],
+            ],
+            'socialLinks' => [
+                ['icon' => 'bi-instagram', 'label' => 'Instagram', 'url' => '#'],
+                ['icon' => 'bi-youtube', 'label' => 'YouTube', 'url' => '#'],
+            ],
+            'stats' => [
+                ['icon' => 'bi-people', 'label' => 'Pengunjung Hari Ini', 'value' => '6', 'colorClass' => 'stat-color-blue'],
+                ['icon' => 'bi-file-earmark-text', 'label' => 'Views Hari Ini', 'value' => '24', 'colorClass' => 'stat-color-green'],
+                ['icon' => 'bi-people-fill', 'label' => 'Pengunjung 7 Hari', 'value' => '121', 'colorClass' => 'stat-color-amber'],
+                ['icon' => 'bi-bar-chart-line', 'label' => 'Total Pengunjung', 'value' => '4.350', 'colorClass' => 'stat-color-purple'],
+                ['icon' => 'bi-eye', 'label' => 'Total Views', 'value' => '35.232', 'colorClass' => 'stat-color-indigo'],
+                ['icon' => 'bi-clock', 'label' => 'Terakhir Diperbarui', 'value' => '16 Apr 2026', 'colorClass' => 'stat-color-teal', 'small' => true],
+            ],
+            'copyright' => '2026 Dislautkan D.I. Yogyakarta. All rights reserved.',
+        ];
+    }
+
     /**
      * Daftar layanan utama yang ditampilkan di beranda.
      *
