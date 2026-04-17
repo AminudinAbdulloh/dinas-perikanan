@@ -109,6 +109,34 @@ class Beranda extends BaseController
         return view('public/galeri_foto', $data);
     }
 
+    public function galeriFotoDetail(int $id): string
+    {
+        $photo = $this->berandaModel->getGalleryPhotoDetail($id);
+
+        if ($photo === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $data = [
+            'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData' => $this->berandaModel->getPublicFooterData(),
+            'photo' => $photo,
+            'relatedPhotos' => $this->berandaModel->getRelatedGalleryPhotos((int) $photo['id']),
+            'pageData' => [
+                'title' => $photo['title'],
+                'description' => 'Detail dokumentasi kegiatan dan potensi sektor kelautan dan perikanan Papua Tengah.',
+                'backgroundImage' => $photo['image'] ?? null,
+                'breadcrumbs' => [
+                    ['label' => 'Beranda', 'href' => base_url('/')],
+                    ['label' => 'Galeri Foto', 'href' => base_url('galeri/foto')],
+                    ['label' => $photo['title'], 'href' => null],
+                ],
+            ],
+        ];
+
+        return view('public/galeri_foto_detail', $data);
+    }
+
     public function galeriVideo(): string
     {
         $data = [

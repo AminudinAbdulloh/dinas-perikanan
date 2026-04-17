@@ -503,6 +503,40 @@ class BerandaModel
     }
 
     /**
+     * Mengambil detail foto galeri berdasarkan ID.
+     *
+     * @param int $id
+     * @return array<string, int|string>|null
+     */
+    public function getGalleryPhotoDetail(int $id): ?array
+    {
+        foreach ($this->getGalleryPhotos() as $photo) {
+            if ((int) $photo['id'] === $id) {
+                return $photo;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Mengambil daftar foto terkait untuk sidebar/detail.
+     *
+     * @param int $excludeId
+     * @param int $limit
+     * @return array<int, array<string, int|string>>
+     */
+    public function getRelatedGalleryPhotos(int $excludeId, int $limit = 4): array
+    {
+        $photos = array_values(array_filter(
+            $this->getGalleryPhotos(),
+            static fn(array $photo): bool => (int) $photo['id'] !== $excludeId
+        ));
+
+        return array_slice($photos, 0, $limit);
+    }
+
+    /**
      * Daftar video terbaru untuk ditampilkan di beranda.
      *
      * @return array<int, array<string, int|string>>

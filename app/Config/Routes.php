@@ -10,6 +10,7 @@ $routes->get('berita', 'Beranda::berita');
 $routes->get('berita/(:num)', 'Beranda::beritaDetail/$1');
 $routes->group('galeri', static function ($routes) {
     $routes->get('foto', 'Beranda::galeriFoto');
+    $routes->get('foto/(:num)', 'Beranda::galeriFotoDetail/$1');
     $routes->get('video', 'Beranda::galeriVideo');
 });
 
