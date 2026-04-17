@@ -95,9 +95,9 @@
                             </div>
                             <h3 class="fw-bold mb-3 news-title"><?= esc($news['title']) ?></h3>
                             <p class="mb-4 news-excerpt"><?= esc($news['excerpt']) ?></p>
-                            <a href="<?= base_url('berita/' . (int) $news['id']) ?>"
-                                class="link-primary fw-semibold text-decoration-none">
-                                Baca Selengkapnya <span aria-hidden="true">&rarr;</span>
+                            <a href="<?= base_url('berita/' . (int) $news['id']) ?>" class="btn btn-primary mt-3 d-inline-flex align-items-center gap-2">
+                                <span>Baca Selengkapnya</span>
+                                <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
                     </article>

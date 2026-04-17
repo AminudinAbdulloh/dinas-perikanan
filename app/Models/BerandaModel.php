@@ -57,12 +57,15 @@ class BerandaModel
                         'nama' => 'Layanan Publik',
                         'link' => '#',
                         'submenu' => [
-                            ['nama' => 'Alur Permohonan', 'link' => base_url('informasi/alur-permohonan')],
-                            ['nama' => 'Form Permohonan', 'link' => base_url('informasi/form-permohonan')],
-                            ['nama' => 'Form Keberatan', 'link' => base_url('informasi/form-keberatan')],
+                            ['nama' => 'Alur Permohonan Informasi Publik', 'link' => base_url('informasi/alur-permohonan')],
+                            ['nama' => 'Form Permohonan Informasi', 'link' => base_url('informasi/form-permohonan')],
+                            ['nama' => 'Form Keberatan atas Permohonan Informasi', 'link' => base_url('informasi/form-keberatan')],
                             ['nama' => 'Daftar Informasi Publik', 'link' => base_url('informasi/daftar-informasi')],
-                            ['nama' => 'Informasi Dikecualikan', 'link' => base_url('informasi/informasi-dikecualikan')],
                             ['nama' => 'Informasi Berkala', 'link' => base_url('informasi/informasi-berkala')],
+                            ['nama' => 'Informasi Serta Merta', 'link' => base_url('informasi/informasi-serta-merta')],
+                            ['nama' => 'Informasi Setiap Saat', 'link' => base_url('informasi/informasi-setiap-saat')],
+                            ['nama' => 'Informasi Dikecualikan', 'link' => base_url('informasi/informasi-dikecualikan')],
+                            ['nama' => 'Laporan Layanan Informasi', 'link' => base_url('informasi/laporan-layanan')],
                         ],
                     ],
                     ['nama' => 'Berita', 'link' => base_url('berita')],
@@ -99,7 +102,7 @@ class BerandaModel
         return [
             'agency' => [
                 'icon' => 'bi-building',
-                'name' => 'Dinas Kelautan dan Perikanan - Daerah Istimewa Yogyakarta',
+                'name' => 'Dinas Kelautan dan Perikanan - Papua Tengah',
                 'contacts' => [
                     ['icon' => 'bi-geo-alt', 'text' => 'Sanoba, Distrik Nabire, Kabupaten Nabire, Papua Tengah 98816'],
                     ['icon' => 'bi-envelope', 'text' => 'dislautkan@papua.go.id'],
@@ -124,7 +127,7 @@ class BerandaModel
                 ['icon' => 'bi-eye', 'label' => 'Total Views', 'value' => '35.232', 'colorClass' => 'stat-color-indigo'],
                 ['icon' => 'bi-clock', 'label' => 'Terakhir Diperbarui', 'value' => '16 Apr 2026', 'colorClass' => 'stat-color-teal', 'small' => true],
             ],
-            'copyright' => '2026 Dislautkan D.I. Yogyakarta. All rights reserved.',
+            'copyright' => '2026 Dislautkan Papua Tengah. All rights reserved.',
         ];
     }
 
@@ -335,7 +338,7 @@ class BerandaModel
                 'id' => 1,
                 'date' => '5 April 2026',
                 'title' => 'Penyerahan Bantuan Alat Tangkap kepada 200 Nelayan',
-                'excerpt' => 'Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire',
+                'excerpt' => 'Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire v Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire v Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire',
                 'image' => 'https://images.unsplash.com/photo-1660278988532-d55143363abb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
             ],
             [

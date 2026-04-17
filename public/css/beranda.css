@@ -141,6 +141,8 @@
     border: 1px solid var(--color-gray-150);
     border-radius: 0.75rem;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     height: 100%;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
@@ -159,6 +161,9 @@
 
 .news-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .news-meta {
@@ -173,6 +178,16 @@
 
 .news-excerpt {
     color: var(--color-zinc-600);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.news-content a {
+    margin-top: auto !important;
+    align-self: flex-start;
 }
 
 /* ------------------------------------------------------------

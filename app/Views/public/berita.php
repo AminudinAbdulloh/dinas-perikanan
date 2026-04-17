@@ -25,7 +25,11 @@
                                         <time><?= esc($news['date']) ?></time>
                                     </div>
                                     <h3 class="fw-bold mb-3 news-title"><?= esc($news['title']) ?></h3>
-                                    <p class="mb-0 news-excerpt"><?= esc($news['excerpt']) ?></p>
+                                    <p class="mb-4 news-excerpt"><?= esc($news['excerpt']) ?></p>
+                                    <a href="#" class="btn btn-primary mt-3 d-inline-flex align-items-center gap-2">
+                                        <span>Baca Selengkapnya</span>
+                                        <i class="bi bi-arrow-right"></i>
+                                    </a>
                                 </div>
                             </article>
                         </div>
