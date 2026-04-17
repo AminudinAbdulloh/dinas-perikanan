@@ -21,7 +21,7 @@
                                 <img src="<?= esc($photo['image']) ?>" alt="<?= esc($photo['title']) ?>" class="gallery-image">
                                 <div class="gallery-overlay">
                                     <div class="gallery-caption">
-                                        <div class="gallery-category"><?= esc($photo['category']) ?></div>
+                                        <div class="gallery-date"><?= esc($photo['date']) ?></div>
                                         <p class="gallery-title"><?= esc($photo['title']) ?></p>
                                     </div>
                                 </div>

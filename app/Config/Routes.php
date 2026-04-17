@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Beranda::index');
 $routes->get('berita', 'Beranda::berita');
+$routes->get('berita/(:num)', 'Beranda::beritaDetail/$1');
 $routes->group('galeri', static function ($routes) {
     $routes->get('foto', 'Beranda::galeriFoto');
     $routes->get('video', 'Beranda::galeriVideo');
@@ -36,6 +37,7 @@ $routes->group('informasi', static function ($routes) {
     $routes->get('daftar-informasi', 'Beranda::page/informasi/daftar-informasi');
     $routes->get('informasi-dikecualikan', 'Beranda::page/informasi/informasi-dikecualikan');
     $routes->get('informasi-berkala', 'Beranda::page/informasi/informasi-berkala');
+    $routes->get('informasi-serta-merta', 'Beranda::page/informasi/informasi-serta-merta');
     $routes->get('informasi-setiap-saat', 'Beranda::page/informasi/informasi-setiap-saat');
     $routes->get('laporan-layanan', 'Beranda::page/informasi/laporan-layanan');
 });

@@ -64,7 +64,7 @@ class BerandaModel
                             ['nama' => 'Informasi Berkala', 'link' => base_url('informasi/informasi-berkala')],
                             ['nama' => 'Informasi Serta Merta', 'link' => base_url('informasi/informasi-serta-merta')],
                             ['nama' => 'Informasi Setiap Saat', 'link' => base_url('informasi/informasi-setiap-saat')],
-                            ['nama' => 'Informasi Dikecualikan', 'link' => base_url('informasi/informasi-dikecualikan')],
+                            ['nama' => 'Informasi yang Dikecualikan', 'link' => base_url('informasi/informasi-dikecualikan')],
                             ['nama' => 'Laporan Layanan Informasi', 'link' => base_url('informasi/laporan-layanan')],
                         ],
                     ],
@@ -72,19 +72,18 @@ class BerandaModel
                 ],
             ],
             [
-                'nama' => 'Galeri',
-                'link' => '#',
-                'aktif' => 'galeri',
-                'submenu' => [
-                    ['nama' => 'Foto', 'link' => base_url('galeri/foto')],
-                    ['nama' => 'Video', 'link' => base_url('galeri/video')],
-                ],
-            ],
-            [
                 'nama' => 'Menu Lainnya',
                 'link' => '#',
                 'aktif' => 'lainnya',
                 'submenu' => [
+                    [
+                        'nama' => 'Galeri',
+                        'link' => '#',
+                        'submenu' => [
+                            ['nama' => 'Foto', 'link' => base_url('galeri/foto')],
+                            ['nama' => 'Video', 'link' => base_url('galeri/video')],
+                        ]
+                    ],
                     ['nama' => 'FAQ', 'link' => base_url('faq')],
                     ['nama' => 'Kebijakan Privasi', 'link' => base_url('kebijakan-privasi')],
                 ],
@@ -201,12 +200,16 @@ class BerandaModel
                 'description' => 'Katalog informasi yang tersedia dan dapat diakses oleh masyarakat.',
             ],
             'informasi/informasi-dikecualikan' => [
-                'title' => 'Informasi Dikecualikan',
+                'title' => 'Informasi yang Dikecualikan',
                 'description' => 'Informasi yang dikecualikan sesuai ketentuan peraturan perundang-undangan.',
             ],
             'informasi/informasi-berkala' => [
                 'title' => 'Informasi Berkala',
                 'description' => 'Informasi yang diumumkan secara berkala sebagai bentuk transparansi layanan.',
+            ],
+            'informasi/informasi-serta-merta' => [
+                'title' => 'Informasi Serta Merta',
+                'description' => 'Informasi penting bagi publik yang wajib diumumkan segera tanpa penundaan.',
             ],
             'informasi/informasi-setiap-saat' => [
                 'title' => 'Informasi Setiap Saat',
@@ -318,6 +321,12 @@ class BerandaModel
                 'link' => 'informasi/informasi-berkala',
             ],
             [
+                'icon' => 'bi-megaphone',
+                'title' => 'Informasi Serta Merta',
+                'description' => 'Informasi yang wajib diumumkan segera demi kepentingan publik',
+                'link' => 'informasi/informasi-serta-merta',
+            ],
+            [
                 'icon' => 'bi-bar-chart-line',
                 'title' => 'Laporan Layanan Informasi',
                 'description' => 'Laporan dan statistik layanan informasi publik',
@@ -340,6 +349,26 @@ class BerandaModel
                 'title' => 'Penyerahan Bantuan Alat Tangkap kepada 200 Nelayan',
                 'excerpt' => 'Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire v Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire v Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire',
                 'image' => 'https://images.unsplash.com/photo-1660278988532-d55143363abb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+                'author' => 'Admin Dinas',
+                'views' => '1,234',
+                'readTime' => '5 min',
+                'tags' => ['Bantuan Nelayan', 'Alat Tangkap', 'Perikanan', 'Nabire'],
+                'content' => '<p>Nabire - Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada 200 nelayan di Kabupaten Nabire pada Jumat, 5 April 2026. Program ini merupakan bagian dari upaya pemerintah provinsi dalam meningkatkan produktivitas dan kesejahteraan nelayan.</p>
+<p>Dalam sambutannya, Gubernur menyampaikan bahwa bantuan ini diharapkan dapat membantu nelayan meningkatkan hasil tangkapan mereka. "Alat tangkap modern ini dirancang untuk lebih efisien dan ramah lingkungan," ujar Gubernur.</p>
+<h2>Bantuan yang Diberikan</h2>
+<p>Bantuan yang diserahkan meliputi:</p>
+<ul>
+  <li>Jaring ikan modern dengan ukuran yang sesuai standar</li>
+  <li>Pancing tuna longline</li>
+  <li>Alat bantu penangkapan ikan</li>
+  <li>GPS dan fish finder</li>
+</ul>
+<h2>Dampak Positif</h2>
+<p>Para nelayan menyambut baik program ini. Menurut salah satu penerima bantuan, Bapak Johannes Kogoya, alat tangkap modern ini akan sangat membantu meningkatkan hasil tangkapan. "Kami sangat berterima kasih kepada Pemerintah Provinsi Papua Tengah atas perhatiannya terhadap kesejahteraan nelayan," ungkapnya.</p>
+<p>Kepala Dinas Perikanan dan Kelautan Papua Tengah menambahkan bahwa program ini akan dilanjutkan ke kabupaten lain di Papua Tengah. "Tahun ini kami menargetkan 1.000 nelayan akan menerima bantuan alat tangkap," jelasnya.</p>
+<h2>Pelatihan Pendampingan</h2>
+<p>Selain bantuan alat tangkap, para nelayan juga akan mendapatkan pelatihan cara penggunaan alat dan teknik penangkapan ikan yang berkelanjutan. Pelatihan ini akan dilaksanakan selama 3 hari dengan didampingi oleh tim teknis dari dinas.</p>
+<p>Program ini diharapkan dapat meningkatkan produksi perikanan tangkap di Papua Tengah serta meningkatkan pendapatan nelayan secara signifikan.</p>',
             ],
             [
                 'id' => 2,
@@ -347,6 +376,12 @@ class BerandaModel
                 'title' => 'Pelatihan Budidaya Ikan Nila untuk Kelompok Tani',
                 'excerpt' => 'Dinas menggelar pelatihan budidaya ikan nila sistem bioflok untuk 50 kelompok pembudidaya',
                 'image' => 'https://images.unsplash.com/photo-1562656611-2b26567ccf19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+                'author' => 'Bidang Budidaya',
+                'views' => '2,145',
+                'readTime' => '4 min',
+                'tags' => ['Budidaya', 'Ikan Nila', 'Pelatihan'],
+                'content' => '<p>Dinas Kelautan dan Perikanan menggelar pelatihan budidaya ikan nila sistem bioflok bagi 50 kelompok pembudidaya di Nabire. Kegiatan ini bertujuan meningkatkan kapasitas teknis masyarakat dalam budidaya berkelanjutan.</p>
+<p>Materi pelatihan meliputi manajemen kualitas air, formulasi pakan, dan pengendalian penyakit ikan. Peserta juga mendapatkan praktik langsung untuk penerapan teknologi bioflok di kolam budidaya.</p>',
             ],
             [
                 'id' => 3,
@@ -354,8 +389,80 @@ class BerandaModel
                 'title' => 'Monitoring Kesehatan Terumbu Karang di Teluk Cenderawasih',
                 'excerpt' => 'Tim survei melakukan monitoring kondisi ekosistem terumbu karang di kawasan konservasi',
                 'image' => 'https://images.unsplash.com/photo-1724257154172-b7dcef926dea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxjb3JhbCUyMHJlZWYlMjB1bmRlcndhdGVyJTIwcGFwdWF8ZW58MXx8fHwxNzc1ODM3MDY2fDA&ixlib=rb-4.1.0&q=80&w=1080',
+                'author' => 'Tim Konservasi',
+                'views' => '1,876',
+                'readTime' => '6 min',
+                'tags' => ['Terumbu Karang', 'Konservasi', 'Teluk Cenderawasih'],
+                'content' => '<p>Tim survei melakukan monitoring kondisi ekosistem terumbu karang di kawasan konservasi Teluk Cenderawasih. Monitoring dilakukan untuk mengukur tutupan karang hidup dan kesehatan habitat laut.</p>
+<p>Hasil awal menunjukkan tren positif pada beberapa lokasi inti konservasi. Pemerintah daerah akan melanjutkan program rehabilitasi dan edukasi masyarakat pesisir untuk menjaga keberlanjutan ekosistem.</p>',
             ],
         ];
+    }
+
+    /**
+     * Mengambil detail berita berdasarkan ID.
+     *
+     * @param int $id
+     * @return array<string, mixed>|null
+     */
+    public function getNewsDetail(int $id): ?array
+    {
+        foreach ($this->getNewsList() as $news) {
+            if ((int) $news['id'] === $id) {
+                return $news;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Mengambil daftar berita populer untuk sidebar.
+     *
+     * @param int|null $excludeId
+     * @return array<int, array<string, mixed>>
+     */
+    public function getPopularNews(?int $excludeId = null): array
+    {
+        $popular = [
+            [
+                'id' => 1,
+                'title' => 'Pelatihan Budidaya Ikan Nila untuk Kelompok Tani',
+                'date' => '28 Maret 2026',
+                'views' => '2,145',
+                'image' => 'https://images.unsplash.com/photo-1562656611-2b26567ccf19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+            ],
+            [
+                'id' => 2,
+                'title' => 'Monitoring Kesehatan Terumbu Karang di Teluk Cenderawasih',
+                'date' => '15 Maret 2026',
+                'views' => '1,876',
+                'image' => 'https://images.unsplash.com/photo-1724257154172-b7dcef926dea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxjb3JhbCUyMHJlZWYlMjB1bmRlcndhdGVyJTIwcGFwdWF8ZW58MXx8fHwxNzc1ODM3MDY2fDA&ixlib=rb-4.1.0&q=80&w=1080',
+            ],
+            [
+                'id' => 3,
+                'title' => 'Pembangunan Pelabuhan Perikanan Modern di Nabire',
+                'date' => '10 Maret 2026',
+                'views' => '1,654',
+                'image' => 'https://images.unsplash.com/photo-1601699006891-c27e05b161c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxmaXNoaW5nJTIwYm9hdCUyMGhhcmJvcnxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+            ],
+            [
+                'id' => 4,
+                'title' => 'Festival Ikan Nusantara Papua Tengah 2026',
+                'date' => '5 Maret 2026',
+                'views' => '1,432',
+                'image' => 'https://images.unsplash.com/photo-1689505630546-bebf6e52dce2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+            ],
+        ];
+
+        if ($excludeId === null) {
+            return $popular;
+        }
+
+        return array_values(array_filter(
+            $popular,
+            static fn(array $news): bool => (int) $news['id'] !== $excludeId
+        ));
     }
 
     /**
@@ -370,49 +477,49 @@ class BerandaModel
                 'id' => 1,
                 'image' => 'https://images.unsplash.com/photo-1660278988532-d55143363abb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
                 'title' => 'Armada Perikanan Tradisional',
-                'category' => 'Perikanan Tangkap',
+                'date' => '1 Januari 2026',
             ],
             [
                 'id' => 2,
                 'image' => 'https://images.unsplash.com/photo-1562656611-2b26567ccf19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
                 'title' => 'Nelayan Papua Tengah',
-                'category' => 'Profil Nelayan',
+                'date' => '10 Januari 2026',
             ],
             [
                 'id' => 3,
                 'image' => 'https://images.unsplash.com/photo-1724257154172-b7dcef926dea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxjb3JhbCUyMHJlZWYlMjB1bmRlcndhdGVyJTIwcGFwdWF8ZW58MXx8fHwxNzc1ODM3MDY2fDA&ixlib=rb-4.1.0&q=80&w=1080',
                 'title' => 'Terumbu Karang Teluk Cenderawasih',
-                'category' => 'Konservasi',
+                'date' => '20 Januari 2026',
             ],
             [
                 'id' => 4,
                 'image' => 'https://images.unsplash.com/photo-1601699006891-c27e05b161c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxmaXNoaW5nJTIwYm9hdCUyMGhhcmJvcnxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
                 'title' => 'Pelabuhan Perikanan Nabire',
-                'category' => 'Infrastruktur',
+                'date' => '30 Januari 2026',
             ],
             [
                 'id' => 5,
                 'image' => 'https://images.unsplash.com/photo-1724257496887-d5012cdc9400?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxjb3JhbCUyMHJlZWYlMjB1bmRlcndhdGVyJTIwcGFwdWF8ZW58MXx8fHwxNzc1ODM3MDY2fDA&ixlib=rb-4.1.0&q=80&w=1080',
                 'title' => 'Keanekaragaman Hayati Laut',
-                'category' => 'Konservasi',
+                'date' => '2 Februari 2026',
             ],
             [
                 'id' => 6,
                 'image' => 'https://images.unsplash.com/photo-1689505630546-bebf6e52dce2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
                 'title' => 'Aktivitas Penangkapan Ikan',
-                'category' => 'Perikanan Tangkap',
+                'date' => '11 Februari 2026',
             ],
             [
                 'id' => 7,
                 'image' => 'https://images.unsplash.com/photo-1582965637751-2c8cc0c164ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
                 'title' => 'Dermaga Perikanan',
-                'category' => 'Infrastruktur',
+                'date' => '21 Februari 2026',
             ],
             [
                 'id' => 8,
                 'image' => 'https://images.unsplash.com/photo-1630546221335-bfbbe63f5e0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
                 'title' => 'Perjalanan Mencari Ikan',
-                'category' => 'Perikanan Tangkap',
+                'date' => '3 Maret 2026',
             ],
         ];
     }

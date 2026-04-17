@@ -62,6 +62,32 @@ class Beranda extends BaseController
         return view('public/berita', $data);
     }
 
+    public function beritaDetail(int $id): string
+    {
+        $news = $this->berandaModel->getNewsDetail($id);
+
+        if ($news === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $data = [
+            'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData' => $this->berandaModel->getPublicFooterData(),
+            'news' => $news,
+            'popularNews' => $this->berandaModel->getPopularNews((int) $news['id']),
+            'pageData' => [
+                'title' => $news['title'],
+                'breadcrumbs' => [
+                    ['label' => 'Beranda', 'href' => base_url('/')],
+                    ['label' => 'Berita', 'href' => base_url('berita')],
+                    ['label' => $news['title'], 'href' => null],
+                ],
+            ],
+        ];
+
+        return view('public/berita_detail', $data);
+    }
+
     public function galeriFoto(): string
     {
         $data = [

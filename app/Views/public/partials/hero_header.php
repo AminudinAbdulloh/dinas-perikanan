@@ -1,9 +1,8 @@
 <?php
 $pageData = $pageData ?? [];
 $breadcrumbs = $pageData['breadcrumbs'] ?? [];
-$backLink = $pageData['backLink'] ?? base_url('/');
-$backText = $pageData['backText'] ?? 'Kembali';
 ?>
+
 <section class="public-page-hero">
     <div class="hero-orbs">
         <div class="orb orb-cyan orb-top-right"></div>
@@ -21,13 +20,12 @@ $backText = $pageData['backText'] ?? 'Kembali';
     </div>
 
     <div class="container px-4 px-sm-5 px-lg-5 hero-content-wrap">
-        <a href="<?= esc($backLink) ?>" class="hero-back-link">
-            <i class="bi bi-arrow-left"></i>
-            <span><?= esc($backText) ?></span>
-        </a>
 
         <?php if (!empty($breadcrumbs)): ?>
             <div class="hero-breadcrumbs">
+                <span class="crumb-home-icon" aria-hidden="true">
+                    <i class="bi bi-house-door"></i>
+                </span>
                 <?php foreach ($breadcrumbs as $index => $crumb): ?>
                     <?php if ($index > 0): ?>
                         <span class="crumb-separator">/</span>

@@ -179,6 +179,7 @@
 .news-excerpt {
     color: var(--color-zinc-600);
     display: -webkit-box;
+    line-clamp: 3;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -251,7 +252,7 @@
     padding: 1rem;
 }
 
-.gallery-category {
+.gallery-date {
     font-size: 0.75rem;
     color: var(--color-primary-400);
     margin-bottom: 0.25rem;
@@ -572,4 +573,192 @@
     #berita .d-flex.align-items-end {
         align-items: flex-start !important;
     }
+}
+
+/* ------------------------------------------------------------
+   Berita Detail
+   ------------------------------------------------------------ */
+.berita-detail-card {
+    padding: 2rem;
+}
+
+.berita-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-zinc-600);
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.berita-back-link:hover {
+    color: var(--color-primary-600);
+}
+
+.detail-category {
+    display: inline-block;
+    background: var(--color-info-100);
+    color: var(--color-primary-700);
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.detail-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-zinc-900);
+    line-height: 1.25;
+}
+
+.detail-meta {
+    color: var(--color-zinc-500);
+    font-size: 0.95rem;
+}
+
+.detail-share {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-gray-150);
+}
+
+.detail-featured-image img {
+    width: 100%;
+    border-radius: 1rem;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.detail-content {
+    background: var(--color-slate-100);
+    border: 1px solid var(--color-gray-150);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    color: var(--color-zinc-700);
+    line-height: 1.8;
+}
+
+.detail-content h2 {
+    font-size: 1.35rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-zinc-900);
+}
+
+.detail-tags .badge {
+    margin-right: 0.35rem;
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+}
+
+.popular-news-box {
+    background: var(--color-slate-100);
+    border: 1px solid var(--color-gray-150);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    position: static;
+}
+
+.popular-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: var(--color-zinc-900);
+}
+
+.popular-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.popular-item {
+    display: flex;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--color-gray-150);
+}
+
+.popular-item:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.popular-item img {
+    width: 78px;
+    height: 78px;
+    border-radius: 0.65rem;
+    object-fit: cover;
+}
+
+.popular-item h4 {
+    margin: 0 0 0.35rem;
+    font-size: 0.92rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--color-zinc-900);
+}
+
+.popular-item p {
+    color: var(--color-zinc-500);
+    font-size: 0.8rem;
+}
+
+.popular-all-link {
+    margin-top: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: var(--color-primary-600);
+    font-weight: 600;
+}
+
+@media (max-width: 767.98px) {
+    .berita-detail-card {
+        padding: 1.2rem;
+    }
+
+    .detail-title {
+        font-size: 1.5rem;
+    }
+}
+
+[data-bs-theme="dark"] .berita-back-link {
+    color: var(--color-zinc-400);
+}
+
+[data-bs-theme="dark"] .berita-back-link:hover {
+    color: var(--color-primary-400);
+}
+
+[data-bs-theme="dark"] .detail-title,
+[data-bs-theme="dark"] .detail-content h2,
+[data-bs-theme="dark"] .popular-title,
+[data-bs-theme="dark"] .popular-item h4 {
+    color: var(--color-gray-150);
+}
+
+[data-bs-theme="dark"] .detail-meta,
+[data-bs-theme="dark"] .popular-item p {
+    color: var(--color-zinc-400);
+}
+
+[data-bs-theme="dark"] .detail-share,
+[data-bs-theme="dark"] .popular-item {
+    border-color: var(--color-slate-700);
+}
+
+[data-bs-theme="dark"] .detail-content,
+[data-bs-theme="dark"] .popular-news-box {
+    background: var(--color-slate-750);
+    border-color: var(--color-slate-700);
+}
+
+[data-bs-theme="dark"] .detail-category {
+    background: var(--overlay-blue-15);
+    color: var(--color-primary-400);
 }
