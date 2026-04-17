@@ -38,37 +38,57 @@ class BerandaModel
                 ],
             ],
             [
-                'nama' => 'Program',
+                'nama' => 'PPID',
                 'link' => '#',
-                'aktif' => 'program',
-                'submenu' => [
-                    ['nama' => 'Rencana Strategis', 'link' => base_url('program/renstra')],
-                    ['nama' => 'Rencana Kerja', 'link' => base_url('program/renja')],
-                    ['nama' => 'Laporan Kinerja', 'link' => base_url('program/lakip')],
-                    ['nama' => 'Perjanjian Kinerja', 'link' => base_url('program/pk')],
-                ],
-            ],
-            [
-                'nama' => 'Data & Informasi',
-                'link' => '#',
-                'aktif' => 'informasi',
+                'aktif' => 'ppid',
                 'submenu' => [
                     [
-                        'nama' => 'Layanan Publik',
+                        'nama' => 'Program',
+                        'link' => '#',
+                        'submenu' => [
+                            ['nama' => 'Rencana Strategis', 'link' => base_url('program/renstra')],
+                            ['nama' => 'Rencana Kerja', 'link' => base_url('program/renja')],
+                            ['nama' => 'Laporan Kinerja', 'link' => base_url('program/lakip')],
+                            ['nama' => 'Perjanjian Kinerja', 'link' => base_url('program/pk')],
+                        ],
+                    ],
+                    [
+                        'nama' => 'Layanan Informasi',
                         'link' => '#',
                         'submenu' => [
                             ['nama' => 'Alur Permohonan Informasi Publik', 'link' => base_url('informasi/alur-permohonan')],
                             ['nama' => 'Form Permohonan Informasi', 'link' => base_url('informasi/form-permohonan')],
                             ['nama' => 'Form Keberatan atas Permohonan Informasi', 'link' => base_url('informasi/form-keberatan')],
+                        ],
+                    ],
+                    [
+                        'nama' => 'Informasi Publik',
+                        'link' => '#',
+                        'submenu' => [
                             ['nama' => 'Daftar Informasi Publik', 'link' => base_url('informasi/daftar-informasi')],
                             ['nama' => 'Informasi Berkala', 'link' => base_url('informasi/informasi-berkala')],
                             ['nama' => 'Informasi Serta Merta', 'link' => base_url('informasi/informasi-serta-merta')],
                             ['nama' => 'Informasi Setiap Saat', 'link' => base_url('informasi/informasi-setiap-saat')],
                             ['nama' => 'Informasi yang Dikecualikan', 'link' => base_url('informasi/informasi-dikecualikan')],
-                            ['nama' => 'Laporan Layanan Informasi', 'link' => base_url('informasi/laporan-layanan')],
                         ],
                     ],
+                    ['nama' => 'Laporan Layanan', 'link' => base_url('informasi/laporan-layanan')],
+                ],
+            ],
+            [
+                'nama' => 'Informasi',
+                'link' => '#',
+                'aktif' => 'informasi',
+                'submenu' => [
                     ['nama' => 'Berita', 'link' => base_url('berita')],
+                    [
+                        'nama' => 'Galeri',
+                        'link' => '#',
+                        'submenu' => [
+                            ['nama' => 'Foto', 'link' => base_url('galeri/foto')],
+                            ['nama' => 'Video', 'link' => base_url('galeri/video')],
+                        ],
+                    ],
                 ],
             ],
             [
@@ -76,14 +96,6 @@ class BerandaModel
                 'link' => '#',
                 'aktif' => 'lainnya',
                 'submenu' => [
-                    [
-                        'nama' => 'Galeri',
-                        'link' => '#',
-                        'submenu' => [
-                            ['nama' => 'Foto', 'link' => base_url('galeri/foto')],
-                            ['nama' => 'Video', 'link' => base_url('galeri/video')],
-                        ]
-                    ],
                     ['nama' => 'FAQ', 'link' => base_url('faq')],
                     ['nama' => 'Kebijakan Privasi', 'link' => base_url('kebijakan-privasi')],
                 ],
