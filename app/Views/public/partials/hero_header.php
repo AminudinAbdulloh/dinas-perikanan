@@ -1,9 +1,15 @@
 <?php
 $pageData = $pageData ?? [];
 $breadcrumbs = $pageData['breadcrumbs'] ?? [];
+$heroBackgroundImage = isset($pageData['backgroundImage']) ? trim((string) $pageData['backgroundImage']) : '';
+$heroStyle = '';
+
+if ($heroBackgroundImage !== '') {
+    $heroStyle = ' style="background-image: linear-gradient(135deg, rgba(8, 47, 73, 0.74), rgba(8, 47, 73, 0.6)), url(\'' . esc($heroBackgroundImage, 'attr') . '\');"';
+}
 ?>
 
-<section class="public-page-hero">
+<section class="public-page-hero<?= $heroBackgroundImage !== '' ? ' public-page-hero--with-image' : '' ?>"<?= $heroStyle ?>>
     <div class="hero-orbs">
         <div class="orb orb-cyan orb-top-right"></div>
         <div class="orb orb-blue orb-bottom-left"></div>

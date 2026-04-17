@@ -77,6 +77,8 @@ class Beranda extends BaseController
             'popularNews' => $this->berandaModel->getPopularNews((int) $news['id']),
             'pageData' => [
                 'title' => $news['title'],
+                'description' => 'Berita terbaru Dinas Kelautan dan Perikanan Papua Tengah.',
+                'backgroundImage' => $news['image'] ?? null,
                 'breadcrumbs' => [
                     ['label' => 'Beranda', 'href' => base_url('/')],
                     ['label' => 'Berita', 'href' => base_url('berita')],

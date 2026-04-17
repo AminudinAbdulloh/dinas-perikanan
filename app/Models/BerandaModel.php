@@ -424,45 +424,23 @@ class BerandaModel
      */
     public function getPopularNews(?int $excludeId = null): array
     {
-        $popular = [
-            [
-                'id' => 1,
-                'title' => 'Pelatihan Budidaya Ikan Nila untuk Kelompok Tani',
-                'date' => '28 Maret 2026',
-                'views' => '2,145',
-                'image' => 'https://images.unsplash.com/photo-1562656611-2b26567ccf19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-            ],
-            [
-                'id' => 2,
-                'title' => 'Monitoring Kesehatan Terumbu Karang di Teluk Cenderawasih',
-                'date' => '15 Maret 2026',
-                'views' => '1,876',
-                'image' => 'https://images.unsplash.com/photo-1724257154172-b7dcef926dea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxjb3JhbCUyMHJlZWYlMjB1bmRlcndhdGVyJTIwcGFwdWF8ZW58MXx8fHwxNzc1ODM3MDY2fDA&ixlib=rb-4.1.0&q=80&w=1080',
-            ],
-            [
-                'id' => 3,
-                'title' => 'Pembangunan Pelabuhan Perikanan Modern di Nabire',
-                'date' => '10 Maret 2026',
-                'views' => '1,654',
-                'image' => 'https://images.unsplash.com/photo-1601699006891-c27e05b161c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxmaXNoaW5nJTIwYm9hdCUyMGhhcmJvcnxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-            ],
-            [
-                'id' => 4,
-                'title' => 'Festival Ikan Nusantara Papua Tengah 2026',
-                'date' => '5 Maret 2026',
-                'views' => '1,432',
-                'image' => 'https://images.unsplash.com/photo-1689505630546-bebf6e52dce2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-            ],
-        ];
+        $popular = $this->getNewsList();
 
-        if ($excludeId === null) {
-            return $popular;
+        if ($excludeId !== null) {
+            $popular = array_values(array_filter(
+                $popular,
+                static fn(array $news): bool => (int) $news['id'] !== $excludeId
+            ));
         }
 
-        return array_values(array_filter(
-            $popular,
-            static fn(array $news): bool => (int) $news['id'] !== $excludeId
-        ));
+        usort($popular, static function (array $a, array $b): int {
+            $viewsA = (int) preg_replace('/\D+/', '', (string) ($a['views'] ?? '0'));
+            $viewsB = (int) preg_replace('/\D+/', '', (string) ($b['views'] ?? '0'));
+
+            return $viewsB <=> $viewsA;
+        });
+
+        return array_slice($popular, 0, 4);
     }
 
     /**
