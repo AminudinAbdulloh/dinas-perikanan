@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Beranda::index');
 $routes->get('berita', 'Beranda::berita');
 $routes->get('berita/(:num)', 'Beranda::beritaDetail/$1');
+$routes->get('pengumuman', 'Beranda::page/pengumuman');
 $routes->group('galeri', static function ($routes) {
     $routes->get('foto', 'Beranda::galeriFoto');
     $routes->get('foto/(:num)', 'Beranda::galeriFotoDetail/$1');
@@ -24,23 +25,26 @@ $routes->group('profil', static function ($routes) {
     $routes->get('kontak', 'Beranda::page/profil/kontak');
 });
 
-$routes->group('program', static function ($routes) {
-    $routes->get('renstra', 'Beranda::page/program/renstra');
-    $routes->get('renja', 'Beranda::page/program/renja');
-    $routes->get('lakip', 'Beranda::page/program/lakip');
-    $routes->get('pk', 'Beranda::page/program/pk');
+// $routes->group('publikasi', static function ($routes) {
+//     $routes->get('renstra', 'Beranda::page/publikasi/renstra');
+//     $routes->get('renja', 'Beranda::page/publikasi/renja');
+//     $routes->get('lakip', 'Beranda::page/publikasi/lakip');
+//     $routes->get('pk', 'Beranda::page/publikasi/pk');
+// });
+
+$routes->group('layanan', static function ($routes) {
+    $routes->get('alur-permohonan', 'Beranda::page/layanan/alur-permohonan-informasi');
+    $routes->get('form-permohonan', 'Beranda::page/layanan/form-permohonan-informasi');
+    $routes->get('form-keberatan', 'Beranda::page/layanan/form-keberatan-informasi');
 });
 
 $routes->group('informasi', static function ($routes) {
-    $routes->get('alur-permohonan', 'Beranda::page/informasi/alur-permohonan');
-    $routes->get('form-permohonan', 'Beranda::page/informasi/form-permohonan');
-    $routes->get('form-keberatan', 'Beranda::page/informasi/form-keberatan');
-    $routes->get('daftar-informasi', 'Beranda::page/informasi/daftar-informasi');
+    $routes->get('daftar-informasi', 'Beranda::page/informasi/daftar-informasi-publik');
     $routes->get('informasi-dikecualikan', 'Beranda::page/informasi/informasi-dikecualikan');
     $routes->get('informasi-berkala', 'Beranda::page/informasi/informasi-berkala');
     $routes->get('informasi-serta-merta', 'Beranda::page/informasi/informasi-serta-merta');
     $routes->get('informasi-setiap-saat', 'Beranda::page/informasi/informasi-setiap-saat');
-    $routes->get('laporan-layanan', 'Beranda::page/informasi/laporan-layanan');
+    $routes->get('laporan-layanan', 'Beranda::page/informasi/laporan-layanan-informasi');
 });
 
 $routes->get('faq', 'Beranda::page/faq');

@@ -38,22 +38,39 @@ class BerandaModel
                 ],
             ],
             [
+                'nama' => 'Informasi',
+                'link' => '#',
+                'aktif' => 'informasi',
+                'submenu' => [
+                    ['nama' => 'Berita', 'link' => base_url('berita')],
+                    ['nama' => 'Pengumuman', 'link' => base_url('pengumuman')],
+                    [
+                        'nama' => 'Galeri',
+                        'link' => '#',
+                        'submenu' => [
+                            ['nama' => 'Foto', 'link' => base_url('galeri/foto')],
+                            ['nama' => 'Video', 'link' => base_url('galeri/video')],
+                        ],
+                    ],
+                ],
+            ],
+            [
                 'nama' => 'PPID',
                 'link' => '#',
                 'aktif' => 'ppid',
                 'submenu' => [
+                    // [
+                    //     'nama' => 'Publikasi',
+                    //     'link' => '#',
+                    //     'submenu' => [
+                    //         ['nama' => 'Rencana Strategis', 'link' => base_url('publikasi/renstra')],
+                    //         ['nama' => 'Rencana Kerja', 'link' => base_url('publikasi/renja')],
+                    //         ['nama' => 'Laporan Kinerja', 'link' => base_url('publikasi/lakip')],
+                    //         ['nama' => 'Perjanjian Kinerja', 'link' => base_url('publikasi/pk')],
+                    //     ],
+                    // ],
                     [
-                        'nama' => 'Program',
-                        'link' => '#',
-                        'submenu' => [
-                            ['nama' => 'Rencana Strategis', 'link' => base_url('program/renstra')],
-                            ['nama' => 'Rencana Kerja', 'link' => base_url('program/renja')],
-                            ['nama' => 'Laporan Kinerja', 'link' => base_url('program/lakip')],
-                            ['nama' => 'Perjanjian Kinerja', 'link' => base_url('program/pk')],
-                        ],
-                    ],
-                    [
-                        'nama' => 'Layanan Informasi',
+                        'nama' => 'Layanan',
                         'link' => '#',
                         'submenu' => [
                             ['nama' => 'Alur Permohonan Informasi Publik', 'link' => base_url('informasi/alur-permohonan')],
@@ -72,23 +89,7 @@ class BerandaModel
                             ['nama' => 'Informasi yang Dikecualikan', 'link' => base_url('informasi/informasi-dikecualikan')],
                         ],
                     ],
-                    ['nama' => 'Laporan Layanan', 'link' => base_url('informasi/laporan-layanan')],
-                ],
-            ],
-            [
-                'nama' => 'Informasi',
-                'link' => '#',
-                'aktif' => 'informasi',
-                'submenu' => [
-                    ['nama' => 'Berita', 'link' => base_url('berita')],
-                    [
-                        'nama' => 'Galeri',
-                        'link' => '#',
-                        'submenu' => [
-                            ['nama' => 'Foto', 'link' => base_url('galeri/foto')],
-                            ['nama' => 'Video', 'link' => base_url('galeri/video')],
-                        ],
-                    ],
+                    ['nama' => 'Laporan Layanan Informasi', 'link' => base_url('informasi/laporan-layanan')],
                 ],
             ],
             [
@@ -230,6 +231,10 @@ class BerandaModel
             'informasi/laporan-layanan' => [
                 'title' => 'Laporan Layanan Informasi',
                 'description' => 'Rekapitulasi statistik dan capaian layanan informasi publik.',
+            ],
+            'pengumuman' => [
+                'title' => 'Pengumuman',
+                'description' => 'Pengumuman resmi dan edaran terkait layanan Dinas Kelautan dan Perikanan Provinsi Papua Tengah.',
             ],
             'faq' => [
                 'title' => 'FAQ',
