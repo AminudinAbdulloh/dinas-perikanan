@@ -19,7 +19,6 @@ class GalleryVideoModel extends Model
         'title',
         'youtube_id',
         'youtube_url',
-        'duration',
     ];
 
     protected $useTimestamps = true;
@@ -48,14 +47,11 @@ class GalleryVideoModel extends Model
             $dateKey = $m[1];
         }
 
-        $dur = trim((string) ($row['duration'] ?? ''));
-
         return [
             'id'          => (int) $row['id'],
             'youtube_id'  => (string) ($row['youtube_id'] ?? ''),
             'youtube_url' => (string) ($row['youtube_url'] ?? ''),
             'title'       => (string) ($row['title'] ?? ''),
-            'duration'    => $dur !== '' ? $dur : '—',
             'date'        => NewsArticleModel::formatIndonesianDate($dateKey),
         ];
     }

@@ -168,7 +168,6 @@
                                     <i class="bi bi-play-fill"></i>
                                 </div>
                             </div>
-                            <div class="video-duration"><?= esc($video['duration']) ?></div>
                         </div>
 
                         <div class="video-meta">

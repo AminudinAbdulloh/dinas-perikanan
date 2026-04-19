@@ -48,7 +48,6 @@ class KontenGaleriVideo extends BaseController
             'title'       => (string) $this->request->getPost('title'),
             'youtube_id'  => $parsed['youtube_id'],
             'youtube_url' => $parsed['youtube_url'],
-            'duration'    => trim((string) $this->request->getPost('duration')) ?: null,
         ]);
 
         return redirect()->to(base_url('admin/konten/galeri-video'))->with('message', 'Video berhasil ditambahkan.');
@@ -89,7 +88,6 @@ class KontenGaleriVideo extends BaseController
             'title'       => (string) $this->request->getPost('title'),
             'youtube_id'  => $parsed['youtube_id'],
             'youtube_url' => $parsed['youtube_url'],
-            'duration'    => trim((string) $this->request->getPost('duration')) ?: null,
         ]);
 
         return redirect()->to(base_url('admin/konten/galeri-video'))->with('message', 'Video berhasil diperbarui.');
@@ -115,7 +113,6 @@ class KontenGaleriVideo extends BaseController
         return [
             'title'          => 'required|max_length[255]',
             'youtube_input'  => 'required|max_length[512]',
-            'duration'       => 'permit_empty|max_length[16]',
         ];
     }
 

@@ -26,37 +26,37 @@ class GalleryVideoSeeder extends Seeder
                 'title' => 'Profil Nelayan Papua Tengah',
                 'youtube_id' => 'N4lNE4MBJG8',
                 'youtube_url' => 'https://youtu.be/N4lNE4MBJG8?si=iJgIJ2zXTzmsrp52',
-                'duration' => '5:32',
+                // removed: 'duration' => '5:32',
             ],
             [
                 'title' => 'Konservasi Terumbu Karang Teluk Cenderawasih',
                 'youtube_id' => 'B2pCPefPba4',
                 'youtube_url' => 'https://youtu.be/B2pCPefPba4?si=VG4HgLFILNfCqzF4',
-                'duration' => '8:15',
+                // removed: 'duration' => '8:15',
             ],
             [
                 'title' => 'Penyerahan Bantuan Kapal Perikanan',
                 'youtube_id' => 'eQwIKZhxdzc',
                 'youtube_url' => 'https://youtu.be/eQwIKZhxdzc?si=tDVQ6nNY13VfxBku',
-                'duration' => '4:20',
+                // removed: 'duration' => '4:20',
             ],
             [
                 'title' => 'Pelatihan Budidaya Ikan Modern',
                 'youtube_id' => 'l4i_zI69klU',
                 'youtube_url' => 'https://youtu.be/l4i_zI69klU?si=6glMP5KJb75Lv-5w',
-                'duration' => '6:45',
+                // removed: 'duration' => '6:45',
             ],
             [
                 'title' => 'Pembangunan Pelabuhan Perikanan Baru',
                 'youtube_id' => 'dndRLICiZbU',
                 'youtube_url' => 'https://youtu.be/dndRLICiZbU?si=zrJSKTjBh7lhCOAX',
-                'duration' => '3:55',
+                // removed: 'duration' => '3:55',
             ],
             [
                 'title' => 'Eksplorasi Kekayaan Laut Papua Tengah',
                 'youtube_id' => 'PlZaWP064KA',
                 'youtube_url' => 'https://youtu.be/PlZaWP064KA?si=1n7rU7_4F_JAv7l0',
-                'duration' => '7:10',
+                // removed: 'duration' => '7:10',
             ],
         ];
 

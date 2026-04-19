@@ -56,13 +56,6 @@ if (is_array($errs) && $errs !== []) { ?>
                     placeholder="https://www.youtube.com/watch?v=..."><?= esc($youtubeDefault) ?></textarea>
             </div>
 
-            <div class="mb-4">
-                <label for="duration" class="form-label fw-semibold">Durasi tampil (opsional)</label>
-                <input type="text" class="form-control rounded-3" id="duration" name="duration" maxlength="16"
-                    placeholder="mis. 5:32" value="<?= esc(old('duration', (string) ($v['duration'] ?? ''))) ?>">
-                <div class="form-text">Hanya teks di kartu video; tidak mengambil durasi otomatis dari YouTube.</div>
-            </div>
-
             <div class="d-flex flex-wrap gap-2">
                 <button type="submit" class="btn btn-primary rounded-3 px-4">
                     <i class="bi bi-check2-circle me-1"></i>Simpan

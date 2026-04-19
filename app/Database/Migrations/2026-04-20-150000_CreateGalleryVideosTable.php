@@ -26,11 +26,6 @@ class CreateGalleryVideosTable extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => 512,
             ],
-            'duration' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 16,
-                'null'       => true,
-            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,

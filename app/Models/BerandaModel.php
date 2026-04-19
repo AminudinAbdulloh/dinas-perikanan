@@ -541,7 +541,6 @@ class BerandaModel
                 'youtube_id' => 'N4lNE4MBJG8',
                 'youtube_url' => 'https://youtu.be/N4lNE4MBJG8?si=iJgIJ2zXTzmsrp52',
                 'title' => 'Profil Nelayan Papua Tengah',
-                'duration' => '5:32',
                 'date' => '2 April 2026',
             ],
             [
@@ -549,7 +548,6 @@ class BerandaModel
                 'youtube_id' => 'B2pCPefPba4',
                 'youtube_url' => 'https://youtu.be/B2pCPefPba4?si=VG4HgLFILNfCqzF4',
                 'title' => 'Konservasi Terumbu Karang Teluk Cenderawasih',
-                'duration' => '8:15',
                 'date' => '25 Maret 2026',
             ],
             [
@@ -557,7 +555,6 @@ class BerandaModel
                 'youtube_id' => 'eQwIKZhxdzc',
                 'youtube_url' => 'https://youtu.be/eQwIKZhxdzc?si=tDVQ6nNY13VfxBku',
                 'title' => 'Penyerahan Bantuan Kapal Perikanan',
-                'duration' => '4:20',
                 'date' => '18 Maret 2026',
             ],
             [
@@ -565,7 +562,6 @@ class BerandaModel
                 'youtube_id' => 'l4i_zI69klU',
                 'youtube_url' => 'https://youtu.be/l4i_zI69klU?si=6glMP5KJb75Lv-5w',
                 'title' => 'Pelatihan Budidaya Ikan Modern',
-                'duration' => '6:45',
                 'date' => '10 Maret 2026',
             ],
             [
@@ -573,7 +569,6 @@ class BerandaModel
                 'youtube_id' => 'dndRLICiZbU',
                 'youtube_url' => 'https://youtu.be/dndRLICiZbU?si=zrJSKTjBh7lhCOAX',
                 'title' => 'Pembangunan Pelabuhan Perikanan Baru',
-                'duration' => '3:55',
                 'date' => '5 Maret 2026',
             ],
             [
@@ -581,7 +576,6 @@ class BerandaModel
                 'youtube_id' => 'PlZaWP064KA',
                 'youtube_url' => 'https://youtu.be/PlZaWP064KA?si=1n7rU7_4F_JAv7l0',
                 'title' => 'Eksplorasi Kekayaan Laut Papua Tengah',
-                'duration' => '7:10',
                 'date' => '1 Maret 2026',
             ],
         ];
