@@ -54,13 +54,54 @@ class KontenMedia extends BaseController
         $newName = $file->getRandomName();
         $file->move($targetDir, $newName);
 
-        // Buat URL yang tetap benar walau aplikasi jalan di subfolder (mis. /dinas-perikanan/public)
         $scriptName = (string) ($this->request->getServer('SCRIPT_NAME') ?? '');
         $basePath = str_replace('\\', '/', dirname($scriptName));
         $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
 
         return $this->response->setJSON([
             'location' => $basePath . '/uploads/editor/' . $newName,
+        ]);
+    }
+
+    /**
+     * Hapus satu file gambar dari folder uploads/editor.
+     * Hanya menghapus jika file sudah tidak dipakai di konten manapun.
+     */
+    public function deleteImage(): ResponseInterface
+    {
+        helper('content');
+
+        $src = trim((string) ($this->request->getJSON(true)['src'] ?? ''));
+
+        if ($src === '') {
+            return $this->response->setStatusCode(400)->setJSON([
+                'error' => 'Parameter src tidak boleh kosong.',
+            ]);
+        }
+
+        // Ambil nama file dari URL/path
+        $filename = basename(parse_url($src, PHP_URL_PATH) ?? '');
+
+        if (! preg_match('/^[a-zA-Z0-9._-]+\.(png|jpe?g|webp|gif)$/i', $filename)) {
+            return $this->response->setStatusCode(422)->setJSON([
+                'error' => 'Nama file tidak valid.',
+            ]);
+        }
+
+        $result = delete_editor_upload_file($filename);
+
+        if ($result) {
+            return $this->response->setJSON([
+                'deleted'   => true,
+                'filename'  => $filename,
+            ]);
+        }
+
+        // File masih dipakai di konten lain — bukan error, cukup skip
+        return $this->response->setJSON([
+            'deleted'  => false,
+            'filename' => $filename,
+            'reason'   => 'File masih digunakan di konten lain.',
         ]);
     }
 }

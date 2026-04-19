@@ -77,7 +77,8 @@ if (is_array($errs) && $errs !== []) { ?>
 (function () {
     const form = document.querySelector('form[action*="konten/visi-misi/update"]');
     if (!form) return;
-    const uploadUrl = '<?= base_url('admin/konten/upload-image') ?>';
+    const uploadUrl      = '<?= base_url('admin/konten/upload-image') ?>';
+    const deleteImageUrl = '<?= base_url('admin/konten/delete-image') ?>';
 
     tinymce.init({
         selector: '#body',
@@ -129,20 +130,15 @@ if (is_array($errs) && $errs !== []) { ?>
                     reject('Upload gagal. Coba lagi.');
                     return;
                 }
-
                 let json = null;
-                try {
-                    json = JSON.parse(xhr.responseText);
-                } catch (e) {
+                try { json = JSON.parse(xhr.responseText); } catch (e) {
                     reject('Respons upload tidak valid.');
                     return;
                 }
-
                 if (!json || typeof json.location !== 'string') {
                     reject((json && json.error) ? json.error : 'Upload gagal.');
                     return;
                 }
-
                 resolve(json.location);
             };
 
@@ -155,35 +151,13 @@ if (is_array($errs) && $errs !== []) { ?>
         media_live_embeds: true,
         color_cols: 10,
         color_map: [
-            '000000', 'Hitam',
-            '1f2937', 'Slate 800',
-            '374151', 'Slate 700',
-            '6b7280', 'Slate 500',
-            '9ca3af', 'Slate 400',
-            'd1d5db', 'Slate 300',
-            'e5e7eb', 'Slate 200',
-            'f3f4f6', 'Slate 100',
-            'ffffff', 'Putih',
-            'ef4444', 'Merah',
-            'f97316', 'Oranye',
-            'f59e0b', 'Amber',
-            'eab308', 'Kuning',
-            '84cc16', 'Lime',
-            '22c55e', 'Hijau',
-            '14b8a6', 'Teal',
-            '06b6d4', 'Cyan',
-            '0ea5e9', 'Sky',
-            '3b82f6', 'Biru',
-            '6366f1', 'Indigo',
-            '8b5cf6', 'Ungu',
-            'a855f7', 'Violet',
-            'd946ef', 'Fuchsia',
-            'ec4899', 'Pink',
-            'f43f5e', 'Rose',
-            '7c2d12', 'Coklat',
-            '064e3b', 'Hijau tua',
-            '0c4a6e', 'Biru tua',
-            '312e81', 'Indigo tua',
+            '000000','Hitam','1f2937','Slate 800','374151','Slate 700','6b7280','Slate 500',
+            '9ca3af','Slate 400','d1d5db','Slate 300','e5e7eb','Slate 200','f3f4f6','Slate 100',
+            'ffffff','Putih','ef4444','Merah','f97316','Oranye','f59e0b','Amber','eab308','Kuning',
+            '84cc16','Lime','22c55e','Hijau','14b8a6','Teal','06b6d4','Cyan','0ea5e9','Sky',
+            '3b82f6','Biru','6366f1','Indigo','8b5cf6','Ungu','a855f7','Violet','d946ef','Fuchsia',
+            'ec4899','Pink','f43f5e','Rose','7c2d12','Coklat','064e3b','Hijau tua',
+            '0c4a6e','Biru tua','312e81','Indigo tua',
         ],
         content_css: [
             'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap',
@@ -204,6 +178,41 @@ if (is_array($errs) && $errs !== []) { ?>
 
             editor.on('change input undo redo', function () {
                 editor.save();
+            });
+
+            // ── Auto-delete gambar dari server saat dihapus di editor ──
+            let _prevEditorImages = [];
+
+            const getEditorImages = () =>
+                editor.dom.select('img')
+                    .map(img => img.getAttribute('src') || '')
+                    .filter(src => src.includes('/uploads/editor/'));
+
+            editor.on('init', function () {
+                _prevEditorImages = getEditorImages();
+            });
+
+            editor.on('change undo redo', function () {
+                const current = getEditorImages();
+                const removed = _prevEditorImages.filter(src => !current.includes(src));
+
+                removed.forEach(src => {
+                    fetch(deleteImageUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'same-origin',
+                        body: JSON.stringify({ src }),
+                    })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.deleted) {
+                            console.info('[Editor] File dihapus dari server:', data.filename);
+                        }
+                    })
+                    .catch(() => { /* silent fail */ });
+                });
+
+                _prevEditorImages = current;
             });
         },
     });

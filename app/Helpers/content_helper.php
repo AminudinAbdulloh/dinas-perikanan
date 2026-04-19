@@ -64,7 +64,6 @@ if (! function_exists('sanitize_inline_style_attribute')) {
                 continue;
             }
             if (in_array($propLower, ['margin-left', 'padding-left', 'text-indent'], true)) {
-                // Batasi indent hanya nilai numerik dengan unit umum agar tetap aman.
                 if (preg_match('/^0$/', $value) === 1 || preg_match('/^[\d.]+\s*(px|pt|em|rem|%)$/i', $value) === 1) {
                     $numeric = (float) preg_replace('/[^0-9.]/', '', $value);
                     if ($numeric <= 120) {
@@ -137,7 +136,7 @@ if (! function_exists('safe_admin_html')) {
             '/<img\s+[^>]*>/i',
             static function (array $m) use ($basePath): string {
                 $tag = $m[0];
-                if (! preg_match('/\bsrc\s*=\s*("[^"]*"|\'[^\']*\')/i', $tag, $sm)) {
+                if (! preg_match('/\bsrc\s*=\s*("([^"]*)"|\'([^\']*)\')/i', $tag, $sm)) {
                     return '';
                 }
                 $src = trim($sm[1], '"\'');
@@ -145,7 +144,6 @@ if (! function_exists('safe_admin_html')) {
                 if ($src === '' || preg_match('/^\s*javascript:/i', $src) || str_starts_with(strtolower($src), 'data:')) {
                     return '';
                 }
-                // Normalisasi src upload editor agar cocok untuk subfolder app (XAMPP)
                 if (str_starts_with($src, 'uploads/editor/')) {
                     $src = ($basePath !== '' ? $basePath : '') . '/' . $src;
                 } elseif (str_starts_with($src, '/uploads/editor/')) {
@@ -156,7 +154,7 @@ if (! function_exists('safe_admin_html')) {
                 }
 
                 $alt = '';
-                if (preg_match('/\balt\s*=\s*("[^"]*"|\'[^\']*\')/i', $tag, $am)) {
+                if (preg_match('/\balt\s*=\s*("([^"]*)"|\'([^\']*)\')/i', $tag, $am)) {
                     $alt = esc(html_entity_decode(trim($am[1], '"\''), ENT_QUOTES | ENT_HTML5, 'UTF-8'), 'attr');
                 }
 
@@ -199,7 +197,7 @@ if (! function_exists('safe_admin_html')) {
             '/<iframe\s+[^>]*>/i',
             static function (array $m): string {
                 $tag = $m[0];
-                if (! preg_match('/\bsrc\s*=\s*("[^"]*"|\'[^\']*\')/i', $tag, $sm)) {
+                if (! preg_match('/\bsrc\s*=\s*("([^"]*)"|\'([^\']*)\')/i', $tag, $sm)) {
                     return '';
                 }
                 $src = html_entity_decode(trim($sm[1], '"\''), ENT_QUOTES | ENT_HTML5, 'UTF-8');
@@ -233,7 +231,7 @@ if (! function_exists('safe_admin_html')) {
         ) ?? $html;
 
         $html = preg_replace_callback(
-            '/<a\s+[^>]*?href\s*=\s*("[^"]*"|\'[^\']*\')[^>]*>/i',
+            '/<a\s+[^>]*?href\s*=\s*("([^"]*)"|\'([^\']*)\')[^>]*>/i',
             static function (array $m): string {
                 $href = trim($m[1], '"\'');
                 $href = html_entity_decode($href, ENT_QUOTES | ENT_HTML5, 'UTF-8');
@@ -285,7 +283,9 @@ if (! function_exists('extract_editor_upload_filenames')) {
 if (! function_exists('cleanup_unused_editor_uploads')) {
     /**
      * Hapus file upload editor yang tidak lagi direferensikan oleh konten manapun.
-     * Diberi grace period agar aman (mis. saat user baru upload tapi belum sempat simpan).
+     *
+     * @param int $graceSeconds Grace period dalam detik. Set 0 untuk hapus seketika.
+     *                          Default 3600 aman untuk upload yang belum sempat disimpan.
      */
     function cleanup_unused_editor_uploads(int $graceSeconds = 3600): void
     {
@@ -317,11 +317,49 @@ if (! function_exists('cleanup_unused_editor_uploads')) {
                 continue;
             }
             $mtime = (int) $fileInfo->getMTime();
-            if (($now - $mtime) < $graceSeconds) {
+            if ($graceSeconds > 0 && ($now - $mtime) < $graceSeconds) {
                 continue;
             }
             @unlink($fileInfo->getPathname());
         }
+    }
+}
+
+if (! function_exists('delete_editor_upload_file')) {
+    /**
+     * Hapus satu file upload editor berdasarkan nama file.
+     * Hanya menghapus jika file tidak lagi digunakan di konten manapun.
+     *
+     * @param string $filename Nama file saja (tanpa path), misal: "abc123.jpg"
+     * @return bool true jika berhasil dihapus atau memang tidak ada, false jika masih dipakai
+     */
+    function delete_editor_upload_file(string $filename): bool
+    {
+        // Validasi nama file: hanya huruf, angka, titik, strip, underscore
+        if (! preg_match('/^[a-zA-Z0-9._-]+\.(png|jpe?g|webp|gif)$/i', $filename)) {
+            return false;
+        }
+
+        $filepath = rtrim(FCPATH, DIRECTORY_SEPARATOR)
+            . DIRECTORY_SEPARATOR . 'uploads'
+            . DIRECTORY_SEPARATOR . 'editor'
+            . DIRECTORY_SEPARATOR . $filename;
+
+        if (! is_file($filepath)) {
+            return true; // sudah tidak ada, anggap berhasil
+        }
+
+        // Pastikan file tidak dipakai di konten manapun
+        $model = model(\App\Models\SitePageModel::class);
+        $rows = $model->select('body')->findAll();
+        foreach ($rows as $row) {
+            $body = (string) ($row['body'] ?? '');
+            if (str_contains($body, '/uploads/editor/' . $filename)) {
+                return false; // masih dipakai
+            }
+        }
+
+        return @unlink($filepath);
     }
 }
 

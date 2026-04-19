@@ -30,6 +30,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->get('konten/tupoksi/edit', 'KontenTupoksi::edit');
         $routes->post('konten/tupoksi/update', 'KontenTupoksi::update', ['filter' => 'csrf']);
         $routes->post('konten/upload-image', 'KontenMedia::uploadImage');
+        $routes->post('konten/delete-image', 'KontenMedia::deleteImage');
     });
 });
 $routes->get('berita', 'Beranda::berita');
