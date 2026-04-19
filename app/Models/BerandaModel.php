@@ -255,8 +255,14 @@ class BerandaModel
         $description = $page['description'];
         $content = $this->buildPageContent($path, $title);
 
-        if ($path === 'profil/sejarah') {
-            $dbPage = model(SitePageModel::class)->findBySlug(SitePageModel::SLUG_PROFIL_SEJARAH);
+        $dbPageSlug = match ($path) {
+            'profil/sejarah' => SitePageModel::SLUG_PROFIL_SEJARAH,
+            'profil/visi-misi' => SitePageModel::SLUG_PROFIL_VISI_MISI,
+            default => null,
+        };
+
+        if ($dbPageSlug !== null) {
+            $dbPage = model(SitePageModel::class)->findBySlug($dbPageSlug);
             if ($dbPage !== null) {
                 if (trim((string) ($dbPage['title'] ?? '')) !== '') {
                     $title = (string) $dbPage['title'];

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 if (! function_exists('sanitize_inline_style_attribute')) {
     /**
-     * Membolehkan properti CSS terbatas pada atribut style (warna, font dasar, rata teks).
+     * Membolehkan properti CSS terbatas pada atribut style (warna, font dasar, rata teks, indent aman).
      */
     function sanitize_inline_style_attribute(string $raw): string
     {
@@ -20,6 +20,9 @@ if (! function_exists('sanitize_inline_style_attribute')) {
             'font-size'          => 'font-size',
             'font-family'        => 'font-family',
             'line-height'        => 'line-height',
+            'margin-left'        => 'indent',
+            'padding-left'       => 'indent',
+            'text-indent'        => 'indent',
         ];
 
         $out = [];
@@ -58,6 +61,16 @@ if (! function_exists('sanitize_inline_style_attribute')) {
             }
             if ($propLower === 'font-family' && preg_match('/^[\pL\pM0-9\s,"\'-]+$/u', $value) === 1 && strlen($value) < 400) {
                 $out[] = 'font-family:' . $value;
+                continue;
+            }
+            if (in_array($propLower, ['margin-left', 'padding-left', 'text-indent'], true)) {
+                // Batasi indent hanya nilai numerik dengan unit umum agar tetap aman.
+                if (preg_match('/^0$/', $value) === 1 || preg_match('/^[\d.]+\s*(px|pt|em|rem|%)$/i', $value) === 1) {
+                    $numeric = (float) preg_replace('/[^0-9.]/', '', $value);
+                    if ($numeric <= 120) {
+                        $out[] = $propLower . ':' . $value;
+                    }
+                }
                 continue;
             }
             if (in_array($propLower, ['color', 'background-color'], true)) {

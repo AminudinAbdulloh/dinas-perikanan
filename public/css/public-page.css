@@ -328,7 +328,7 @@
 
 [data-bs-theme="dark"] .content-section p,
 [data-bs-theme="dark"] .content-section li {
-    color: var(--color-slate-300);
+    color: var(--color-white);
 }
 
 .content-section ul {
@@ -383,7 +383,7 @@
 [data-bs-theme="dark"] .public-page-prose li,
 [data-bs-theme="dark"] .public-page-prose td,
 [data-bs-theme="dark"] .public-page-prose th {
-    color: var(--color-slate-300);
+    color: var(--color-slate-100);
 }
 
 .public-page-prose ul,

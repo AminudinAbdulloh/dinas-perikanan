@@ -21,6 +21,10 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->get('konten/sejarah', 'KontenSejarah::index');
         $routes->get('konten/sejarah/edit', 'KontenSejarah::edit');
         $routes->post('konten/sejarah/update', 'KontenSejarah::update', ['filter' => 'csrf']);
+
+        $routes->get('konten/visi-misi', 'KontenVisiMisi::index');
+        $routes->get('konten/visi-misi/edit', 'KontenVisiMisi::edit');
+        $routes->post('konten/visi-misi/update', 'KontenVisiMisi::update', ['filter' => 'csrf']);
     });
 });
 $routes->get('berita', 'Beranda::berita');
