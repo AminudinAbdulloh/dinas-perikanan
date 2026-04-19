@@ -11,6 +11,8 @@ class SitePageModel extends Model
     public const SLUG_PROFIL_TUPOKSI = 'profil/tupoksi';
     public const SLUG_PROFIL_STRUKTUR = 'profil/struktur';
     public const SLUG_PROFIL_PEJABAT = 'profil/pejabat';
+    public const SLUG_PROFIL_PEGAWAI = 'profil/pegawai';
+    public const SLUG_PROFIL_KONTAK = 'profil/kontak';
 
     protected $table            = 'site_pages';
     protected $primaryKey       = 'id';

@@ -261,6 +261,8 @@ class BerandaModel
             'profil/tupoksi' => SitePageModel::SLUG_PROFIL_TUPOKSI,
             'profil/struktur' => SitePageModel::SLUG_PROFIL_STRUKTUR,
             'profil/pejabat' => SitePageModel::SLUG_PROFIL_PEJABAT,
+            'profil/pegawai' => SitePageModel::SLUG_PROFIL_PEGAWAI,
+            'profil/kontak' => SitePageModel::SLUG_PROFIL_KONTAK,
             default => null,
         };
 
