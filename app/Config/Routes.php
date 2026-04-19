@@ -44,7 +44,7 @@ $routes->group('informasi', static function ($routes) {
     $routes->get('informasi-berkala', 'Beranda::page/informasi/informasi-berkala');
     $routes->get('informasi-serta-merta', 'Beranda::page/informasi/informasi-serta-merta');
     $routes->get('informasi-setiap-saat', 'Beranda::page/informasi/informasi-setiap-saat');
-    $routes->get('laporan-layanan', 'Beranda::page/informasi/laporan-layanan-informasi');
+    // $routes->get('laporan-layanan', 'Beranda::page/informasi/laporan-layanan-informasi');
 });
 
 $routes->get('faq', 'Beranda::page/faq');
