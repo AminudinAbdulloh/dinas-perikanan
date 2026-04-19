@@ -14,9 +14,9 @@ Tengah<?= $this->endSection() ?>
     <section class="public-page-content">
         <div class="container px-sm-5 px-lg-0">
             <div class="content-card">
-                <?php if (($pageData['path'] ?? '') === 'informasi/form-permohonan'): ?>
+                <?php if (($pageData['path'] ?? '') === 'layanan/form-permohonan-informasi'): ?>
                     <?= $this->include('public/partials/form_permohonan_informasi') ?>
-                <?php elseif (($pageData['path'] ?? '') === 'informasi/form-keberatan'): ?>
+                <?php elseif (($pageData['path'] ?? '') === 'layanan/form-keberatan-informasi'): ?>
                     <?= $this->include('public/partials/form_keberatan_informasi') ?>
                 <?php else: ?>
                     <?php

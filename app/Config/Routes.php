@@ -33,13 +33,13 @@ $routes->group('profil', static function ($routes) {
 // });
 
 $routes->group('layanan', static function ($routes) {
-    $routes->get('alur-permohonan', 'Beranda::page/layanan/alur-permohonan-informasi');
-    $routes->get('form-permohonan', 'Beranda::page/layanan/form-permohonan-informasi');
-    $routes->get('form-keberatan', 'Beranda::page/layanan/form-keberatan-informasi');
+    $routes->get('alur-permohonan-informasi', 'Beranda::page/layanan/alur-permohonan-informasi');
+    $routes->get('form-permohonan-informasi', 'Beranda::page/layanan/form-permohonan-informasi');
+    $routes->get('form-keberatan-informasi', 'Beranda::page/layanan/form-keberatan-informasi');
 });
 
 $routes->group('informasi', static function ($routes) {
-    $routes->get('daftar-informasi', 'Beranda::page/informasi/daftar-informasi-publik');
+    $routes->get('daftar-informasi-publik', 'Beranda::page/informasi/daftar-informasi-publik');
     $routes->get('informasi-dikecualikan', 'Beranda::page/informasi/informasi-dikecualikan');
     $routes->get('informasi-berkala', 'Beranda::page/informasi/informasi-berkala');
     $routes->get('informasi-serta-merta', 'Beranda::page/informasi/informasi-serta-merta');

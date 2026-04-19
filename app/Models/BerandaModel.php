@@ -73,16 +73,16 @@ class BerandaModel
                         'nama' => 'Layanan',
                         'link' => '#',
                         'submenu' => [
-                            ['nama' => 'Alur Permohonan Informasi Publik', 'link' => base_url('informasi/alur-permohonan')],
-                            ['nama' => 'Form Permohonan Informasi', 'link' => base_url('informasi/form-permohonan')],
-                            ['nama' => 'Form Keberatan atas Permohonan Informasi', 'link' => base_url('informasi/form-keberatan')],
+                            ['nama' => 'Alur Permohonan Informasi Publik', 'link' => base_url('layanan/alur-permohonan-informasi')],
+                            ['nama' => 'Form Permohonan Informasi', 'link' => base_url('layanan/form-permohonan-informasi')],
+                            ['nama' => 'Form Keberatan atas Permohonan Informasi', 'link' => base_url('layanan/form-keberatan-informasi')],
                         ],
                     ],
                     [
                         'nama' => 'Informasi Publik',
                         'link' => '#',
                         'submenu' => [
-                            ['nama' => 'Daftar Informasi Publik', 'link' => base_url('informasi/daftar-informasi')],
+                            ['nama' => 'Daftar Informasi Publik', 'link' => base_url('informasi/daftar-informasi-publik')],
                             ['nama' => 'Informasi Berkala', 'link' => base_url('informasi/informasi-berkala')],
                             ['nama' => 'Informasi Serta Merta', 'link' => base_url('informasi/informasi-serta-merta')],
                             ['nama' => 'Informasi Setiap Saat', 'link' => base_url('informasi/informasi-setiap-saat')],
@@ -196,19 +196,19 @@ class BerandaModel
             //     'title' => 'Perjanjian Kinerja',
             //     'description' => 'Komitmen target kinerja antara pimpinan unit kerja dan kepala perangkat daerah.',
             // ],
-            'informasi/alur-permohonan' => [
+            'layanan/alur-permohonan-informasi' => [
                 'title' => 'Alur Permohonan Informasi',
                 'description' => 'Langkah-langkah pengajuan permohonan informasi publik secara mudah dan transparan.',
             ],
-            'informasi/form-permohonan' => [
+            'layanan/form-permohonan-informasi' => [
                 'title' => 'Form Permohonan Informasi',
                 'description' => 'Unduh dan isi formulir resmi pengajuan informasi publik melalui PPID Pelaksana.',
             ],
-            'informasi/form-keberatan' => [
+            'layanan/form-keberatan-informasi' => [
                 'title' => 'Form Keberatan Informasi',
                 'description' => 'Formulir pengajuan keberatan atas layanan informasi publik yang telah diberikan.',
             ],
-            'informasi/daftar-informasi' => [
+            'informasi/daftar-informasi-publik' => [
                 'title' => 'Daftar Informasi Publik',
                 'description' => 'Katalog informasi yang tersedia dan dapat diakses oleh masyarakat.',
             ],
@@ -299,25 +299,25 @@ class BerandaModel
                 'icon' => 'bi-clipboard-check',
                 'title' => 'Alur Permohonan Informasi Publik',
                 'description' => 'Panduan dan prosedur pengajuan permohonan informasi publik',
-                'link' => 'informasi/alur-permohonan',
+                'link' => 'layanan/alur-permohonan-informasi',
             ],
             [
                 'icon' => 'bi-file-earmark-text',
                 'title' => 'Form Permohonan Informasi',
                 'description' => 'Formulir pengajuan permohonan informasi publik secara online',
-                'link' => 'informasi/form-permohonan',
+                'link' => 'layanan/form-permohonan-informasi',
             ],
             [
                 'icon' => 'bi-shield-exclamation',
                 'title' => 'Form Keberatan Informasi',
                 'description' => 'Formulir pengajuan keberatan atas permohonan informasi',
-                'link' => 'informasi/form-keberatan',
+                'link' => 'layanan/form-keberatan-informasi',
             ],
             [
                 'icon' => 'bi-folder2-open',
                 'title' => 'Daftar Informasi Publik',
                 'description' => 'Katalog dan daftar informasi publik yang tersedia',
-                'link' => 'informasi/daftar-informasi',
+                'link' => 'informasi/daftar-informasi-publik',
             ],
             [
                 'icon' => 'bi-lock',
