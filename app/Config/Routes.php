@@ -32,6 +32,9 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->get('konten/struktur', 'KontenStruktur::index');
         $routes->get('konten/struktur/edit', 'KontenStruktur::edit');
         $routes->post('konten/struktur/update', 'KontenStruktur::update', ['filter' => 'csrf']);
+        $routes->get('konten/pejabat', 'KontenPejabat::index');
+        $routes->get('konten/pejabat/edit', 'KontenPejabat::edit');
+        $routes->post('konten/pejabat/update', 'KontenPejabat::update', ['filter' => 'csrf']);
         $routes->post('konten/upload-image', 'KontenMedia::uploadImage');
         $routes->post('konten/delete-image', 'KontenMedia::deleteImage');
     });

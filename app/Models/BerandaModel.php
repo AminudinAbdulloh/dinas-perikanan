@@ -260,6 +260,7 @@ class BerandaModel
             'profil/visi-misi' => SitePageModel::SLUG_PROFIL_VISI_MISI,
             'profil/tupoksi' => SitePageModel::SLUG_PROFIL_TUPOKSI,
             'profil/struktur' => SitePageModel::SLUG_PROFIL_STRUKTUR,
+            'profil/pejabat' => SitePageModel::SLUG_PROFIL_PEJABAT,
             default => null,
         };
 
