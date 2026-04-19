@@ -251,13 +251,31 @@ class BerandaModel
         }
 
         $page = $pages[$path];
+        $title = $page['title'];
+        $description = $page['description'];
+        $content = $this->buildPageContent($path, $title);
+
+        if ($path === 'profil/sejarah') {
+            $dbPage = model(SitePageModel::class)->findBySlug(SitePageModel::SLUG_PROFIL_SEJARAH);
+            if ($dbPage !== null) {
+                if (trim((string) ($dbPage['title'] ?? '')) !== '') {
+                    $title = (string) $dbPage['title'];
+                }
+                if (trim((string) ($dbPage['description'] ?? '')) !== '') {
+                    $description = (string) $dbPage['description'];
+                }
+                if (trim((string) ($dbPage['body'] ?? '')) !== '') {
+                    $content = (string) $dbPage['body'];
+                }
+            }
+        }
 
         return [
             'path' => $path,
-            'title' => $page['title'],
-            'description' => $page['description'],
-            'breadcrumbs' => $this->buildBreadcrumbs($path, $page['title']),
-            'content' => $this->buildPageContent($path, $page['title']),
+            'title' => $title,
+            'description' => $description,
+            'breadcrumbs' => $this->buildBreadcrumbs($path, $title),
+            'content' => $content,
         ];
     }
 

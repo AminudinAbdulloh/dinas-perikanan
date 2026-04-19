@@ -19,16 +19,25 @@ Tengah<?= $this->endSection() ?>
                 <?php elseif (($pageData['path'] ?? '') === 'layanan/form-keberatan-informasi'): ?>
                     <?= $this->include('public/partials/form_keberatan_informasi') ?>
                 <?php else: ?>
+                    <?php helper('content') ?>
                     <?php
                     $contentText = trim((string) ($pageData['content'] ?? ''));
-                    $paragraphs = preg_split("/\R{2,}/", $contentText) ?: [];
+                    $pagePath = (string) ($pageData['path'] ?? '');
                     ?>
 
-                    <?php foreach ($paragraphs as $paragraph): ?>
-                        <article class="content-section">
-                            <p><?= esc($paragraph) ?></p>
+                    <?php if ($pagePath === 'profil/sejarah' && $contentText !== '' && is_html_string($contentText)) : ?>
+                        <article class="content-section public-page-prose">
+                            <?= safe_admin_html($contentText) ?>
                         </article>
-                    <?php endforeach ?>
+                    <?php else : ?>
+                        <?php $paragraphs = preg_split("/\R{2,}/", $contentText) ?: []; ?>
+
+                        <?php foreach ($paragraphs as $paragraph) : ?>
+                            <article class="content-section">
+                                <p><?= esc($paragraph) ?></p>
+                            </article>
+                        <?php endforeach ?>
+                    <?php endif ?>
                 <?php endif ?>
             </div>
         </div>

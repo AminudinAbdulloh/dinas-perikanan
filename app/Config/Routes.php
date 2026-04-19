@@ -6,6 +6,23 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Beranda::index');
+
+$routes->get('login', static fn () => redirect()->to(base_url('admin/login')));
+
+$routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static function ($routes) {
+    $routes->get('login', 'Auth::login');
+    $routes->post('login', 'Auth::attemptLogin', ['filter' => 'csrf']);
+    $routes->get('logout', 'Auth::logout');
+
+    $routes->group('', ['filter' => 'adminauth'], static function ($routes) {
+        $routes->get('/', 'Dashboard::index');
+        $routes->get('dashboard', 'Dashboard::index');
+
+        $routes->get('konten/sejarah', 'KontenSejarah::index');
+        $routes->get('konten/sejarah/edit', 'KontenSejarah::edit');
+        $routes->post('konten/sejarah/update', 'KontenSejarah::update', ['filter' => 'csrf']);
+    });
+});
 $routes->get('berita', 'Beranda::berita');
 $routes->get('berita/(:num)', 'Beranda::beritaDetail/$1');
 $routes->get('pengumuman', 'Beranda::page/pengumuman');
