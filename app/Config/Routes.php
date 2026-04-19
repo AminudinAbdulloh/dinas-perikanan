@@ -56,6 +56,13 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->post('konten/galeri-foto/(:num)/update', 'KontenGaleriFoto::update/$1', ['filter' => 'csrf']);
         $routes->post('konten/galeri-foto/(:num)/hapus', 'KontenGaleriFoto::delete/$1', ['filter' => 'csrf']);
 
+        $routes->get('konten/galeri-video', 'KontenGaleriVideo::index');
+        $routes->get('konten/galeri-video/tambah', 'KontenGaleriVideo::create');
+        $routes->post('konten/galeri-video/simpan', 'KontenGaleriVideo::store', ['filter' => 'csrf']);
+        $routes->get('konten/galeri-video/(:num)/edit', 'KontenGaleriVideo::edit/$1');
+        $routes->post('konten/galeri-video/(:num)/update', 'KontenGaleriVideo::update/$1', ['filter' => 'csrf']);
+        $routes->post('konten/galeri-video/(:num)/hapus', 'KontenGaleriVideo::delete/$1', ['filter' => 'csrf']);
+
         $routes->post('konten/upload-image', 'KontenMedia::uploadImage');
         $routes->post('konten/delete-image', 'KontenMedia::deleteImage');
     });

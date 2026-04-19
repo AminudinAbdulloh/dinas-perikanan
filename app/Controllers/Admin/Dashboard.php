@@ -49,6 +49,12 @@ class Dashboard extends BaseController
                     'icon' => 'bi-image',
                 ],
                 [
+                    'label' => 'Kelola galeri video',
+                    'description' => 'Daftar video YouTube untuk situs',
+                    'href' => base_url('admin/konten/galeri-video'),
+                    'icon' => 'bi-collection-play',
+                ],
+                [
                     'label' => 'Berita',
                     'description' => 'Daftar artikel publik',
                     'href' => base_url('berita'),
@@ -81,7 +87,7 @@ class Dashboard extends BaseController
             ],
             'upcomingModules' => [
                 ['icon' => 'bi-folder2-open', 'title' => 'Halaman statis', 'detail' => 'Profil, PPID, dan layanan dari panel.'],
-                ['icon' => 'bi-camera-video', 'title' => 'Galeri video', 'detail' => 'Kelola daftar video dari panel admin.'],
+                ['icon' => 'bi-megaphone', 'title' => 'Pengumuman', 'detail' => 'Pengumuman resmi dari satu modul admin.'],
                 ['icon' => 'bi-people', 'title' => 'Pengguna admin', 'detail' => 'Peran, log aktivitas, dan reset sandi.'],
             ],
         ]);

@@ -75,10 +75,11 @@
                 <?= $sidebarNav('konten-berita', 'Berita', base_url('admin/konten/berita'), 'bi-newspaper') ?>
                 <?= $sidebarNav('mod-pengumuman', 'Pengumuman', '#', 'bi-megaphone', true) ?>
                 <?= $sidebarNav('konten-galeri-foto', 'Galeri Foto', base_url('admin/konten/galeri-foto'), 'bi-images') ?>
+                <?= $sidebarNav('konten-galeri-video', 'Galeri Video', base_url('admin/konten/galeri-video'), 'bi-camera-video') ?>
                 <?= $sidebarNav('mod-ppid', 'Informasi Publik', '#', 'bi-journal-text', true) ?>
             </nav>
             <div class="admin-sidebar-footer border-top p-3 small text-secondary">
-                Halaman Sejarah, Visi & Misi, Tupoksi, Struktur Organisasi, Profil Pejabat Struktural, Daftar Pegawai, Alamat & Kontak, Berita, dan Galeri Foto dapat dikelola di sini; modul lain mengikuti roadmap CMS.
+                Halaman Sejarah, Visi & Misi, Tupoksi, Struktur Organisasi, Profil Pejabat Struktural, Daftar Pegawai, Alamat & Kontak, Berita, Galeri Foto, dan Galeri Video dapat dikelola di sini; modul lain mengikuti roadmap CMS.
             </div>
         </aside>
 
@@ -102,6 +103,7 @@
                     <?= $sidebarNav('konten-berita', 'Berita', base_url('admin/konten/berita'), 'bi-newspaper') ?>
                     <?= $sidebarNav('mod-pengumuman', 'Pengumuman', '#', 'bi-megaphone', true) ?>
                     <?= $sidebarNav('konten-galeri-foto', 'Galeri Foto', base_url('admin/konten/galeri-foto'), 'bi-images') ?>
+                    <?= $sidebarNav('konten-galeri-video', 'Galeri Video', base_url('admin/konten/galeri-video'), 'bi-camera-video') ?>
                     <?= $sidebarNav('mod-ppid', 'Informasi Publik', '#', 'bi-journal-text', true) ?>
                 </nav>
             </div>

@@ -512,6 +512,29 @@ class BerandaModel
      */
     public function getLatestVideos(): array
     {
+        if ($this->isGalleryVideosTablePresent()) {
+            return model(GalleryVideoModel::class)->getForPublic();
+        }
+
+        return $this->getStaticGalleryVideosFallback();
+    }
+
+    private function isGalleryVideosTablePresent(): bool
+    {
+        try {
+            return Database::connect()->tableExists('gallery_videos');
+        } catch (\Throwable) {
+            return false;
+        }
+    }
+
+    /**
+     * Data demo bila tabel galeri video belum dimigrasikan.
+     *
+     * @return array<int, array<string, int|string>>
+     */
+    private function getStaticGalleryVideosFallback(): array
+    {
         return [
             [
                 'id' => 1,
