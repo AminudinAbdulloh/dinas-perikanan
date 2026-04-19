@@ -29,6 +29,9 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->get('konten/tupoksi', 'KontenTupoksi::index');
         $routes->get('konten/tupoksi/edit', 'KontenTupoksi::edit');
         $routes->post('konten/tupoksi/update', 'KontenTupoksi::update', ['filter' => 'csrf']);
+        $routes->get('konten/struktur', 'KontenStruktur::index');
+        $routes->get('konten/struktur/edit', 'KontenStruktur::edit');
+        $routes->post('konten/struktur/update', 'KontenStruktur::update', ['filter' => 'csrf']);
         $routes->post('konten/upload-image', 'KontenMedia::uploadImage');
         $routes->post('konten/delete-image', 'KontenMedia::deleteImage');
     });

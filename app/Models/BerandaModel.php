@@ -259,6 +259,7 @@ class BerandaModel
             'profil/sejarah' => SitePageModel::SLUG_PROFIL_SEJARAH,
             'profil/visi-misi' => SitePageModel::SLUG_PROFIL_VISI_MISI,
             'profil/tupoksi' => SitePageModel::SLUG_PROFIL_TUPOKSI,
+            'profil/struktur' => SitePageModel::SLUG_PROFIL_STRUKTUR,
             default => null,
         };
 

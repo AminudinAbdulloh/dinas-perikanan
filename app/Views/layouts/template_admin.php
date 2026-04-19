@@ -68,13 +68,14 @@
                 <?= $sidebarNav('konten-sejarah', 'Sejarah', base_url('admin/konten/sejarah'), 'bi-clock-history') ?>
                 <?= $sidebarNav('konten-visi-misi', 'Visi & Misi', base_url('admin/konten/visi-misi'), 'bi-bullseye') ?>
                 <?= $sidebarNav('konten-tupoksi', 'Tupoksi', base_url('admin/konten/tupoksi'), 'bi-list-check') ?>
+                <?= $sidebarNav('konten-struktur', 'Struktur Organisasi', base_url('admin/konten/struktur'), 'bi-diagram-3') ?>
                 <?= $sidebarNav('mod-berita', 'Berita', '#', 'bi-newspaper', true) ?>
                 <?= $sidebarNav('mod-pengumuman', 'Pengumuman', '#', 'bi-megaphone', true) ?>
                 <?= $sidebarNav('mod-galeri', 'Galeri', '#', 'bi-images', true) ?>
                 <?= $sidebarNav('mod-ppid', 'Informasi Publik', '#', 'bi-journal-text', true) ?>
             </nav>
             <div class="admin-sidebar-footer border-top p-3 small text-secondary">
-                Halaman Sejarah, Visi & Misi, dan Tupoksi dapat diedit di sini; modul lain mengikuti roadmap CMS.
+                Halaman Sejarah, Visi & Misi, Tupoksi, dan Struktur Organisasi dapat diedit di sini; modul lain mengikuti roadmap CMS.
             </div>
         </aside>
 
@@ -91,6 +92,7 @@
                     <?= $sidebarNav('konten-sejarah', 'Sejarah', base_url('admin/konten/sejarah'), 'bi-clock-history') ?>
                     <?= $sidebarNav('konten-visi-misi', 'Visi & Misi', base_url('admin/konten/visi-misi'), 'bi-bullseye') ?>
                     <?= $sidebarNav('konten-tupoksi', 'Tupoksi', base_url('admin/konten/tupoksi'), 'bi-list-check') ?>
+                    <?= $sidebarNav('konten-struktur', 'Struktur Organisasi', base_url('admin/konten/struktur'), 'bi-diagram-3') ?>
                     <?= $sidebarNav('mod-berita', 'Berita', '#', 'bi-newspaper', true) ?>
                     <?= $sidebarNav('mod-pengumuman', 'Pengumuman', '#', 'bi-megaphone', true) ?>
                     <?= $sidebarNav('mod-galeri', 'Galeri', '#', 'bi-images', true) ?>

@@ -25,7 +25,7 @@ Tengah<?= $this->endSection() ?>
                     $pagePath = (string) ($pageData['path'] ?? '');
                     ?>
 
-                    <?php if (in_array($pagePath, ['profil/sejarah', 'profil/visi-misi', 'profil/tupoksi'], true) && $contentText !== '' && is_html_string($contentText)) : ?>
+                    <?php if (in_array($pagePath, ['profil/sejarah', 'profil/visi-misi', 'profil/tupoksi', 'profil/struktur'], true) && $contentText !== '' && is_html_string($contentText)) : ?>
                         <article class="content-section public-page-prose">
                             <?= safe_admin_html($contentText) ?>
                         </article>
