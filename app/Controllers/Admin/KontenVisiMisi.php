@@ -68,6 +68,8 @@ class KontenVisiMisi extends BaseController
             $model->insert(array_merge(['slug' => $slug], $data));
         }
 
+        cleanup_unused_editor_uploads();
+
         return redirect()->to(base_url('admin/konten/visi-misi'))->with('message', 'Halaman Visi & Misi berhasil disimpan.');
     }
 

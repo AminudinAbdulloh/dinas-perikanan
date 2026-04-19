@@ -1,19 +1,19 @@
 <?= $this->extend('layouts/template_admin') ?>
 
-<?= $this->section('title') ?>Edit Sejarah<?= $this->endSection() ?>
+<?= $this->section('title') ?>Edit Tupoksi<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 <div class="admin-page-header mb-4">
     <nav aria-label="breadcrumb" class="mb-2">
         <ol class="breadcrumb small mb-0">
             <li class="breadcrumb-item"><a href="<?= base_url('admin/dashboard') ?>">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="<?= base_url('admin/konten/sejarah') ?>">Sejarah</a></li>
+            <li class="breadcrumb-item"><a href="<?= base_url('admin/konten/tupoksi') ?>">Tupoksi</a></li>
             <li class="breadcrumb-item active" aria-current="page">Edit</li>
         </ol>
     </nav>
-    <h1 class="h3 fw-bold text-body mb-1">Edit Konten Sejarah</h1>
+    <h1 class="h3 fw-bold text-body mb-1">Edit Konten Tugas Pokok &amp; Fungsi</h1>
     <p class="text-secondary mb-0">
-        Ubah judul, deskripsi, dan isi konten sejarah.
+        Ubah judul, deskripsi, dan isi konten Tupoksi.
     </p>
 </div>
 
@@ -31,7 +31,7 @@ if (is_array($errs) && $errs !== []) { ?>
 
 <div class="card border-0 shadow-sm rounded-4">
     <div class="card-body p-4 p-lg-5">
-        <form method="post" action="<?= base_url('admin/konten/sejarah/update') ?>" novalidate>
+        <form method="post" action="<?= base_url('admin/konten/tupoksi/update') ?>" novalidate>
             <?= csrf_field() ?>
 
             <div class="mb-4">
@@ -48,7 +48,7 @@ if (is_array($errs) && $errs !== []) { ?>
             </div>
 
             <div class="mb-4">
-                <label for="body" class="form-label fw-semibold">Isi sejarah</label>
+                <label for="body" class="form-label fw-semibold">Isi tugas pokok dan fungsi</label>
                 <textarea class="form-control rounded-3 admin-richtext-source" id="body" name="body" rows="14"><?= old('body', $page['body'] ?? '', false) ?></textarea>
                 <div class="form-text">
                     Kosongkan isi untuk memakai teks bawaan sistem sampai Anda mengisi dan menyimpan konten.
@@ -59,10 +59,10 @@ if (is_array($errs) && $errs !== []) { ?>
                 <button type="submit" class="btn btn-primary rounded-3 px-4">
                     <i class="bi bi-check2-circle me-1"></i>Simpan
                 </button>
-                <a class="btn btn-outline-secondary rounded-3" href="<?= base_url('admin/konten/sejarah') ?>">
+                <a class="btn btn-outline-secondary rounded-3" href="<?= base_url('admin/konten/tupoksi') ?>">
                     Kembali
                 </a>
-                <a class="btn btn-outline-secondary rounded-3" href="<?= base_url('profil/sejarah') ?>" target="_blank" rel="noopener noreferrer">
+                <a class="btn btn-outline-secondary rounded-3" href="<?= base_url('profil/tupoksi') ?>" target="_blank" rel="noopener noreferrer">
                     <i class="bi bi-box-arrow-up-right me-1"></i>Lihat di situs
                 </a>
             </div>
@@ -75,7 +75,7 @@ if (is_array($errs) && $errs !== []) { ?>
 <script src="https://cdn.jsdelivr.net/npm/tinymce@7.6.1/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 (function () {
-    const form = document.querySelector('form[action*="konten/sejarah/update"]');
+    const form = document.querySelector('form[action*="konten/tupoksi/update"]');
     if (!form) return;
     const uploadUrl = '<?= base_url('admin/konten/upload-image') ?>';
 

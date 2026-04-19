@@ -258,6 +258,7 @@ class BerandaModel
         $dbPageSlug = match ($path) {
             'profil/sejarah' => SitePageModel::SLUG_PROFIL_SEJARAH,
             'profil/visi-misi' => SitePageModel::SLUG_PROFIL_VISI_MISI,
+            'profil/tupoksi' => SitePageModel::SLUG_PROFIL_TUPOKSI,
             default => null,
         };
 

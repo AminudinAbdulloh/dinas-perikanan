@@ -7,17 +7,17 @@ use App\Models\BerandaModel;
 use App\Models\SitePageModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class KontenSejarah extends BaseController
+class KontenTupoksi extends BaseController
 {
     protected $helpers = ['form', 'url', 'content'];
 
     public function index(): string
     {
-        $page = $this->resolveSejarahPage();
+        $page = $this->resolveTupoksiPage();
 
-        return view('admin/konten/sejarah', [
-            'title'       => 'Konten Sejarah',
-            'adminNav'    => 'konten-sejarah',
+        return view('admin/konten/tupoksi', [
+            'title'       => 'Konten Tupoksi',
+            'adminNav'    => 'konten-tupoksi',
             'page'        => $page,
             'previewBody' => safe_admin_html((string) ($page['body'] ?? '')),
             'isHtmlBody'  => is_html_string((string) ($page['body'] ?? '')),
@@ -26,15 +26,15 @@ class KontenSejarah extends BaseController
 
     public function edit(): string
     {
-        $page = $this->resolveSejarahPage();
+        $page = $this->resolveTupoksiPage();
 
         if (($page['body'] ?? '') !== '' && ! is_html_string($page['body'])) {
             $page['body'] = plain_text_to_editor_html($page['body']);
         }
 
-        return view('admin/konten/sejarah_edit', [
-            'title'    => 'Edit Sejarah',
-            'adminNav' => 'konten-sejarah',
+        return view('admin/konten/tupoksi_edit', [
+            'title'    => 'Edit Tupoksi',
+            'adminNav' => 'konten-tupoksi',
             'page'     => $page,
         ]);
     }
@@ -51,12 +51,12 @@ class KontenSejarah extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $slug = SitePageModel::SLUG_PROFIL_SEJARAH;
+        $slug = SitePageModel::SLUG_PROFIL_TUPOKSI;
         $body = safe_admin_html((string) $this->request->getPost('body'));
         $data = [
-            'title'         => $this->request->getPost('title'),
-            'description'   => $this->request->getPost('description') ?: null,
-            'body'          => $body,
+            'title'       => $this->request->getPost('title'),
+            'description' => $this->request->getPost('description') ?: null,
+            'body'        => $body,
         ];
 
         $model = model(SitePageModel::class);
@@ -70,15 +70,15 @@ class KontenSejarah extends BaseController
 
         cleanup_unused_editor_uploads();
 
-        return redirect()->to(base_url('admin/konten/sejarah'))->with('message', 'Halaman Sejarah berhasil disimpan.');
+        return redirect()->to(base_url('admin/konten/tupoksi'))->with('message', 'Halaman Tupoksi berhasil disimpan.');
     }
 
     /**
      * @return array<string, mixed>
      */
-    private function resolveSejarahPage(): array
+    private function resolveTupoksiPage(): array
     {
-        $slug = SitePageModel::SLUG_PROFIL_SEJARAH;
+        $slug = SitePageModel::SLUG_PROFIL_TUPOKSI;
         $row = model(SitePageModel::class)->findBySlug($slug);
 
         if ($row !== null) {
@@ -91,10 +91,10 @@ class KontenSejarah extends BaseController
         }
 
         $beranda = new BerandaModel();
-        $public = $beranda->getPublicPageData('profil/sejarah');
+        $public = $beranda->getPublicPageData('profil/tupoksi');
 
         return [
-            'title'       => $public['title'] ?? 'Sejarah Dinas',
+            'title'       => $public['title'] ?? 'Tugas Pokok dan Fungsi',
             'description' => $public['description'] ?? '',
             'body'        => $public['content'] ?? '',
             'updated_at'  => '',

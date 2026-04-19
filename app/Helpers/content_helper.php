@@ -114,6 +114,16 @@ if (! function_exists('safe_admin_html')) {
      */
     function safe_admin_html(string $html): string
     {
+        $req = null;
+        try {
+            $req = service('request');
+        } catch (\Throwable $e) {
+            $req = null;
+        }
+        $scriptName = $req ? (string) ($req->getServer('SCRIPT_NAME') ?? '') : '';
+        $basePath = str_replace('\\', '/', dirname($scriptName));
+        $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
+
         $html = preg_replace('/<\s*(script|style)\b[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/i', '', $html) ?? $html;
         $html = preg_replace('/\son\w+\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $html) ?? $html;
         $html = sanitize_style_attributes_in_html($html);
@@ -125,14 +135,21 @@ if (! function_exists('safe_admin_html')) {
 
         $html = preg_replace_callback(
             '/<img\s+[^>]*>/i',
-            static function (array $m): string {
+            static function (array $m) use ($basePath): string {
                 $tag = $m[0];
                 if (! preg_match('/\bsrc\s*=\s*("[^"]*"|\'[^\']*\')/i', $tag, $sm)) {
                     return '';
                 }
                 $src = trim($sm[1], '"\'');
+                $src = html_entity_decode($src, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                 if ($src === '' || preg_match('/^\s*javascript:/i', $src) || str_starts_with(strtolower($src), 'data:')) {
                     return '';
+                }
+                // Normalisasi src upload editor agar cocok untuk subfolder app (XAMPP)
+                if (str_starts_with($src, 'uploads/editor/')) {
+                    $src = ($basePath !== '' ? $basePath : '') . '/' . $src;
+                } elseif (str_starts_with($src, '/uploads/editor/')) {
+                    $src = ($basePath !== '' ? $basePath : '') . $src;
                 }
                 if (! preg_match('#^(https?:)?//#i', $src) && ! str_starts_with($src, '/')) {
                     return '';
@@ -140,10 +157,40 @@ if (! function_exists('safe_admin_html')) {
 
                 $alt = '';
                 if (preg_match('/\balt\s*=\s*("[^"]*"|\'[^\']*\')/i', $tag, $am)) {
-                    $alt = esc(trim($am[1], '"\''), 'attr');
+                    $alt = esc(html_entity_decode(trim($am[1], '"\''), ENT_QUOTES | ENT_HTML5, 'UTF-8'), 'attr');
                 }
 
-                return '<img src="' . esc($src, 'attr') . '" alt="' . $alt . '" loading="lazy">';
+                $width = null;
+                if (preg_match('/\bwidth\s*=\s*("([^"]*)"|\'([^\']*)\')/i', $tag, $wm)) {
+                    $raw = trim($wm[2] !== '' ? $wm[2] : ($wm[3] ?? ''));
+                    if (preg_match('/^\d{1,4}$/', $raw) === 1) {
+                        $w = (int) $raw;
+                        if ($w >= 1 && $w <= 2400) {
+                            $width = (string) $w;
+                        }
+                    }
+                }
+
+                $height = null;
+                if (preg_match('/\bheight\s*=\s*("([^"]*)"|\'([^\']*)\')/i', $tag, $hm)) {
+                    $raw = trim($hm[2] !== '' ? $hm[2] : ($hm[3] ?? ''));
+                    if (preg_match('/^\d{1,4}$/', $raw) === 1) {
+                        $h = (int) $raw;
+                        if ($h >= 1 && $h <= 2400) {
+                            $height = (string) $h;
+                        }
+                    }
+                }
+
+                $attrs = ' src="' . esc($src, 'attr') . '" alt="' . $alt . '" loading="lazy"';
+                if ($width !== null) {
+                    $attrs .= ' width="' . esc($width, 'attr') . '"';
+                }
+                if ($height !== null) {
+                    $attrs .= ' height="' . esc($height, 'attr') . '"';
+                }
+
+                return '<img' . $attrs . '>';
             },
             $html
         ) ?? $html;
@@ -155,7 +202,7 @@ if (! function_exists('safe_admin_html')) {
                 if (! preg_match('/\bsrc\s*=\s*("[^"]*"|\'[^\']*\')/i', $tag, $sm)) {
                     return '';
                 }
-                $src = trim($sm[1], '"\'');
+                $src = html_entity_decode(trim($sm[1], '"\''), ENT_QUOTES | ENT_HTML5, 'UTF-8');
                 $parts = parse_url($src);
                 $host = strtolower($parts['host'] ?? '');
                 $allowedHosts = [
@@ -189,6 +236,7 @@ if (! function_exists('safe_admin_html')) {
             '/<a\s+[^>]*?href\s*=\s*("[^"]*"|\'[^\']*\')[^>]*>/i',
             static function (array $m): string {
                 $href = trim($m[1], '"\'');
+                $href = html_entity_decode($href, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                 $hrefLower = strtolower($href);
                 if ($hrefLower === '' || str_contains($hrefLower, 'javascript:') || str_starts_with($hrefLower, 'data:')) {
                     return '';
@@ -210,6 +258,70 @@ if (! function_exists('safe_admin_html')) {
         $html = preg_replace('/javascript:/i', '', $html) ?? $html;
 
         return preg_replace('/<div\b[^>]*>/i', '<div>', $html) ?? $html;
+    }
+}
+
+if (! function_exists('extract_editor_upload_filenames')) {
+    /**
+     * @return array<string, true> map filename => true
+     */
+    function extract_editor_upload_filenames(string $html): array
+    {
+        $out = [];
+        if ($html === '') {
+            return $out;
+        }
+
+        if (preg_match_all('#/uploads/editor/([a-zA-Z0-9._-]+\.(?:png|jpe?g|webp|gif))#i', $html, $m)) {
+            foreach ($m[1] as $name) {
+                $out[(string) $name] = true;
+            }
+        }
+
+        return $out;
+    }
+}
+
+if (! function_exists('cleanup_unused_editor_uploads')) {
+    /**
+     * Hapus file upload editor yang tidak lagi direferensikan oleh konten manapun.
+     * Diberi grace period agar aman (mis. saat user baru upload tapi belum sempat simpan).
+     */
+    function cleanup_unused_editor_uploads(int $graceSeconds = 3600): void
+    {
+        $dir = rtrim(FCPATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'editor';
+        if (! is_dir($dir)) {
+            return;
+        }
+
+        $model = model(\App\Models\SitePageModel::class);
+        $rows = $model->select('body')->findAll();
+        $used = [];
+        foreach ($rows as $row) {
+            $body = (string) ($row['body'] ?? '');
+            foreach (extract_editor_upload_filenames($body) as $name => $_) {
+                $used[$name] = true;
+            }
+        }
+
+        $now = time();
+        foreach (new \DirectoryIterator($dir) as $fileInfo) {
+            if (! $fileInfo->isFile()) {
+                continue;
+            }
+            $name = $fileInfo->getFilename();
+            if (! preg_match('/\.(png|jpe?g|webp|gif)$/i', $name)) {
+                continue;
+            }
+            if (isset($used[$name])) {
+                continue;
+            }
+            $mtime = (int) $fileInfo->getMTime();
+            if (($now - $mtime) < $graceSeconds) {
+                continue;
+            }
+            @unlink($fileInfo->getPathname());
+        }
     }
 }
 

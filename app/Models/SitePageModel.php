@@ -8,6 +8,7 @@ class SitePageModel extends Model
 {
     public const SLUG_PROFIL_SEJARAH = 'profil/sejarah';
     public const SLUG_PROFIL_VISI_MISI = 'profil/visi-misi';
+    public const SLUG_PROFIL_TUPOKSI = 'profil/tupoksi';
 
     protected $table            = 'site_pages';
     protected $primaryKey       = 'id';

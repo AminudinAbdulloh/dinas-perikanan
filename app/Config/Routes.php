@@ -25,6 +25,11 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->get('konten/visi-misi', 'KontenVisiMisi::index');
         $routes->get('konten/visi-misi/edit', 'KontenVisiMisi::edit');
         $routes->post('konten/visi-misi/update', 'KontenVisiMisi::update', ['filter' => 'csrf']);
+
+        $routes->get('konten/tupoksi', 'KontenTupoksi::index');
+        $routes->get('konten/tupoksi/edit', 'KontenTupoksi::edit');
+        $routes->post('konten/tupoksi/update', 'KontenTupoksi::update', ['filter' => 'csrf']);
+        $routes->post('konten/upload-image', 'KontenMedia::uploadImage');
     });
 });
 $routes->get('berita', 'Beranda::berita');

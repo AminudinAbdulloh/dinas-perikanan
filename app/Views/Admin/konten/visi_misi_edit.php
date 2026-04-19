@@ -77,6 +77,7 @@ if (is_array($errs) && $errs !== []) { ?>
 (function () {
     const form = document.querySelector('form[action*="konten/visi-misi/update"]');
     if (!form) return;
+    const uploadUrl = '<?= base_url('admin/konten/upload-image') ?>';
 
     tinymce.init({
         selector: '#body',
@@ -110,7 +111,47 @@ if (is_array($errs) && $errs !== []) { ?>
         remove_script_host: false,
         image_title: true,
         image_description: true,
-        automatic_uploads: false,
+        automatic_uploads: true,
+        file_picker_types: 'image',
+        images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', uploadUrl);
+            xhr.withCredentials = true;
+
+            xhr.upload.onprogress = (event) => {
+                if (event.lengthComputable) {
+                    progress((event.loaded / event.total) * 100);
+                }
+            };
+
+            xhr.onload = () => {
+                if (xhr.status < 200 || xhr.status >= 300) {
+                    reject('Upload gagal. Coba lagi.');
+                    return;
+                }
+
+                let json = null;
+                try {
+                    json = JSON.parse(xhr.responseText);
+                } catch (e) {
+                    reject('Respons upload tidak valid.');
+                    return;
+                }
+
+                if (!json || typeof json.location !== 'string') {
+                    reject((json && json.error) ? json.error : 'Upload gagal.');
+                    return;
+                }
+
+                resolve(json.location);
+            };
+
+            xhr.onerror = () => reject('Koneksi upload gagal.');
+
+            const formData = new FormData();
+            formData.append('file', blobInfo.blob(), blobInfo.filename());
+            xhr.send(formData);
+        }),
         media_live_embeds: true,
         color_cols: 10,
         color_map: [
