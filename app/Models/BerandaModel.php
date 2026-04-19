@@ -38,22 +38,39 @@ class BerandaModel
                 ],
             ],
             [
+                'nama' => 'Informasi',
+                'link' => '#',
+                'aktif' => 'informasi',
+                'submenu' => [
+                    ['nama' => 'Berita', 'link' => base_url('berita')],
+                    ['nama' => 'Pengumuman', 'link' => base_url('pengumuman')],
+                    [
+                        'nama' => 'Galeri',
+                        'link' => '#',
+                        'submenu' => [
+                            ['nama' => 'Foto', 'link' => base_url('galeri/foto')],
+                            ['nama' => 'Video', 'link' => base_url('galeri/video')],
+                        ],
+                    ],
+                ],
+            ],
+            [
                 'nama' => 'PPID',
                 'link' => '#',
                 'aktif' => 'ppid',
                 'submenu' => [
+                    // [
+                    //     'nama' => 'Publikasi',
+                    //     'link' => '#',
+                    //     'submenu' => [
+                    //         ['nama' => 'Rencana Strategis', 'link' => base_url('publikasi/renstra')],
+                    //         ['nama' => 'Rencana Kerja', 'link' => base_url('publikasi/renja')],
+                    //         ['nama' => 'Laporan Kinerja', 'link' => base_url('publikasi/lakip')],
+                    //         ['nama' => 'Perjanjian Kinerja', 'link' => base_url('publikasi/pk')],
+                    //     ],
+                    // ],
                     [
-                        'nama' => 'Program',
-                        'link' => '#',
-                        'submenu' => [
-                            ['nama' => 'Rencana Strategis', 'link' => base_url('program/renstra')],
-                            ['nama' => 'Rencana Kerja', 'link' => base_url('program/renja')],
-                            ['nama' => 'Laporan Kinerja', 'link' => base_url('program/lakip')],
-                            ['nama' => 'Perjanjian Kinerja', 'link' => base_url('program/pk')],
-                        ],
-                    ],
-                    [
-                        'nama' => 'Layanan Informasi',
+                        'nama' => 'Layanan',
                         'link' => '#',
                         'submenu' => [
                             ['nama' => 'Alur Permohonan Informasi Publik', 'link' => base_url('informasi/alur-permohonan')],
@@ -72,23 +89,7 @@ class BerandaModel
                             ['nama' => 'Informasi yang Dikecualikan', 'link' => base_url('informasi/informasi-dikecualikan')],
                         ],
                     ],
-                    ['nama' => 'Laporan Layanan', 'link' => base_url('informasi/laporan-layanan')],
-                ],
-            ],
-            [
-                'nama' => 'Informasi',
-                'link' => '#',
-                'aktif' => 'informasi',
-                'submenu' => [
-                    ['nama' => 'Berita', 'link' => base_url('berita')],
-                    [
-                        'nama' => 'Galeri',
-                        'link' => '#',
-                        'submenu' => [
-                            ['nama' => 'Foto', 'link' => base_url('galeri/foto')],
-                            ['nama' => 'Video', 'link' => base_url('galeri/video')],
-                        ],
-                    ],
+                    // ['nama' => 'Laporan Layanan Informasi', 'link' => base_url('informasi/laporan-layanan-informasi')],
                 ],
             ],
             [
@@ -179,22 +180,22 @@ class BerandaModel
                 'title' => 'Alamat dan Kontak',
                 'description' => 'Informasi alamat kantor, email, dan kanal komunikasi resmi layanan dinas.',
             ],
-            'program/renstra' => [
-                'title' => 'Rencana Strategis (Renstra)',
-                'description' => 'Dokumen arah kebijakan jangka menengah sektor kelautan dan perikanan.',
-            ],
-            'program/renja' => [
-                'title' => 'Rencana Kerja (Renja)',
-                'description' => 'Program kerja tahunan sebagai turunan dari Renstra dan prioritas daerah.',
-            ],
-            'program/lakip' => [
-                'title' => 'Laporan Kinerja (LAKIP)',
-                'description' => 'Laporan akuntabilitas kinerja instansi pemerintah bidang kelautan dan perikanan.',
-            ],
-            'program/pk' => [
-                'title' => 'Perjanjian Kinerja',
-                'description' => 'Komitmen target kinerja antara pimpinan unit kerja dan kepala perangkat daerah.',
-            ],
+            // 'publikasi/renstra' => [
+            //     'title' => 'Rencana Strategis (Renstra)',
+            //     'description' => 'Dokumen arah kebijakan jangka menengah sektor kelautan dan perikanan.',
+            // ],
+            // 'publikasi/renja' => [
+            //     'title' => 'Rencana Kerja (Renja)',
+            //     'description' => 'Program kerja tahunan sebagai turunan dari Renstra dan prioritas daerah.',
+            // ],
+            // 'publikasi/lakip' => [
+            //     'title' => 'Laporan Kinerja (LAKIP)',
+            //     'description' => 'Laporan akuntabilitas kinerja instansi pemerintah bidang kelautan dan perikanan.',
+            // ],
+            // 'publikasi/pk' => [
+            //     'title' => 'Perjanjian Kinerja',
+            //     'description' => 'Komitmen target kinerja antara pimpinan unit kerja dan kepala perangkat daerah.',
+            // ],
             'informasi/alur-permohonan' => [
                 'title' => 'Alur Permohonan Informasi',
                 'description' => 'Langkah-langkah pengajuan permohonan informasi publik secara mudah dan transparan.',
@@ -227,9 +228,13 @@ class BerandaModel
                 'title' => 'Informasi Setiap Saat',
                 'description' => 'Informasi yang tersedia sewaktu-waktu untuk memenuhi kebutuhan publik.',
             ],
-            'informasi/laporan-layanan' => [
-                'title' => 'Laporan Layanan Informasi',
-                'description' => 'Rekapitulasi statistik dan capaian layanan informasi publik.',
+            // 'informasi/laporan-layanan-informasi' => [
+            //     'title' => 'Laporan Layanan Informasi',
+            //     'description' => 'Rekapitulasi statistik dan capaian layanan informasi publik.',
+            // ],
+            'pengumuman' => [
+                'title' => 'Pengumuman',
+                'description' => 'Pengumuman resmi dan edaran terkait layanan Dinas Kelautan dan Perikanan Provinsi Papua Tengah.',
             ],
             'faq' => [
                 'title' => 'FAQ',
@@ -338,12 +343,12 @@ class BerandaModel
                 'description' => 'Informasi yang wajib diumumkan segera demi kepentingan publik',
                 'link' => 'informasi/informasi-serta-merta',
             ],
-            [
-                'icon' => 'bi-bar-chart-line',
-                'title' => 'Laporan Layanan Informasi',
-                'description' => 'Laporan dan statistik layanan informasi publik',
-                'link' => 'informasi/laporan-layanan',
-            ],
+            // [
+            //     'icon' => 'bi-bar-chart-line',
+            //     'title' => 'Laporan Layanan Informasi',
+            //     'description' => 'Laporan dan statistik layanan informasi publik',
+            //     'link' => 'informasi/laporan-layanan-informasi',
+            // ],
         ];
     }
 
