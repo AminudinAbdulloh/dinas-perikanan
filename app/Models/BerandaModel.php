@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Config\Database;
+
 /**
  * BerandaModel
  *
@@ -388,61 +390,11 @@ class BerandaModel
      */
     public function getNewsList(): array
     {
-        return [
-            [
-                'id' => 1,
-                'date' => '5 April 2026',
-                'title' => 'Penyerahan Bantuan Alat Tangkap kepada 200 Nelayan',
-                'excerpt' => 'Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire v Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire v Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire',
-                'image' => 'https://images.unsplash.com/photo-1660278988532-d55143363abb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-                'author' => 'Admin Dinas',
-                'views' => '1,234',
-                'readTime' => '5 min',
-                'tags' => ['Bantuan Nelayan', 'Alat Tangkap', 'Perikanan', 'Nabire'],
-                'content' => '<p>Nabire - Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada 200 nelayan di Kabupaten Nabire pada Jumat, 5 April 2026. Program ini merupakan bagian dari upaya pemerintah provinsi dalam meningkatkan produktivitas dan kesejahteraan nelayan.</p>
-<p>Dalam sambutannya, Gubernur menyampaikan bahwa bantuan ini diharapkan dapat membantu nelayan meningkatkan hasil tangkapan mereka. "Alat tangkap modern ini dirancang untuk lebih efisien dan ramah lingkungan," ujar Gubernur.</p>
-<h2>Bantuan yang Diberikan</h2>
-<p>Bantuan yang diserahkan meliputi:</p>
-<ul>
-  <li>Jaring ikan modern dengan ukuran yang sesuai standar</li>
-  <li>Pancing tuna longline</li>
-  <li>Alat bantu penangkapan ikan</li>
-  <li>GPS dan fish finder</li>
-</ul>
-<h2>Dampak Positif</h2>
-<p>Para nelayan menyambut baik program ini. Menurut salah satu penerima bantuan, Bapak Johannes Kogoya, alat tangkap modern ini akan sangat membantu meningkatkan hasil tangkapan. "Kami sangat berterima kasih kepada Pemerintah Provinsi Papua Tengah atas perhatiannya terhadap kesejahteraan nelayan," ungkapnya.</p>
-<p>Kepala Dinas Perikanan dan Kelautan Papua Tengah menambahkan bahwa program ini akan dilanjutkan ke kabupaten lain di Papua Tengah. "Tahun ini kami menargetkan 1.000 nelayan akan menerima bantuan alat tangkap," jelasnya.</p>
-<h2>Pelatihan Pendampingan</h2>
-<p>Selain bantuan alat tangkap, para nelayan juga akan mendapatkan pelatihan cara penggunaan alat dan teknik penangkapan ikan yang berkelanjutan. Pelatihan ini akan dilaksanakan selama 3 hari dengan didampingi oleh tim teknis dari dinas.</p>
-<p>Program ini diharapkan dapat meningkatkan produksi perikanan tangkap di Papua Tengah serta meningkatkan pendapatan nelayan secara signifikan.</p>',
-            ],
-            [
-                'id' => 2,
-                'date' => '28 Maret 2026',
-                'title' => 'Pelatihan Budidaya Ikan Nila untuk Kelompok Tani',
-                'excerpt' => 'Dinas menggelar pelatihan budidaya ikan nila sistem bioflok untuk 50 kelompok pembudidaya',
-                'image' => 'https://images.unsplash.com/photo-1562656611-2b26567ccf19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-                'author' => 'Bidang Budidaya',
-                'views' => '2,145',
-                'readTime' => '4 min',
-                'tags' => ['Budidaya', 'Ikan Nila', 'Pelatihan'],
-                'content' => '<p>Dinas Kelautan dan Perikanan menggelar pelatihan budidaya ikan nila sistem bioflok bagi 50 kelompok pembudidaya di Nabire. Kegiatan ini bertujuan meningkatkan kapasitas teknis masyarakat dalam budidaya berkelanjutan.</p>
-<p>Materi pelatihan meliputi manajemen kualitas air, formulasi pakan, dan pengendalian penyakit ikan. Peserta juga mendapatkan praktik langsung untuk penerapan teknologi bioflok di kolam budidaya.</p>',
-            ],
-            [
-                'id' => 3,
-                'date' => '15 Maret 2026',
-                'title' => 'Monitoring Kesehatan Terumbu Karang di Teluk Cenderawasih',
-                'excerpt' => 'Tim survei melakukan monitoring kondisi ekosistem terumbu karang di kawasan konservasi',
-                'image' => 'https://images.unsplash.com/photo-1724257154172-b7dcef926dea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxjb3JhbCUyMHJlZWYlMjB1bmRlcndhdGVyJTIwcGFwdWF8ZW58MXx8fHwxNzc1ODM3MDY2fDA&ixlib=rb-4.1.0&q=80&w=1080',
-                'author' => 'Tim Konservasi',
-                'views' => '1,876',
-                'readTime' => '6 min',
-                'tags' => ['Terumbu Karang', 'Konservasi', 'Teluk Cenderawasih'],
-                'content' => '<p>Tim survei melakukan monitoring kondisi ekosistem terumbu karang di kawasan konservasi Teluk Cenderawasih. Monitoring dilakukan untuk mengukur tutupan karang hidup dan kesehatan habitat laut.</p>
-<p>Hasil awal menunjukkan tren positif pada beberapa lokasi inti konservasi. Pemerintah daerah akan melanjutkan program rehabilitasi dan edukasi masyarakat pesisir untuk menjaga keberlanjutan ekosistem.</p>',
-            ],
-        ];
+        if ($this->isNewsArticlesTablePresent()) {
+            return model(NewsArticleModel::class)->getPublishedForPublic();
+        }
+
+        return $this->getStaticNewsListFallback();
     }
 
     /**
@@ -453,7 +405,11 @@ class BerandaModel
      */
     public function getNewsDetail(int $id): ?array
     {
-        foreach ($this->getNewsList() as $news) {
+        if ($this->isNewsArticlesTablePresent()) {
+            return model(NewsArticleModel::class)->getPublishedById($id);
+        }
+
+        foreach ($this->getStaticNewsListFallback() as $news) {
             if ((int) $news['id'] === $id) {
                 return $news;
             }
@@ -470,7 +426,11 @@ class BerandaModel
      */
     public function getPopularNews(?int $excludeId = null): array
     {
-        $popular = $this->getNewsList();
+        if ($this->isNewsArticlesTablePresent()) {
+            return model(NewsArticleModel::class)->getPopularPublished($excludeId, 4);
+        }
+
+        $popular = $this->getStaticNewsListFallback();
 
         if ($excludeId !== null) {
             $popular = array_values(array_filter(
@@ -637,6 +597,73 @@ class BerandaModel
                 'title' => 'Eksplorasi Kekayaan Laut Papua Tengah',
                 'duration' => '7:10',
                 'date' => '1 Maret 2026',
+            ],
+        ];
+    }
+
+    private function isNewsArticlesTablePresent(): bool
+    {
+        try {
+            return Database::connect()->tableExists('news_articles');
+        } catch (\Throwable) {
+            return false;
+        }
+    }
+
+    /**
+     * Data demo bila tabel berita belum dimigrasikan.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    private function getStaticNewsListFallback(): array
+    {
+        return [
+            [
+                'id' => 1,
+                'date' => '5 April 2026',
+                'title' => 'Penyerahan Bantuan Alat Tangkap kepada 200 Nelayan',
+                'excerpt' => 'Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire v Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire v Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada nelayan di Kabupaten Nabire',
+                'image' => 'https://images.unsplash.com/photo-1660278988532-d55143363abb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+                'author' => 'Admin Dinas',
+                'views' => '1,234',
+                'content' => '<p>Nabire - Gubernur Papua Tengah menyerahkan bantuan alat tangkap modern kepada 200 nelayan di Kabupaten Nabire pada Jumat, 5 April 2026. Program ini merupakan bagian dari upaya pemerintah provinsi dalam meningkatkan produktivitas dan kesejahteraan nelayan.</p>
+<p>Dalam sambutannya, Gubernur menyampaikan bahwa bantuan ini diharapkan dapat membantu nelayan meningkatkan hasil tangkapan mereka. "Alat tangkap modern ini dirancang untuk lebih efisien dan ramah lingkungan," ujar Gubernur.</p>
+<h2>Bantuan yang Diberikan</h2>
+<p>Bantuan yang diserahkan meliputi:</p>
+<ul>
+  <li>Jaring ikan modern dengan ukuran yang sesuai standar</li>
+  <li>Pancing tuna longline</li>
+  <li>Alat bantu penangkapan ikan</li>
+  <li>GPS dan fish finder</li>
+</ul>
+<h2>Dampak Positif</h2>
+<p>Para nelayan menyambut baik program ini. Menurut salah satu penerima bantuan, Bapak Johannes Kogoya, alat tangkap modern ini akan sangat membantu meningkatkan hasil tangkapan. "Kami sangat berterima kasih kepada Pemerintah Provinsi Papua Tengah atas perhatiannya terhadap kesejahteraan nelayan," ungkapnya.</p>
+<p>Kepala Dinas Perikanan dan Kelautan Papua Tengah menambahkan bahwa program ini akan dilanjutkan ke kabupaten lain di Papua Tengah. "Tahun ini kami menargetkan 1.000 nelayan akan menerima bantuan alat tangkap," jelasnya.</p>
+<h2>Pelatihan Pendampingan</h2>
+<p>Selain bantuan alat tangkap, para nelayan juga akan mendapatkan pelatihan cara penggunaan alat dan teknik penangkapan ikan yang berkelanjutan. Pelatihan ini akan dilaksanakan selama 3 hari dengan didampingi oleh tim teknis dari dinas.</p>
+<p>Program ini diharapkan dapat meningkatkan produksi perikanan tangkap di Papua Tengah serta meningkatkan pendapatan nelayan secara signifikan.</p>',
+            ],
+            [
+                'id' => 2,
+                'date' => '28 Maret 2026',
+                'title' => 'Pelatihan Budidaya Ikan Nila untuk Kelompok Tani',
+                'excerpt' => 'Dinas menggelar pelatihan budidaya ikan nila sistem bioflok untuk 50 kelompok pembudidaya',
+                'image' => 'https://images.unsplash.com/photo-1562656611-2b26567ccf19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+                'author' => 'Bidang Budidaya',
+                'views' => '2,145',
+                'content' => '<p>Dinas Kelautan dan Perikanan menggelar pelatihan budidaya ikan nila sistem bioflok bagi 50 kelompok pembudidaya di Nabire. Kegiatan ini bertujuan meningkatkan kapasitas teknis masyarakat dalam budidaya berkelanjutan.</p>
+<p>Materi pelatihan meliputi manajemen kualitas air, formulasi pakan, dan pengendalian penyakit ikan. Peserta juga mendapatkan praktik langsung untuk penerapan teknologi bioflok di kolam budidaya.</p>',
+            ],
+            [
+                'id' => 3,
+                'date' => '15 Maret 2026',
+                'title' => 'Monitoring Kesehatan Terumbu Karang di Teluk Cenderawasih',
+                'excerpt' => 'Tim survei melakukan monitoring kondisi ekosistem terumbu karang di kawasan konservasi',
+                'image' => 'https://images.unsplash.com/photo-1724257154172-b7dcef926dea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxjb3JhbCUyMHJlZWYlMjB1bmRlcndhdGVyJTIwcGFwdWF8ZW58MXx8fHwxNzc1ODM3MDY2fDA&ixlib=rb-4.1.0&q=80&w=1080',
+                'author' => 'Tim Konservasi',
+                'views' => '1,876',
+                'content' => '<p>Tim survei melakukan monitoring kondisi ekosistem terumbu karang di kawasan konservasi Teluk Cenderawasih. Monitoring dilakukan untuk mengukur tutupan karang hidup dan kesehatan habitat laut.</p>
+<p>Hasil awal menunjukkan tren positif pada beberapa lokasi inti konservasi. Pemerintah daerah akan melanjutkan program rehabilitasi dan edukasi masyarakat pesisir untuk menjaga keberlanjutan ekosistem.</p>',
             ],
         ];
     }

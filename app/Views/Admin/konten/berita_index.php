@@ -1,0 +1,90 @@
+<?= $this->extend('layouts/template_admin') ?>
+
+<?= $this->section('title') ?>Kelola Berita<?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
+<div class="admin-page-header mb-4 d-flex flex-wrap align-items-start justify-content-between gap-3">
+    <div>
+        <nav aria-label="breadcrumb" class="mb-2">
+            <ol class="breadcrumb small mb-0">
+                <li class="breadcrumb-item"><a href="<?= base_url('admin/dashboard') ?>">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Berita</li>
+            </ol>
+        </nav>
+        <h1 class="h3 fw-bold text-body mb-1">Kelola Berita</h1>
+        <p class="text-secondary mb-0">
+            Tambah, ubah, atau hapus artikel yang tampil di halaman beranda dan berita publik.
+        </p>
+    </div>
+    <a class="btn btn-primary rounded-3" href="<?= base_url('admin/konten/berita/tambah') ?>">
+        <i class="bi bi-plus-lg me-1"></i>Tambah berita
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">Judul</th>
+                        <th class="d-none d-md-table-cell">Dibuat</th>
+                        <th class="d-none d-lg-table-cell text-end">Tayangan</th>
+                        <th class="d-none d-lg-table-cell">Penulis</th>
+                        <th>Status</th>
+                        <th class="pe-4 text-end">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (($articles ?? []) === []) : ?>
+                        <tr>
+                            <td colspan="6" class="px-4 py-5 text-center text-secondary">
+                                Belum ada berita. <a href="<?= base_url('admin/konten/berita/tambah') ?>">Tambah berita pertama</a>
+                                atau jalankan seeder <code class="small">NewsArticleSeeder</code> untuk contoh data.
+                            </td>
+                        </tr>
+                    <?php else : ?>
+                        <?php foreach ($articles as $row) : ?>
+                            <?php
+                            $pub = (int) ($row['is_published'] ?? 0) === 1;
+                            $dateLabel = \App\Models\NewsArticleModel::displayDateFromRow($row);
+                            $viewsN = (int) ($row['views'] ?? 0);
+                            ?>
+                            <tr>
+                                <td class="ps-4">
+                                    <span class="fw-medium"><?= esc((string) ($row['title'] ?? '')) ?></span>
+                                    <div class="small text-secondary d-md-none"><?= esc($dateLabel) ?></div>
+                                </td>
+                                <td class="text-secondary small d-none d-md-table-cell"><?= esc($dateLabel) ?></td>
+                                <td class="d-none d-lg-table-cell text-end small"><?= esc(number_format($viewsN, 0, ',', '.')) ?></td>
+                                <td class="d-none d-lg-table-cell"><?= esc((string) ($row['author'] ?? '—')) ?></td>
+                                <td>
+                                    <?php if ($pub) : ?>
+                                        <span class="badge text-bg-success rounded-pill">Terbit</span>
+                                    <?php else : ?>
+                                        <span class="badge text-bg-secondary rounded-pill">Draft</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td class="pe-4 text-end text-nowrap">
+                                    <?php if ($pub) : ?>
+                                        <a class="btn btn-sm btn-light border rounded-3"
+                                            href="<?= base_url('berita/' . (int) $row['id']) ?>" target="_blank" rel="noopener noreferrer"
+                                            title="Lihat di situs">Lihat</a>
+                                    <?php endif; ?>
+                                    <a class="btn btn-sm btn-outline-primary rounded-3"
+                                        href="<?= base_url('admin/konten/berita/' . (int) $row['id'] . '/edit') ?>">Edit</a>
+                                    <form method="post" action="<?= base_url('admin/konten/berita/' . (int) $row['id'] . '/hapus') ?>"
+                                        class="d-inline" onsubmit="return confirm('Hapus berita ini?');">
+                                        <?= csrf_field() ?>
+                                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-3">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<?= $this->endSection() ?>

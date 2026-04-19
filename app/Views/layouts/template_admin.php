@@ -72,13 +72,13 @@
                 <?= $sidebarNav('konten-pejabat', 'Profil Pejabat Struktural', base_url('admin/konten/pejabat'), 'bi-person-vcard') ?>
                 <?= $sidebarNav('konten-pegawai', 'Daftar Pegawai', base_url('admin/konten/pegawai'), 'bi-people') ?>
                 <?= $sidebarNav('konten-kontak', 'Alamat dan Kontak', base_url('admin/konten/kontak'), 'bi-geo-alt') ?>
-                <?= $sidebarNav('mod-berita', 'Berita', '#', 'bi-newspaper', true) ?>
+                <?= $sidebarNav('konten-berita', 'Berita', base_url('admin/konten/berita'), 'bi-newspaper') ?>
                 <?= $sidebarNav('mod-pengumuman', 'Pengumuman', '#', 'bi-megaphone', true) ?>
                 <?= $sidebarNav('mod-galeri', 'Galeri', '#', 'bi-images', true) ?>
                 <?= $sidebarNav('mod-ppid', 'Informasi Publik', '#', 'bi-journal-text', true) ?>
             </nav>
             <div class="admin-sidebar-footer border-top p-3 small text-secondary">
-                Halaman Sejarah, Visi & Misi, Tupoksi, Struktur Organisasi, Profil Pejabat Struktural, Daftar Pegawai, dan Alamat & Kontak dapat diedit di sini; modul lain mengikuti roadmap CMS.
+                Halaman Sejarah, Visi & Misi, Tupoksi, Struktur Organisasi, Profil Pejabat Struktural, Daftar Pegawai, Alamat & Kontak, serta Berita dapat dikelola di sini; modul lain mengikuti roadmap CMS.
             </div>
         </aside>
 
@@ -99,7 +99,7 @@
                     <?= $sidebarNav('konten-pejabat', 'Profil Pejabat Struktural', base_url('admin/konten/pejabat'), 'bi-person-vcard') ?>
                     <?= $sidebarNav('konten-pegawai', 'Daftar Pegawai', base_url('admin/konten/pegawai'), 'bi-people') ?>
                     <?= $sidebarNav('konten-kontak', 'Alamat dan Kontak', base_url('admin/konten/kontak'), 'bi-geo-alt') ?>
-                    <?= $sidebarNav('mod-berita', 'Berita', '#', 'bi-newspaper', true) ?>
+                    <?= $sidebarNav('konten-berita', 'Berita', base_url('admin/konten/berita'), 'bi-newspaper') ?>
                     <?= $sidebarNav('mod-pengumuman', 'Pengumuman', '#', 'bi-megaphone', true) ?>
                     <?= $sidebarNav('mod-galeri', 'Galeri', '#', 'bi-images', true) ?>
                     <?= $sidebarNav('mod-ppid', 'Informasi Publik', '#', 'bi-journal-text', true) ?>

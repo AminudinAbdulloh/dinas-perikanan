@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\BerandaModel;
+use App\Models\NewsArticleModel;
 
 class Beranda extends BaseController
 {
@@ -68,6 +69,11 @@ class Beranda extends BaseController
 
         if ($news === null) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        if (NewsArticleModel::tableReady()) {
+            model(NewsArticleModel::class)->recordReaderVisitIfNewSession($id);
+            $news = $this->berandaModel->getNewsDetail($id) ?? $news;
         }
 
         $data = [

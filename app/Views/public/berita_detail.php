@@ -23,9 +23,7 @@ Tengah<?= $this->endSection() ?>
                                 <div class="detail-meta d-flex flex-wrap align-items-center gap-3 mt-3">
                                     <span><i class="bi bi-calendar-event me-1"></i><?= esc($news['date']) ?></span>
                                     <span><i class="bi bi-person me-1"></i><?= esc($news['author'] ?? 'Admin') ?></span>
-                                    <span><i class="bi bi-eye me-1"></i><?= esc($news['views'] ?? '0') ?> views</span>
-                                    <span><i class="bi bi-clock me-1"></i><?= esc($news['readTime'] ?? '0 min') ?>
-                                        read</span>
+                                    <span><i class="bi bi-eye me-1"></i><?= esc($news['views'] ?? '0') ?> tayangan</span>
                                 </div>
                             </div>
 
@@ -65,14 +63,6 @@ Tengah<?= $this->endSection() ?>
                                 <?= $news['content'] ?? '' ?>
                             </div>
 
-                            <?php if (!empty($news['tags']) && is_array($news['tags'])): ?>
-                                <div class="detail-tags mt-4 pt-4 border-top">
-                                    <span class="fw-semibold me-2">Tags:</span>
-                                    <?php foreach ($news['tags'] as $tag): ?>
-                                        <span class="badge rounded-pill text-bg-light border"><?= esc((string) $tag) ?></span>
-                                    <?php endforeach; ?>
-                                </div>
-                            <?php endif; ?>
                         </article>
                     </div>
 

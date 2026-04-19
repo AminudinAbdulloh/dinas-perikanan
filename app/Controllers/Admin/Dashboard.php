@@ -37,6 +37,12 @@ class Dashboard extends BaseController
                     'icon' => 'bi-house-door',
                 ],
                 [
+                    'label' => 'Kelola berita',
+                    'description' => 'Tambah dan edit artikel admin',
+                    'href' => base_url('admin/konten/berita'),
+                    'icon' => 'bi-pencil-square',
+                ],
+                [
                     'label' => 'Berita',
                     'description' => 'Daftar artikel publik',
                     'href' => base_url('berita'),
@@ -68,7 +74,6 @@ class Dashboard extends BaseController
                 ],
             ],
             'upcomingModules' => [
-                ['icon' => 'bi-pencil-square', 'title' => 'Editor berita', 'detail' => 'CRUD artikel, draft, dan jadwal tayang.'],
                 ['icon' => 'bi-folder2-open', 'title' => 'Halaman statis', 'detail' => 'Profil, PPID, dan layanan dari panel.'],
                 ['icon' => 'bi-image', 'title' => 'Media galeri', 'detail' => 'Unggah foto dan kelola tautan video.'],
                 ['icon' => 'bi-people', 'title' => 'Pengguna admin', 'detail' => 'Peran, log aktivitas, dan reset sandi.'],
