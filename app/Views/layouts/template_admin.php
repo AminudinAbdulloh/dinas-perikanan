@@ -74,11 +74,11 @@
                 <?= $sidebarNav('konten-kontak', 'Alamat dan Kontak', base_url('admin/konten/kontak'), 'bi-geo-alt') ?>
                 <?= $sidebarNav('konten-berita', 'Berita', base_url('admin/konten/berita'), 'bi-newspaper') ?>
                 <?= $sidebarNav('mod-pengumuman', 'Pengumuman', '#', 'bi-megaphone', true) ?>
-                <?= $sidebarNav('mod-galeri', 'Galeri', '#', 'bi-images', true) ?>
+                <?= $sidebarNav('konten-galeri-foto', 'Galeri Foto', base_url('admin/konten/galeri-foto'), 'bi-images') ?>
                 <?= $sidebarNav('mod-ppid', 'Informasi Publik', '#', 'bi-journal-text', true) ?>
             </nav>
             <div class="admin-sidebar-footer border-top p-3 small text-secondary">
-                Halaman Sejarah, Visi & Misi, Tupoksi, Struktur Organisasi, Profil Pejabat Struktural, Daftar Pegawai, Alamat & Kontak, serta Berita dapat dikelola di sini; modul lain mengikuti roadmap CMS.
+                Halaman Sejarah, Visi & Misi, Tupoksi, Struktur Organisasi, Profil Pejabat Struktural, Daftar Pegawai, Alamat & Kontak, Berita, dan Galeri Foto dapat dikelola di sini; modul lain mengikuti roadmap CMS.
             </div>
         </aside>
 
@@ -101,7 +101,7 @@
                     <?= $sidebarNav('konten-kontak', 'Alamat dan Kontak', base_url('admin/konten/kontak'), 'bi-geo-alt') ?>
                     <?= $sidebarNav('konten-berita', 'Berita', base_url('admin/konten/berita'), 'bi-newspaper') ?>
                     <?= $sidebarNav('mod-pengumuman', 'Pengumuman', '#', 'bi-megaphone', true) ?>
-                    <?= $sidebarNav('mod-galeri', 'Galeri', '#', 'bi-images', true) ?>
+                    <?= $sidebarNav('konten-galeri-foto', 'Galeri Foto', base_url('admin/konten/galeri-foto'), 'bi-images') ?>
                     <?= $sidebarNav('mod-ppid', 'Informasi Publik', '#', 'bi-journal-text', true) ?>
                 </nav>
             </div>

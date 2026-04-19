@@ -49,6 +49,13 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->post('konten/berita/(:num)/update', 'KontenBerita::update/$1', ['filter' => 'csrf']);
         $routes->post('konten/berita/(:num)/hapus', 'KontenBerita::delete/$1', ['filter' => 'csrf']);
 
+        $routes->get('konten/galeri-foto', 'KontenGaleriFoto::index');
+        $routes->get('konten/galeri-foto/tambah', 'KontenGaleriFoto::create');
+        $routes->post('konten/galeri-foto/simpan', 'KontenGaleriFoto::store', ['filter' => 'csrf']);
+        $routes->get('konten/galeri-foto/(:num)/edit', 'KontenGaleriFoto::edit/$1');
+        $routes->post('konten/galeri-foto/(:num)/update', 'KontenGaleriFoto::update/$1', ['filter' => 'csrf']);
+        $routes->post('konten/galeri-foto/(:num)/hapus', 'KontenGaleriFoto::delete/$1', ['filter' => 'csrf']);
+
         $routes->post('konten/upload-image', 'KontenMedia::uploadImage');
         $routes->post('konten/delete-image', 'KontenMedia::deleteImage');
     });

@@ -456,56 +456,11 @@ class BerandaModel
      */
     public function getGalleryPhotos(): array
     {
-        return [
-            [
-                'id' => 1,
-                'image' => 'https://images.unsplash.com/photo-1660278988532-d55143363abb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-                'title' => 'Armada Perikanan Tradisional',
-                'date' => '1 Januari 2026',
-            ],
-            [
-                'id' => 2,
-                'image' => 'https://images.unsplash.com/photo-1562656611-2b26567ccf19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-                'title' => 'Nelayan Papua Tengah',
-                'date' => '10 Januari 2026',
-            ],
-            [
-                'id' => 3,
-                'image' => 'https://images.unsplash.com/photo-1724257154172-b7dcef926dea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxjb3JhbCUyMHJlZWYlMjB1bmRlcndhdGVyJTIwcGFwdWF8ZW58MXx8fHwxNzc1ODM3MDY2fDA&ixlib=rb-4.1.0&q=80&w=1080',
-                'title' => 'Terumbu Karang Teluk Cenderawasih',
-                'date' => '20 Januari 2026',
-            ],
-            [
-                'id' => 4,
-                'image' => 'https://images.unsplash.com/photo-1601699006891-c27e05b161c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxmaXNoaW5nJTIwYm9hdCUyMGhhcmJvcnxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-                'title' => 'Pelabuhan Perikanan Nabire',
-                'date' => '30 Januari 2026',
-            ],
-            [
-                'id' => 5,
-                'image' => 'https://images.unsplash.com/photo-1724257496887-d5012cdc9400?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxjb3JhbCUyMHJlZWYlMjB1bmRlcndhdGVyJTIwcGFwdWF8ZW58MXx8fHwxNzc1ODM3MDY2fDA&ixlib=rb-4.1.0&q=80&w=1080',
-                'title' => 'Keanekaragaman Hayati Laut',
-                'date' => '2 Februari 2026',
-            ],
-            [
-                'id' => 6,
-                'image' => 'https://images.unsplash.com/photo-1689505630546-bebf6e52dce2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-                'title' => 'Aktivitas Penangkapan Ikan',
-                'date' => '11 Februari 2026',
-            ],
-            [
-                'id' => 7,
-                'image' => 'https://images.unsplash.com/photo-1582965637751-2c8cc0c164ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-                'title' => 'Dermaga Perikanan',
-                'date' => '21 Februari 2026',
-            ],
-            [
-                'id' => 8,
-                'image' => 'https://images.unsplash.com/photo-1630546221335-bfbbe63f5e0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-                'title' => 'Perjalanan Mencari Ikan',
-                'date' => '3 Maret 2026',
-            ],
-        ];
+        if ($this->isGalleryPhotosTablePresent()) {
+            return model(GalleryPhotoModel::class)->getForPublic();
+        }
+
+        return $this->getStaticGalleryPhotosFallback();
     }
 
     /**
@@ -516,7 +471,11 @@ class BerandaModel
      */
     public function getGalleryPhotoDetail(int $id): ?array
     {
-        foreach ($this->getGalleryPhotos() as $photo) {
+        if ($this->isGalleryPhotosTablePresent()) {
+            return model(GalleryPhotoModel::class)->getByIdForPublic($id);
+        }
+
+        foreach ($this->getStaticGalleryPhotosFallback() as $photo) {
             if ((int) $photo['id'] === $id) {
                 return $photo;
             }
@@ -534,8 +493,12 @@ class BerandaModel
      */
     public function getRelatedGalleryPhotos(int $excludeId, int $limit = 4): array
     {
+        if ($this->isGalleryPhotosTablePresent()) {
+            return model(GalleryPhotoModel::class)->getRelatedForPublic($excludeId, $limit);
+        }
+
         $photos = array_values(array_filter(
-            $this->getGalleryPhotos(),
+            $this->getStaticGalleryPhotosFallback(),
             static fn(array $photo): bool => (int) $photo['id'] !== $excludeId
         ));
 
@@ -597,6 +560,74 @@ class BerandaModel
                 'title' => 'Eksplorasi Kekayaan Laut Papua Tengah',
                 'duration' => '7:10',
                 'date' => '1 Maret 2026',
+            ],
+        ];
+    }
+
+    private function isGalleryPhotosTablePresent(): bool
+    {
+        try {
+            return Database::connect()->tableExists('gallery_photos');
+        } catch (\Throwable) {
+            return false;
+        }
+    }
+
+    /**
+     * Data demo bila tabel galeri foto belum dimigrasikan.
+     *
+     * @return array<int, array<string, int|string>>
+     */
+    private function getStaticGalleryPhotosFallback(): array
+    {
+        return [
+            [
+                'id' => 1,
+                'image' => 'https://images.unsplash.com/photo-1660278988532-d55143363abb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+                'title' => 'Armada Perikanan Tradisional',
+                'date' => '1 Januari 2026',
+            ],
+            [
+                'id' => 2,
+                'image' => 'https://images.unsplash.com/photo-1562656611-2b26567ccf19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+                'title' => 'Nelayan Papua Tengah',
+                'date' => '10 Januari 2026',
+            ],
+            [
+                'id' => 3,
+                'image' => 'https://images.unsplash.com/photo-1724257154172-b7dcef926dea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxjb3JhbCUyMHJlZWYlMjB1bmRlcndhdGVyJTIwcGFwdWF8ZW58MXx8fHwxNzc1ODM3MDY2fDA&ixlib=rb-4.1.0&q=80&w=1080',
+                'title' => 'Terumbu Karang Teluk Cenderawasih',
+                'date' => '20 Januari 2026',
+            ],
+            [
+                'id' => 4,
+                'image' => 'https://images.unsplash.com/photo-1601699006891-c27e05b161c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxmaXNoaW5nJTIwYm9hdCUyMGhhcmJvcnxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+                'title' => 'Pelabuhan Perikanan Nabire',
+                'date' => '30 Januari 2026',
+            ],
+            [
+                'id' => 5,
+                'image' => 'https://images.unsplash.com/photo-1724257496887-d5012cdc9400?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxjb3JhbCUyMHJlZWYlMjB1bmRlcndhdGVyJTIwcGFwdWF8ZW58MXx8fHwxNzc1ODM3MDY2fDA&ixlib=rb-4.1.0&q=80&w=1080',
+                'title' => 'Keanekaragaman Hayati Laut',
+                'date' => '2 Februari 2026',
+            ],
+            [
+                'id' => 6,
+                'image' => 'https://images.unsplash.com/photo-1689505630546-bebf6e52dce2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+                'title' => 'Aktivitas Penangkapan Ikan',
+                'date' => '11 Februari 2026',
+            ],
+            [
+                'id' => 7,
+                'image' => 'https://images.unsplash.com/photo-1582965637751-2c8cc0c164ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+                'title' => 'Dermaga Perikanan',
+                'date' => '21 Februari 2026',
+            ],
+            [
+                'id' => 8,
+                'image' => 'https://images.unsplash.com/photo-1630546221335-bfbbe63f5e0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+                'title' => 'Perjalanan Mencari Ikan',
+                'date' => '3 Maret 2026',
             ],
         ];
     }

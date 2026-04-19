@@ -43,6 +43,12 @@ class Dashboard extends BaseController
                     'icon' => 'bi-pencil-square',
                 ],
                 [
+                    'label' => 'Kelola galeri foto',
+                    'description' => 'Unggah dan urutkan album kegiatan',
+                    'href' => base_url('admin/konten/galeri-foto'),
+                    'icon' => 'bi-image',
+                ],
+                [
                     'label' => 'Berita',
                     'description' => 'Daftar artikel publik',
                     'href' => base_url('berita'),
@@ -75,7 +81,7 @@ class Dashboard extends BaseController
             ],
             'upcomingModules' => [
                 ['icon' => 'bi-folder2-open', 'title' => 'Halaman statis', 'detail' => 'Profil, PPID, dan layanan dari panel.'],
-                ['icon' => 'bi-image', 'title' => 'Media galeri', 'detail' => 'Unggah foto dan kelola tautan video.'],
+                ['icon' => 'bi-camera-video', 'title' => 'Galeri video', 'detail' => 'Kelola daftar video dari panel admin.'],
                 ['icon' => 'bi-people', 'title' => 'Pengguna admin', 'detail' => 'Peran, log aktivitas, dan reset sandi.'],
             ],
         ]);
