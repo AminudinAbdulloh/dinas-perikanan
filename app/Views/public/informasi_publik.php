@@ -121,8 +121,8 @@
                                 'dikecualikan' => 'informasi-dikecualikan',
                             ];
                             ?>
-                            <a href="<?= base_url('informasi/daftar-informasi-publik') ?>"
-                                class="sidebar-link <?= !isset($currentCategory) || $currentCategory === null ? 'active' : '' ?>">
+                            <a href="<?= base_url('publikasi/daftar-informasi-publik') ?>"
+                                class="sidebar-link">
                                 <i class="bi bi-folder2-open"></i>
                                 Daftar Informasi Publik
                             </a>

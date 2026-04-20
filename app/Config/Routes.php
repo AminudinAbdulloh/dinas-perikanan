@@ -118,7 +118,7 @@ $routes->group('layanan', static function ($routes) {
 });
 
 $routes->group('informasi', static function ($routes) {
-    $routes->get('daftar-informasi-publik', 'Beranda::informasiPublik/daftar-informasi-publik');
+    $routes->get('daftar-informasi-publik', static fn () => redirect()->to(base_url('publikasi/daftar-informasi-publik')));
     $routes->get('informasi-berkala', 'Beranda::informasiPublik/informasi-berkala');
     $routes->get('informasi-serta-merta', 'Beranda::informasiPublik/informasi-serta-merta');
     $routes->get('informasi-setiap-saat', 'Beranda::informasiPublik/informasi-setiap-saat');

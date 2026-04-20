@@ -84,7 +84,7 @@ class BerandaModel
                         'nama' => 'Informasi Publik',
                         'link' => '#',
                         'submenu' => [
-                            ['nama' => 'Daftar Informasi Publik', 'link' => base_url('informasi/daftar-informasi-publik')],
+                            ['nama' => 'Daftar Informasi Publik', 'link' => base_url('publikasi/daftar-informasi-publik')],
                             ['nama' => 'Informasi Berkala', 'link' => base_url('informasi/informasi-berkala')],
                             ['nama' => 'Informasi Serta Merta', 'link' => base_url('informasi/informasi-serta-merta')],
                             ['nama' => 'Informasi Setiap Saat', 'link' => base_url('informasi/informasi-setiap-saat')],
@@ -210,10 +210,7 @@ class BerandaModel
                 'title' => 'Form Keberatan Informasi',
                 'description' => 'Formulir pengajuan keberatan atas layanan informasi publik yang telah diberikan.',
             ],
-            'informasi/daftar-informasi-publik' => [
-                'title' => 'Daftar Informasi Publik',
-                'description' => 'Katalog informasi yang tersedia dan dapat diakses oleh masyarakat.',
-            ],
+            // 'informasi/daftar-informasi-publik' dihapus — sekarang menggunakan route publikasi/daftar-informasi-publik
             'informasi/informasi-dikecualikan' => [
                 'title' => 'Informasi yang Dikecualikan',
                 'description' => 'Informasi yang dikecualikan sesuai ketentuan peraturan perundang-undangan.',
@@ -349,7 +346,7 @@ class BerandaModel
                 'icon' => 'bi-folder2-open',
                 'title' => 'Daftar Informasi Publik',
                 'description' => 'Katalog dan daftar informasi publik yang tersedia',
-                'link' => 'informasi/daftar-informasi-publik',
+                'link' => 'publikasi/daftar-informasi-publik',
             ],
             [
                 'icon' => 'bi-lock',

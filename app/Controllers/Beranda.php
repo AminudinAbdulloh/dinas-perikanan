@@ -174,7 +174,6 @@ class Beranda extends BaseController
             'informasi-serta-merta'  => PublicInformationModel::CATEGORY_SERTA_MERTA,
             'informasi-setiap-saat'  => PublicInformationModel::CATEGORY_SETIAP_SAAT,
             'informasi-dikecualikan' => PublicInformationModel::CATEGORY_DIKECUALIKAN,
-            'daftar-informasi-publik' => null,
         ];
 
         $modelCategory = $categoryMap[$categorySlug] ?? null;
