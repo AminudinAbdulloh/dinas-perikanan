@@ -1,0 +1,127 @@
+<?= $this->extend('layouts/template_admin') ?>
+
+<?= $this->section('title') ?>Detail Keberatan<?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
+<?php
+$status = (string) ($item['status'] ?? 'diterima');
+$badgeClass = \App\Models\InformationObjectionModel::statusBadgeClass($status);
+$statusLabel = \App\Models\InformationObjectionModel::statusLabel($status);
+$dateLabel = \App\Models\InformationObjectionModel::displayDateFromRow($item);
+$reasonLabel = \App\Models\InformationObjectionModel::reasonLabel((string) ($item['objection_reason'] ?? ''));
+?>
+<div class="admin-page-header mb-4">
+    <nav aria-label="breadcrumb" class="mb-2">
+        <ol class="breadcrumb small mb-0">
+            <li class="breadcrumb-item"><a href="<?= base_url('admin/dashboard') ?>">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="<?= base_url('admin/konten/keberatan-informasi') ?>">Keberatan Informasi</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detail</li>
+        </ol>
+    </nav>
+    <h1 class="h3 fw-bold text-body mb-1">Keberatan <?= esc((string) ($item['registration_number'] ?? '')) ?></h1>
+    <p class="text-secondary mb-0">
+        Diajukan pada <?= esc($dateLabel) ?> · Status: <span class="badge rounded-pill <?= esc($badgeClass) ?>"><?= esc($statusLabel) ?></span>
+    </p>
+</div>
+
+<div class="row g-4">
+    <!-- Detail Data -->
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body p-4">
+                <h2 class="h5 fw-bold mb-4">Data Pemohon Keberatan</h2>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-sm-4 text-secondary small">Nama</div>
+                    <div class="col-sm-8 fw-medium"><?= esc((string) ($item['name'] ?? '')) ?></div>
+
+                    <div class="col-sm-4 text-secondary small">Identitas</div>
+                    <div class="col-sm-8"><?= esc((string) ($item['identity_type'] ?? '')) ?> — <?= esc((string) ($item['identity_number'] ?? '')) ?></div>
+
+                    <div class="col-sm-4 text-secondary small">Alamat</div>
+                    <div class="col-sm-8"><?= nl2br(esc((string) ($item['address'] ?? ''))) ?></div>
+
+                    <div class="col-sm-4 text-secondary small">Telepon</div>
+                    <div class="col-sm-8"><?= esc((string) ($item['phone'] ?? '')) ?></div>
+                </div>
+
+                <h2 class="h5 fw-bold mb-3">Detail Keberatan</h2>
+
+                <div class="row g-3">
+                    <div class="col-sm-4 text-secondary small">Alasan Keberatan</div>
+                    <div class="col-sm-8">
+                        <span class="badge rounded-pill text-bg-warning"><?= esc($reasonLabel) ?></span>
+                    </div>
+
+                    <div class="col-sm-4 text-secondary small">Kasus Posisi</div>
+                    <div class="col-sm-8"><?= nl2br(esc((string) ($item['case_description'] ?? ''))) ?></div>
+
+                    <div class="col-sm-4 text-secondary small">No. Registrasi Permohonan Asal</div>
+                    <div class="col-sm-8"><?= esc(trim((string) ($item['request_registration_number'] ?? '')) !== '' ? (string) $item['request_registration_number'] : '—') ?></div>
+
+                    <div class="col-sm-4 text-secondary small">Lampiran</div>
+                    <div class="col-sm-8">
+                        <?php
+                        $attachPath = trim((string) ($item['attachment_path'] ?? ''));
+                        $attachName = trim((string) ($item['attachment_name'] ?? ''));
+                        ?>
+                        <?php if ($attachPath !== '') : ?>
+                            <a href="<?= base_url($attachPath) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary rounded-3">
+                                <i class="bi bi-download me-1"></i><?= esc($attachName !== '' ? $attachName : 'Unduh lampiran') ?>
+                            </a>
+                        <?php else : ?>
+                            <span class="text-secondary">Tidak ada lampiran</span>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Update -->
+    <div class="col-lg-5">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body p-4">
+                <h2 class="h5 fw-bold mb-3">Perbarui Status</h2>
+
+                <form method="post" action="<?= base_url('admin/konten/keberatan-informasi/' . (int) $item['id'] . '/status') ?>">
+                    <?= csrf_field() ?>
+
+                    <div class="mb-3">
+                        <label for="status" class="form-label fw-semibold small">Status</label>
+                        <select class="form-select rounded-3" id="status" name="status">
+                            <?php foreach ($statuses as $slug => $label) : ?>
+                                <option value="<?= esc($slug) ?>" <?= $status === $slug ? 'selected' : '' ?>><?= esc($label) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="admin_notes" class="form-label fw-semibold small">Catatan Admin</label>
+                        <textarea class="form-control rounded-3" id="admin_notes" name="admin_notes" rows="4"
+                            placeholder="Opsional: tambahkan catatan internal..."><?= esc((string) ($item['admin_notes'] ?? '')) ?></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary rounded-3 w-100">
+                        <i class="bi bi-check2-circle me-1"></i>Simpan Perubahan
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-4 mt-3">
+            <div class="card-body p-4">
+                <h2 class="h6 fw-bold mb-2 text-danger">Zona Berbahaya</h2>
+                <p class="small text-secondary mb-3">Tindakan ini tidak dapat dibatalkan.</p>
+                <form method="post" action="<?= base_url('admin/konten/keberatan-informasi/' . (int) $item['id'] . '/hapus') ?>"
+                    onsubmit="return confirm('Hapus keberatan ini secara permanen?');">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="btn btn-outline-danger rounded-3 btn-sm">
+                        <i class="bi bi-trash me-1"></i>Hapus Keberatan
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<?= $this->endSection() ?>

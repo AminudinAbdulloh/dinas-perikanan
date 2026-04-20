@@ -46,6 +46,16 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->get('konten/alur-informasi/edit', 'KontenAlurInformasi::edit');
         $routes->post('konten/alur-informasi/update', 'KontenAlurInformasi::update', ['filter' => 'csrf']);
 
+        $routes->get('konten/permohonan-informasi', 'KontenPermohonanInformasi::index');
+        $routes->get('konten/permohonan-informasi/(:num)', 'KontenPermohonanInformasi::detail/$1');
+        $routes->post('konten/permohonan-informasi/(:num)/status', 'KontenPermohonanInformasi::updateStatus/$1', ['filter' => 'csrf']);
+        $routes->post('konten/permohonan-informasi/(:num)/hapus', 'KontenPermohonanInformasi::delete/$1', ['filter' => 'csrf']);
+
+        $routes->get('konten/keberatan-informasi', 'KontenKeberatanInformasi::index');
+        $routes->get('konten/keberatan-informasi/(:num)', 'KontenKeberatanInformasi::detail/$1');
+        $routes->post('konten/keberatan-informasi/(:num)/status', 'KontenKeberatanInformasi::updateStatus/$1', ['filter' => 'csrf']);
+        $routes->post('konten/keberatan-informasi/(:num)/hapus', 'KontenKeberatanInformasi::delete/$1', ['filter' => 'csrf']);
+
         $routes->get('konten/berita', 'KontenBerita::index');
         $routes->get('konten/berita/tambah', 'KontenBerita::create');
         $routes->post('konten/berita/simpan', 'KontenBerita::store', ['filter' => 'csrf']);
@@ -114,7 +124,10 @@ $routes->group('profil', static function ($routes) {
 $routes->group('layanan', static function ($routes) {
     $routes->get('alur-permohonan-informasi', 'Beranda::page/layanan/alur-permohonan-informasi');
     $routes->get('form-permohonan-informasi', 'Beranda::page/layanan/form-permohonan-informasi');
+    $routes->post('form-permohonan-informasi/kirim', 'Beranda::submitPermohonan', ['filter' => 'csrf']);
+    $routes->post('form-permohonan-informasi/lacak', 'Beranda::lacakPermohonan', ['filter' => 'csrf']);
     $routes->get('form-keberatan-informasi', 'Beranda::page/layanan/form-keberatan-informasi');
+    $routes->post('form-keberatan-informasi/kirim', 'Beranda::submitKeberatan', ['filter' => 'csrf']);
 });
 
 $routes->group('informasi', static function ($routes) {

@@ -3,9 +3,12 @@
 namespace App\Controllers;
 
 use App\Models\BerandaModel;
+use App\Models\InformationObjectionModel;
+use App\Models\InformationRequestModel;
 use App\Models\NewsArticleModel;
 use App\Models\PublicInformationModel;
 use App\Models\PublicationCategoryModel;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class Beranda extends BaseController
 {
@@ -335,5 +338,136 @@ class Beranda extends BaseController
         ];
 
         return view('public/publikasi_detail', $data);
+    }
+
+    /**
+     * Handle form permohonan informasi submission.
+     */
+    public function submitPermohonan(): ResponseInterface
+    {
+        $rules = [
+            'kategori'          => 'required|in_list[Perorangan,Lembaga]',
+            'nama'              => 'required|max_length[255]',
+            'pekerjaan'         => 'required|max_length[255]',
+            'alamat'            => 'required|max_length[2000]',
+            'identitas'         => 'required|max_length[50]',
+            'nomor_identitas'   => 'required|max_length[100]',
+            'telepon'           => 'required|max_length[30]',
+            'email'             => 'required|valid_email|max_length[255]',
+            'rincian_informasi' => 'required|max_length[5000]',
+            'tujuan_informasi'  => 'required|max_length[5000]',
+            'cara_mendapatkan'  => 'required|in_list[membaca,salinan]',
+            'cara_salinan'      => 'required|in_list[langsung,kurir,pos,faksimili,email]',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $model = model(InformationRequestModel::class);
+        $regNumber = $model->generateRegistrationNumber();
+
+        $model->insert([
+            'registration_number' => $regNumber,
+            'applicant_category'  => (string) $this->request->getPost('kategori'),
+            'name'                => (string) $this->request->getPost('nama'),
+            'occupation'          => (string) $this->request->getPost('pekerjaan'),
+            'address'             => (string) $this->request->getPost('alamat'),
+            'identity_type'       => (string) $this->request->getPost('identitas'),
+            'identity_number'     => (string) $this->request->getPost('nomor_identitas'),
+            'phone'               => (string) $this->request->getPost('telepon'),
+            'email'               => (string) $this->request->getPost('email'),
+            'information_detail'  => (string) $this->request->getPost('rincian_informasi'),
+            'information_purpose' => (string) $this->request->getPost('tujuan_informasi'),
+            'obtain_method'       => (string) $this->request->getPost('cara_mendapatkan'),
+            'copy_method'         => (string) $this->request->getPost('cara_salinan'),
+            'status'              => InformationRequestModel::STATUS_DITERIMA,
+        ]);
+
+        return redirect()->to(base_url('layanan/form-permohonan-informasi'))
+            ->with('permohonan_success', 'Permohonan informasi berhasil dikirim. Nomor registrasi Anda: ' . $regNumber . '. Simpan nomor ini untuk melacak status permohonan.');
+    }
+
+    /**
+     * Handle tracking permohonan informasi.
+     */
+    public function lacakPermohonan(): string
+    {
+        $query = trim((string) $this->request->getPost('query_lacak'));
+
+        $trackResults = [];
+        if ($query !== '' && InformationRequestModel::tableReady()) {
+            $trackResults = model(InformationRequestModel::class)->trackByQuery($query);
+        }
+
+        $pageData = $this->berandaModel->getPublicPageData('layanan/form-permohonan-informasi');
+        if ($pageData === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $data = [
+            'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData'   => $this->berandaModel->getPublicFooterData(),
+            'pageData'     => $pageData,
+            'trackQuery'   => $query,
+            'trackResults' => $trackResults,
+            'activeLacakTab' => true,
+        ];
+
+        return view('public/page', $data);
+    }
+
+    /**
+     * Handle form keberatan informasi submission.
+     */
+    public function submitKeberatan(): ResponseInterface
+    {
+        $rules = [
+            'nama'            => 'required|max_length[255]',
+            'identitas'       => 'required|max_length[50]',
+            'nomor_identitas' => 'required|max_length[100]',
+            'alamat'          => 'required|max_length[2000]',
+            'telepon'         => 'required|max_length[30]',
+            'alasan'          => 'required|in_list[' . implode(',', InformationObjectionModel::validReasons()) . ']',
+            'kasus_posisi'    => 'required|max_length[10000]',
+            'no_registrasi_permohonan' => 'permit_empty|max_length[50]',
+            'lampiran'        => 'permit_empty|uploaded[lampiran]|max_size[lampiran,10240]|ext_in[lampiran,pdf,doc,docx,jpg,jpeg,png]',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $model = model(InformationObjectionModel::class);
+        $regNumber = $model->generateRegistrationNumber();
+
+        // Handle file upload
+        $attachPath = null;
+        $attachName = null;
+        $file = $this->request->getFile('lampiran');
+        if ($file !== null && $file->isValid() && !$file->hasMoved()) {
+            $newName = $file->getRandomName();
+            $file->move(FCPATH . 'uploads/keberatan', $newName);
+            $attachPath = 'uploads/keberatan/' . $newName;
+            $attachName = $file->getClientName();
+        }
+
+        $model->insert([
+            'registration_number'          => $regNumber,
+            'name'                         => (string) $this->request->getPost('nama'),
+            'identity_type'                => (string) $this->request->getPost('identitas'),
+            'identity_number'              => (string) $this->request->getPost('nomor_identitas'),
+            'address'                      => (string) $this->request->getPost('alamat'),
+            'phone'                        => (string) $this->request->getPost('telepon'),
+            'objection_reason'             => (string) $this->request->getPost('alasan'),
+            'case_description'             => (string) $this->request->getPost('kasus_posisi'),
+            'request_registration_number'  => trim((string) $this->request->getPost('no_registrasi_permohonan')) ?: null,
+            'attachment_path'              => $attachPath,
+            'attachment_name'              => $attachName,
+            'status'                       => InformationObjectionModel::STATUS_DITERIMA,
+        ]);
+
+        return redirect()->to(base_url('layanan/form-keberatan-informasi'))
+            ->with('keberatan_success', 'Keberatan berhasil dikirim. Nomor registrasi: ' . $regNumber . '. Keberatan akan diproses maksimal 30 hari kerja.');
     }
 }

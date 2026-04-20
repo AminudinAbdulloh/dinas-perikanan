@@ -79,9 +79,11 @@
                 <?= $sidebarNav('mod-ppid', 'Informasi Publik', base_url('admin/konten/informasi-publik'), 'bi-journal-text') ?>
                 <p class="admin-sidebar-label px-3 mb-2 mt-4">Layanan PPID</p>
                 <?= $sidebarNav('konten-alur-informasi', 'Alur Informasi Publik', base_url('admin/konten/alur-informasi'), 'bi-signpost-split') ?>
+                <?= $sidebarNav('konten-permohonan-informasi', 'Permohonan Informasi', base_url('admin/konten/permohonan-informasi'), 'bi-envelope-paper') ?>
+                <?= $sidebarNav('konten-keberatan-informasi', 'Keberatan Informasi', base_url('admin/konten/keberatan-informasi'), 'bi-exclamation-triangle') ?>
             </nav>
             <div class="admin-sidebar-footer border-top p-3 small text-secondary">
-                Halaman Sejarah, Visi & Misi, Tupoksi, Struktur Organisasi, Profil Pejabat Struktural, Daftar Pegawai, Alamat & Kontak, Berita, Galeri Foto, Galeri Video, Informasi Publik, dan Alur Informasi Publik dapat dikelola di sini; modul lain mengikuti roadmap CMS.
+                Semua modul konten situs dan layanan PPID dapat dikelola di sini.
             </div>
         </aside>
 
@@ -109,6 +111,8 @@
                     <?= $sidebarNav('mod-ppid', 'Informasi Publik', base_url('admin/konten/informasi-publik'), 'bi-journal-text') ?>
                     <p class="admin-sidebar-label px-3 mb-2 mt-3">Layanan PPID</p>
                     <?= $sidebarNav('konten-alur-informasi', 'Alur Informasi Publik', base_url('admin/konten/alur-informasi'), 'bi-signpost-split') ?>
+                    <?= $sidebarNav('konten-permohonan-informasi', 'Permohonan Informasi', base_url('admin/konten/permohonan-informasi'), 'bi-envelope-paper') ?>
+                    <?= $sidebarNav('konten-keberatan-informasi', 'Keberatan Informasi', base_url('admin/konten/keberatan-informasi'), 'bi-exclamation-triangle') ?>
                 </nav>
             </div>
         </div>
