@@ -7,6 +7,7 @@ use App\Models\InformationObjectionModel;
 use App\Models\InformationRequestModel;
 use App\Models\NewsArticleModel;
 use App\Models\PublicInformationModel;
+use App\Models\FaqModel;
 use App\Models\PublicationCategoryModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -165,6 +166,30 @@ class Beranda extends BaseController
         ];
 
         return view('public/galeri_video', $data);
+    }
+
+    public function faq(): string
+    {
+        $faqs = [];
+        if (FaqModel::tableReady()) {
+            $faqs = model(FaqModel::class)->getActiveForPublic();
+        }
+
+        $data = [
+            'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData'   => $this->berandaModel->getPublicFooterData(),
+            'faqs'         => $faqs,
+            'pageData'     => [
+                'title'       => 'FAQ',
+                'description' => 'Pertanyaan yang sering diajukan seputar layanan Dinas Kelautan dan Perikanan Provinsi Papua Tengah.',
+                'breadcrumbs' => [
+                    ['label' => 'Beranda', 'href' => base_url('/')],
+                    ['label' => 'FAQ', 'href' => null],
+                ],
+            ],
+        ];
+
+        return view('public/faq', $data);
     }
 
     /**

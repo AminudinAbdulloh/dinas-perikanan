@@ -93,6 +93,13 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
 
         $routes->post('konten/upload-image', 'KontenMedia::uploadImage');
         $routes->post('konten/delete-image', 'KontenMedia::deleteImage');
+
+        $routes->get('konten/faq', 'KontenFaq::index');
+        $routes->get('konten/faq/tambah', 'KontenFaq::create');
+        $routes->post('konten/faq/simpan', 'KontenFaq::store', ['filter' => 'csrf']);
+        $routes->get('konten/faq/(:num)/edit', 'KontenFaq::edit/$1');
+        $routes->post('konten/faq/(:num)/update', 'KontenFaq::update/$1', ['filter' => 'csrf']);
+        $routes->post('konten/faq/(:num)/hapus', 'KontenFaq::delete/$1', ['filter' => 'csrf']);
     });
 });
 $routes->get('berita', 'Beranda::berita');
@@ -143,5 +150,5 @@ $routes->group('publikasi', static function ($routes) {
     $routes->get('(:segment)/(:num)', 'Beranda::publikasiDetail/$1/$2');
 });
 
-$routes->get('faq', 'Beranda::page/faq');
+$routes->get('faq', 'Beranda::faq');
 $routes->get('kebijakan-privasi', 'Beranda::page/kebijakan-privasi');
