@@ -130,7 +130,7 @@
     </div>
 
     <div class="col-xl-5">
-        <div class="card border-0 shadow-sm rounded-4 admin-hint-card mb-4">
+        <!-- <div class="card border-0 shadow-sm rounded-4 admin-hint-card mb-4">
             <div class="card-body p-4">
                 <h2 class="h6 fw-bold mb-3 d-flex align-items-center gap-2">
                     <i class="bi bi-shield-check text-primary"></i>Keamanan
@@ -140,7 +140,7 @@
                     Gunakan sandi panjang dan unik; batasi siapa saja yang memiliki akses ke URL <code class="small">/admin</code>.
                 </p>
             </div>
-        </div>
+        </div> -->
 
         <div class="card border-0 shadow-sm rounded-4 mb-0">
             <div class="card-header bg-transparent border-0 pt-4 px-4 pb-0">

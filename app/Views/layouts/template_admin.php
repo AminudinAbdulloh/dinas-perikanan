@@ -83,6 +83,8 @@
                 <?= $sidebarNav('konten-alur-informasi', 'Alur Informasi Publik', base_url('admin/konten/alur-informasi'), 'bi-signpost-split') ?>
                 <?= $sidebarNav('konten-permohonan-informasi', 'Permohonan Informasi', base_url('admin/konten/permohonan-informasi'), 'bi-envelope-paper') ?>
                 <?= $sidebarNav('konten-keberatan-informasi', 'Keberatan Informasi', base_url('admin/konten/keberatan-informasi'), 'bi-exclamation-triangle') ?>
+                <p class="admin-sidebar-label px-3 mb-2 mt-4">Pengaturan</p>
+                <?= $sidebarNav('manajemen-user', 'Manajemen User', base_url('admin/manajemen-user'), 'bi-person-gear') ?>
             </nav>
             <div class="admin-sidebar-footer border-top p-3 small text-secondary">
                 Semua modul konten situs dan layanan PPID dapat dikelola di sini.
@@ -117,6 +119,8 @@
                     <?= $sidebarNav('konten-alur-informasi', 'Alur Informasi Publik', base_url('admin/konten/alur-informasi'), 'bi-signpost-split') ?>
                     <?= $sidebarNav('konten-permohonan-informasi', 'Permohonan Informasi', base_url('admin/konten/permohonan-informasi'), 'bi-envelope-paper') ?>
                     <?= $sidebarNav('konten-keberatan-informasi', 'Keberatan Informasi', base_url('admin/konten/keberatan-informasi'), 'bi-exclamation-triangle') ?>
+                    <p class="admin-sidebar-label px-3 mb-2 mt-3">Pengaturan</p>
+                    <?= $sidebarNav('manajemen-user', 'Manajemen User', base_url('admin/manajemen-user'), 'bi-person-gear') ?>
                 </nav>
             </div>
         </div>

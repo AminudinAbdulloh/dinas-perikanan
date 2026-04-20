@@ -104,6 +104,13 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->get('konten/kebijakan-privasi', 'KontenKebijakanPrivasi::index');
         $routes->get('konten/kebijakan-privasi/edit', 'KontenKebijakanPrivasi::edit');
         $routes->post('konten/kebijakan-privasi/update', 'KontenKebijakanPrivasi::update', ['filter' => 'csrf']);
+
+        $routes->get('manajemen-user', 'ManajemenUser::index');
+        $routes->get('manajemen-user/tambah', 'ManajemenUser::create');
+        $routes->post('manajemen-user/simpan', 'ManajemenUser::store', ['filter' => 'csrf']);
+        $routes->get('manajemen-user/(:num)/edit', 'ManajemenUser::edit/$1');
+        $routes->post('manajemen-user/(:num)/update', 'ManajemenUser::update/$1', ['filter' => 'csrf']);
+        $routes->post('manajemen-user/(:num)/hapus', 'ManajemenUser::delete/$1', ['filter' => 'csrf']);
     });
 });
 $routes->get('berita', 'Beranda::berita');
