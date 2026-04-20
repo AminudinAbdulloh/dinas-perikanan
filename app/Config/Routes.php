@@ -63,6 +63,20 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->post('konten/galeri-video/(:num)/update', 'KontenGaleriVideo::update/$1', ['filter' => 'csrf']);
         $routes->post('konten/galeri-video/(:num)/hapus', 'KontenGaleriVideo::delete/$1', ['filter' => 'csrf']);
 
+        $routes->get('konten/informasi-publik', 'KontenInformasiPublik::index');
+        $routes->get('konten/informasi-publik/tambah', 'KontenInformasiPublik::create');
+        $routes->post('konten/informasi-publik/simpan', 'KontenInformasiPublik::store', ['filter' => 'csrf']);
+        $routes->get('konten/informasi-publik/(:num)/edit', 'KontenInformasiPublik::edit/$1');
+        $routes->post('konten/informasi-publik/(:num)/update', 'KontenInformasiPublik::update/$1', ['filter' => 'csrf']);
+        $routes->post('konten/informasi-publik/(:num)/hapus', 'KontenInformasiPublik::delete/$1', ['filter' => 'csrf']);
+
+        $routes->get('konten/kategori-publikasi', 'KontenKategoriPublikasi::index');
+        $routes->get('konten/kategori-publikasi/tambah', 'KontenKategoriPublikasi::create');
+        $routes->post('konten/kategori-publikasi/simpan', 'KontenKategoriPublikasi::store', ['filter' => 'csrf']);
+        $routes->get('konten/kategori-publikasi/(:num)/edit', 'KontenKategoriPublikasi::edit/$1');
+        $routes->post('konten/kategori-publikasi/(:num)/update', 'KontenKategoriPublikasi::update/$1', ['filter' => 'csrf']);
+        $routes->post('konten/kategori-publikasi/(:num)/hapus', 'KontenKategoriPublikasi::delete/$1', ['filter' => 'csrf']);
+
         $routes->post('konten/upload-image', 'KontenMedia::uploadImage');
         $routes->post('konten/delete-image', 'KontenMedia::deleteImage');
     });
@@ -100,12 +114,16 @@ $routes->group('layanan', static function ($routes) {
 });
 
 $routes->group('informasi', static function ($routes) {
-    $routes->get('daftar-informasi-publik', 'Beranda::page/informasi/daftar-informasi-publik');
-    $routes->get('informasi-dikecualikan', 'Beranda::page/informasi/informasi-dikecualikan');
-    $routes->get('informasi-berkala', 'Beranda::page/informasi/informasi-berkala');
-    $routes->get('informasi-serta-merta', 'Beranda::page/informasi/informasi-serta-merta');
-    $routes->get('informasi-setiap-saat', 'Beranda::page/informasi/informasi-setiap-saat');
-    // $routes->get('laporan-layanan', 'Beranda::page/informasi/laporan-layanan-informasi');
+    $routes->get('daftar-informasi-publik', 'Beranda::informasiPublik/daftar-informasi-publik');
+    $routes->get('informasi-berkala', 'Beranda::informasiPublik/informasi-berkala');
+    $routes->get('informasi-serta-merta', 'Beranda::informasiPublik/informasi-serta-merta');
+    $routes->get('informasi-setiap-saat', 'Beranda::informasiPublik/informasi-setiap-saat');
+    $routes->get('informasi-dikecualikan', 'Beranda::informasiPublik/informasi-dikecualikan');
+});
+
+$routes->group('publikasi', static function ($routes) {
+    $routes->get('(:segment)', 'Beranda::publikasiList/$1');
+    $routes->get('(:segment)/(:num)', 'Beranda::publikasiDetail/$1/$2');
 });
 
 $routes->get('faq', 'Beranda::page/faq');

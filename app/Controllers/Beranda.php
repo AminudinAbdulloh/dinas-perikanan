@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\BerandaModel;
 use App\Models\NewsArticleModel;
+use App\Models\PublicInformationModel;
+use App\Models\PublicationCategoryModel;
 
 class Beranda extends BaseController
 {
@@ -160,5 +162,179 @@ class Beranda extends BaseController
         ];
 
         return view('public/galeri_video', $data);
+    }
+
+    /**
+     * Informasi Publik – list by category.
+     */
+    public function informasiPublik(?string $categorySlug = null): string
+    {
+        $categoryMap = [
+            'informasi-berkala'      => PublicInformationModel::CATEGORY_BERKALA,
+            'informasi-serta-merta'  => PublicInformationModel::CATEGORY_SERTA_MERTA,
+            'informasi-setiap-saat'  => PublicInformationModel::CATEGORY_SETIAP_SAAT,
+            'informasi-dikecualikan' => PublicInformationModel::CATEGORY_DIKECUALIKAN,
+            'daftar-informasi-publik' => null,
+        ];
+
+        $modelCategory = $categoryMap[$categorySlug] ?? null;
+        $pageTitle = match ($modelCategory) {
+            PublicInformationModel::CATEGORY_BERKALA      => 'Informasi Berkala',
+            PublicInformationModel::CATEGORY_SERTA_MERTA  => 'Informasi Serta Merta',
+            PublicInformationModel::CATEGORY_SETIAP_SAAT  => 'Informasi Setiap Saat',
+            PublicInformationModel::CATEGORY_DIKECUALIKAN => 'Informasi yang Dikecualikan',
+            default => 'Daftar Informasi Publik',
+        };
+
+        $infoItems = [];
+        if (PublicInformationModel::tableReady()) {
+            $infoItems = model(PublicInformationModel::class)->getPublishedForPublic($modelCategory);
+        }
+
+        // Search filter
+        $searchQuery = trim((string) $this->request->getGet('cari'));
+        if ($searchQuery !== '' && $infoItems !== []) {
+            $infoItems = array_values(array_filter($infoItems, static function (array $item) use ($searchQuery): bool {
+                $haystack = strtolower(
+                    ((string) ($item['title'] ?? ''))
+                    . ' ' . ((string) ($item['description'] ?? ''))
+                    . ' ' . ((string) ($item['responsible_party'] ?? ''))
+                );
+                return str_contains($haystack, strtolower($searchQuery));
+            }));
+        }
+
+        $breadcrumbs = [
+            ['label' => 'Beranda', 'href' => base_url('/')],
+            ['label' => 'PPID', 'href' => null],
+        ];
+        if ($modelCategory !== null) {
+            $breadcrumbs[] = ['label' => $pageTitle, 'href' => null];
+        }
+
+        $data = [
+            'menuNavigasi'      => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData'        => $this->berandaModel->getPublicFooterData(),
+            'infoItems'         => $infoItems,
+            'currentCategory'   => $modelCategory,
+            'currentCategorySlug' => $categorySlug,
+            'searchQuery'       => $searchQuery,
+            'pageData'          => [
+                'title'       => $pageTitle,
+                'description' => 'Informasi publik yang disediakan oleh Dinas Kelautan dan Perikanan Provinsi Papua Tengah.',
+                'breadcrumbs' => $breadcrumbs,
+            ],
+        ];
+
+        return view('public/informasi_publik', $data);
+    }
+
+    /**
+     * Publikasi – list documents by sub-category.
+     */
+    public function publikasiList(string $categorySlug): string
+    {
+        $pubCatModel = model(PublicationCategoryModel::class);
+        $pubCategory = $pubCatModel->findBySlug($categorySlug);
+
+        if ($pubCategory === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $pubTypeName = PublicationCategoryModel::publicationTypeLabel((string) ($pubCategory['publication_type'] ?? ''));
+        $catName = (string) ($pubCategory['name'] ?? '');
+
+        $documents = [];
+        if (PublicInformationModel::tableReady()) {
+            $documents = model(PublicInformationModel::class)->getPublishedByPubCategory((int) $pubCategory['id']);
+        }
+
+        // Search filter
+        $searchQuery = trim((string) $this->request->getGet('cari'));
+        if ($searchQuery !== '' && $documents !== []) {
+            $documents = array_values(array_filter($documents, static function (array $doc) use ($searchQuery): bool {
+                $haystack = strtolower(((string) ($doc['title'] ?? '')) . ' ' . ((string) ($doc['description'] ?? '')));
+                return str_contains($haystack, strtolower($searchQuery));
+            }));
+        }
+
+        $allPubCategories = $pubCatModel->getAllForSelect();
+
+        $data = [
+            'menuNavigasi'       => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData'         => $this->berandaModel->getPublicFooterData(),
+            'documents'          => $documents,
+            'currentCategorySlug' => $categorySlug,
+            'allPubCategories'   => $allPubCategories,
+            'searchQuery'        => $searchQuery,
+            'breadcrumbs'        => [
+                ['label' => 'Beranda', 'href' => base_url('/')],
+                ['label' => 'Publikasi', 'href' => null],
+                ['label' => $pubTypeName, 'href' => null],
+                ['label' => $catName, 'href' => null],
+            ],
+            'pageData'           => [
+                'title'       => 'Publikasi',
+                'description' => 'Daftar dokumen publikasi ' . $catName . '.',
+                'breadcrumbs' => [
+                    ['label' => 'Beranda', 'href' => base_url('/')],
+                    ['label' => $catName, 'href' => null],
+                ],
+            ],
+        ];
+
+        return view('public/publikasi_list', $data);
+    }
+
+    /**
+     * Publikasi – detail view of a single document.
+     */
+    public function publikasiDetail(string $categorySlug, int $id): string
+    {
+        $pubCatModel = model(PublicationCategoryModel::class);
+        $pubCategory = $pubCatModel->findBySlug($categorySlug);
+
+        if ($pubCategory === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $pubTypeName = PublicationCategoryModel::publicationTypeLabel((string) ($pubCategory['publication_type'] ?? ''));
+        $catName = (string) ($pubCategory['name'] ?? '');
+
+        $document = null;
+        if (PublicInformationModel::tableReady()) {
+            $document = model(PublicInformationModel::class)->getPublishedById($id);
+        }
+
+        if ($document === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $docTitle = (string) ($document['title'] ?? $catName);
+        $allPubCategories = $pubCatModel->getAllForSelect();
+
+        $data = [
+            'menuNavigasi'       => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData'         => $this->berandaModel->getPublicFooterData(),
+            'document'           => $document,
+            'currentCategorySlug' => $categorySlug,
+            'allPubCategories'   => $allPubCategories,
+            'breadcrumbs'        => [
+                ['label' => 'Beranda', 'href' => base_url('/')],
+                ['label' => 'Publikasi', 'href' => null],
+                ['label' => $catName, 'href' => base_url('publikasi/' . $categorySlug)],
+                ['label' => $docTitle, 'href' => null],
+            ],
+            'pageData'           => [
+                'title'       => $docTitle,
+                'description' => 'Detail dokumen publikasi.',
+                'breadcrumbs' => [
+                    ['label' => 'Beranda', 'href' => base_url('/')],
+                    ['label' => $docTitle, 'href' => null],
+                ],
+            ],
+        ];
+
+        return view('public/publikasi_detail', $data);
     }
 }
