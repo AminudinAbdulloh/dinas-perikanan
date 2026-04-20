@@ -8,6 +8,7 @@ use App\Models\InformationRequestModel;
 use App\Models\NewsArticleModel;
 use App\Models\PublicInformationModel;
 use App\Models\FaqModel;
+use App\Models\PrivacyPolicyModel;
 use App\Models\PublicationCategoryModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -190,6 +191,28 @@ class Beranda extends BaseController
         ];
 
         return view('public/faq', $data);
+    }
+
+    public function kebijakanPrivasi(): string
+    {
+        $model = new PrivacyPolicyModel();
+        $policy = $model->getPolicy();
+
+        $data = [
+            'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData'   => $this->berandaModel->getPublicFooterData(),
+            'policy'       => $policy,
+            'pageData'     => [
+                'title'       => 'Kebijakan Privasi',
+                'description' => 'Aturan mengenai pengumpulan dan perlindungan data pengguna.',
+                'breadcrumbs' => [
+                    ['label' => 'Beranda', 'href' => base_url('/')],
+                    ['label' => 'Kebijakan Privasi', 'href' => null],
+                ],
+            ],
+        ];
+
+        return view('public/kebijakan_privasi', $data);
     }
 
     /**
