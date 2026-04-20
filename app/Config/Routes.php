@@ -42,6 +42,10 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->get('konten/kontak/edit', 'KontenKontak::edit');
         $routes->post('konten/kontak/update', 'KontenKontak::update', ['filter' => 'csrf']);
 
+        $routes->get('konten/alur-informasi', 'KontenAlurInformasi::index');
+        $routes->get('konten/alur-informasi/edit', 'KontenAlurInformasi::edit');
+        $routes->post('konten/alur-informasi/update', 'KontenAlurInformasi::update', ['filter' => 'csrf']);
+
         $routes->get('konten/berita', 'KontenBerita::index');
         $routes->get('konten/berita/tambah', 'KontenBerita::create');
         $routes->post('konten/berita/simpan', 'KontenBerita::store', ['filter' => 'csrf']);

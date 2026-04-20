@@ -125,7 +125,7 @@ Tengah<?= $this->endSection() ?>
                                 <?php endif; ?>
                             </div>
                         </section>
-                    <?php elseif (in_array($pagePath, ['profil/sejarah', 'profil/visi-misi', 'profil/tupoksi', 'profil/struktur', 'profil/pejabat', 'profil/pegawai'], true) && $contentText !== '' && is_html_string($contentText)) : ?>
+                    <?php elseif (in_array($pagePath, ['profil/sejarah', 'profil/visi-misi', 'profil/tupoksi', 'profil/struktur', 'profil/pejabat', 'profil/pegawai', 'layanan/alur-permohonan-informasi'], true) && $contentText !== '' && is_html_string($contentText)) : ?>
                         <article class="content-section public-page-prose">
                             <?= safe_admin_html($contentText) ?>
                         </article>

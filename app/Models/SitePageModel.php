@@ -13,6 +13,7 @@ class SitePageModel extends Model
     public const SLUG_PROFIL_PEJABAT = 'profil/pejabat';
     public const SLUG_PROFIL_PEGAWAI = 'profil/pegawai';
     public const SLUG_PROFIL_KONTAK = 'profil/kontak';
+    public const SLUG_LAYANAN_ALUR_INFORMASI = 'layanan/alur-permohonan-informasi';
 
     protected $table            = 'site_pages';
     protected $primaryKey       = 'id';

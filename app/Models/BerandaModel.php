@@ -265,6 +265,7 @@ class BerandaModel
             'profil/pejabat' => SitePageModel::SLUG_PROFIL_PEJABAT,
             'profil/pegawai' => SitePageModel::SLUG_PROFIL_PEGAWAI,
             'profil/kontak' => SitePageModel::SLUG_PROFIL_KONTAK,
+            'layanan/alur-permohonan-informasi' => SitePageModel::SLUG_LAYANAN_ALUR_INFORMASI,
             default => null,
         };
 
