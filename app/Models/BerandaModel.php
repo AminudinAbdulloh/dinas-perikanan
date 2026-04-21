@@ -105,26 +105,64 @@ class BerandaModel
      */
     public function getPublicFooterData(): array
     {
+        $kontakModel = null;
+        try {
+            if (\Config\Database::connect()->tableExists('kontak')) {
+                $kontakModel = model(KontakModel::class)->first();
+            }
+        } catch (\Throwable $e) {}
+
+        $namaDinas = 'Dinas Kelautan dan Perikanan - Papua Tengah';
+        $alamat = 'Sanoba, Distrik Nabire, Kabupaten Nabire, Papua Tengah 98816';
+        $email = 'dislautkan@papua.go.id';
+        $telepon = '(0123) 456789';
+        $socials = [
+            ['icon' => 'bi-instagram', 'label' => 'Instagram', 'url' => '#'],
+            ['icon' => 'bi-youtube', 'label' => 'YouTube', 'url' => '#'],
+        ];
+
+        if ($kontakModel !== null) {
+            $namaDinas = $kontakModel['nama_dinas'] ?: $namaDinas;
+            $alamat = $kontakModel['alamat'] ?: $alamat;
+            $email = $kontakModel['email'] ?: $email;
+            $telepon = $kontakModel['telepon'] ?: $telepon;
+            
+            if (!empty($kontakModel['socials'])) {
+                $decoded = json_decode($kontakModel['socials'], true);
+                if (is_array($decoded) && count($decoded) > 0) {
+                    $socials = [];
+                    foreach ($decoded as $soc) {
+                        $label = $soc['label'] ?? '';
+                        $url = $soc['url'] ?? '#';
+                        $icon = 'bi-link';
+                        if (stripos($label, 'instagram') !== false) $icon = 'bi-instagram';
+                        elseif (stripos($label, 'youtube') !== false) $icon = 'bi-youtube';
+                        elseif (stripos($label, 'facebook') !== false) $icon = 'bi-facebook';
+                        elseif (stripos($label, 'twitter') !== false || stripos($label, 'x') !== false) $icon = 'bi-twitter-x';
+                        
+                        $socials[] = ['icon' => $icon, 'label' => $label, 'url' => $url];
+                    }
+                }
+            }
+        }
+
         return [
             'agency' => [
                 'icon' => 'bi-building',
-                'name' => 'Dinas Kelautan dan Perikanan - Papua Tengah',
+                'name' => $namaDinas,
                 'contacts' => [
-                    ['icon' => 'bi-geo-alt', 'text' => 'Sanoba, Distrik Nabire, Kabupaten Nabire, Papua Tengah 98816'],
-                    ['icon' => 'bi-envelope', 'text' => 'dislautkan@papua.go.id'],
-                    ['icon' => 'bi-telephone', 'text' => '(0123) 456789'],
+                    ['icon' => 'bi-geo-alt', 'text' => $alamat],
+                    ['icon' => 'bi-envelope', 'text' => $email],
+                    ['icon' => 'bi-telephone', 'text' => $telepon],
                 ],
             ],
             'informationLinks' => [
-                ['label' => 'Berita Terbaru', 'url' => '#'],
-                ['label' => 'Galeri Foto', 'url' => '#'],
-                ['label' => 'Galeri Video', 'url' => '#'],
-                ['label' => 'Pemberitahuan Privasi', 'url' => '#'],
+                ['label' => 'Berita Terbaru', 'url' => base_url('berita')],
+                ['label' => 'Galeri Foto', 'url' => base_url('galeri/foto')],
+                ['label' => 'Galeri Video', 'url' => base_url('galeri/video')],
+                ['label' => 'Pengumuman', 'url' => base_url('pengumuman')],
             ],
-            'socialLinks' => [
-                ['icon' => 'bi-instagram', 'label' => 'Instagram', 'url' => '#'],
-                ['icon' => 'bi-youtube', 'label' => 'YouTube', 'url' => '#'],
-            ],
+            'socialLinks' => $socials,
             'stats' => [
                 ['icon' => 'bi-people', 'label' => 'Pengunjung Hari Ini', 'value' => '6', 'colorClass' => 'stat-color-blue'],
                 ['icon' => 'bi-file-earmark-text', 'label' => 'Views Hari Ini', 'value' => '24', 'colorClass' => 'stat-color-green'],

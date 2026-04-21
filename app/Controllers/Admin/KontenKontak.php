@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\BerandaModel;
 use App\Models\SitePageModel;
+use App\Models\KontakModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class KontenKontak extends BaseController
@@ -74,6 +75,22 @@ class KontenKontak extends BaseController
             $model->update((int) $existing['id'], $data);
         } else {
             $model->insert(array_merge(['slug' => $slug], $data));
+        }
+
+        // Sinkronisasi ke tabel kontak
+        $kontakModel = model(KontakModel::class);
+        $kontakExisting = $kontakModel->first();
+        $kontakData = [
+            'nama_dinas' => $this->request->getPost('title') ?: 'Dinas Kelautan dan Perikanan - Papua Tengah',
+            'alamat'     => $bodyPayload['address'],
+            'email'      => $bodyPayload['email'],
+            'telepon'    => $bodyPayload['phone'],
+            'socials'    => json_encode($bodyPayload['socials']),
+        ];
+        if ($kontakExisting) {
+            $kontakModel->update($kontakExisting['id'], $kontakData);
+        } else {
+            $kontakModel->insert($kontakData);
         }
 
         return redirect()->to(base_url('admin/konten/kontak'))->with('message', 'Halaman Alamat dan Kontak berhasil disimpan.');
