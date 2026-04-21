@@ -76,13 +76,19 @@
                                                 <td class="col-no"><?= $idx + 1 ?></td>
                                                 <td class="col-detail">
                                                     <?php
-                                                    // Detail link goes to publication sub-category page
+                                                    // Detail link handling
+                                                    $customUrl = (string) ($row['custom_url'] ?? '');
                                                     $pubCatSlug = (string) ($row['pub_cat_slug'] ?? '');
-                                                    $detailUrl = $pubCatSlug !== ''
-                                                        ? base_url('publikasi/' . $pubCatSlug)
-                                                        : '#';
+                                                    
+                                                    if ($customUrl !== '') {
+                                                        $detailUrl = $customUrl;
+                                                    } else {
+                                                        $detailUrl = $pubCatSlug !== ''
+                                                            ? base_url('publikasi/' . $pubCatSlug)
+                                                            : '#';
+                                                    }
                                                     ?>
-                                                    <?php if ($pubCatSlug !== '') : ?>
+                                                    <?php if ($customUrl !== '' || $pubCatSlug !== '') : ?>
                                                         <a href="<?= esc($detailUrl) ?>" class="detail-link">Detail</a>
                                                     <?php else : ?>
                                                         <span class="detail-link-muted">—</span>

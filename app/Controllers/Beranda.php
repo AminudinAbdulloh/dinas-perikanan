@@ -315,6 +315,75 @@ class Beranda extends BaseController
             $infoItems = model(PublicInformationModel::class)->getPublishedForPublic($modelCategory);
         }
 
+        if ($modelCategory === PublicInformationModel::CATEGORY_BERKALA) {
+            $profilItems = [
+                [
+                    'custom_url' => base_url('profil/sejarah'),
+                    'title' => 'Sejarah Dinas',
+                    'description' => 'Informasi mengenai sejarah berdirinya Dinas Kelautan dan Perikanan Papua Tengah',
+                    'responsible_party' => 'Dinas Kelautan dan Perikanan',
+                    'time_period' => 'Setiap Saat',
+                    'information_format' => 'Teks / Halaman Web',
+                    'year' => date('Y'),
+                ],
+                [
+                    'custom_url' => base_url('profil/visi-misi'),
+                    'title' => 'Visi dan Misi',
+                    'description' => 'Visi dan Misi Dinas Kelautan dan Perikanan Papua Tengah',
+                    'responsible_party' => 'Dinas Kelautan dan Perikanan',
+                    'time_period' => 'Setiap Saat',
+                    'information_format' => 'Teks / Halaman Web',
+                    'year' => date('Y'),
+                ],
+                [
+                    'custom_url' => base_url('profil/tupoksi'),
+                    'title' => 'Tugas Pokok dan Fungsi',
+                    'description' => 'Tugas pokok dan fungsi Dinas Kelautan dan Perikanan Papua Tengah',
+                    'responsible_party' => 'Dinas Kelautan dan Perikanan',
+                    'time_period' => 'Setiap Saat',
+                    'information_format' => 'Teks / Halaman Web',
+                    'year' => date('Y'),
+                ],
+                [
+                    'custom_url' => base_url('profil/struktur'),
+                    'title' => 'Struktur Organisasi',
+                    'description' => 'Struktur organisasi Dinas Kelautan dan Perikanan Papua Tengah',
+                    'responsible_party' => 'Dinas Kelautan dan Perikanan',
+                    'time_period' => 'Setiap Saat',
+                    'information_format' => 'Bagan / Teks',
+                    'year' => date('Y'),
+                ],
+                [
+                    'custom_url' => base_url('profil/pejabat'),
+                    'title' => 'Profil Pejabat',
+                    'description' => 'Profil pejabat struktural di lingkungan Dinas',
+                    'responsible_party' => 'Bagian Kepegawaian',
+                    'time_period' => 'Setiap Saat',
+                    'information_format' => 'Teks / Foto',
+                    'year' => date('Y'),
+                ],
+                [
+                    'custom_url' => base_url('profil/pegawai'),
+                    'title' => 'Profil Pegawai',
+                    'description' => 'Data pegawai Dinas Kelautan dan Perikanan Papua Tengah',
+                    'responsible_party' => 'Bagian Kepegawaian',
+                    'time_period' => 'Setiap Saat',
+                    'information_format' => 'Teks',
+                    'year' => date('Y'),
+                ],
+                [
+                    'custom_url' => base_url('profil/kontak'),
+                    'title' => 'Alamat dan Kontak',
+                    'description' => 'Informasi alamat kantor, email, dan telepon Dinas',
+                    'responsible_party' => 'Dinas Kelautan dan Perikanan',
+                    'time_period' => 'Setiap Saat',
+                    'information_format' => 'Teks',
+                    'year' => date('Y'),
+                ],
+            ];
+            $infoItems = array_merge($profilItems, $infoItems);
+        }
+
         // Search filter
         $searchQuery = trim((string) $this->request->getGet('cari'));
         if ($searchQuery !== '' && $infoItems !== []) {
