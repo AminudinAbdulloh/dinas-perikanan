@@ -76,8 +76,6 @@
                 <?= $sidebarNav('pengumuman', 'Pengumuman', base_url('admin/pengumuman'), 'bi-megaphone') ?>
                 <?= $sidebarNav('konten-galeri-foto', 'Galeri Foto', base_url('admin/konten/galeri-foto'), 'bi-images') ?>
                 <?= $sidebarNav('konten-galeri-video', 'Galeri Video', base_url('admin/konten/galeri-video'), 'bi-camera-video') ?>
-                <?= $sidebarNav('konten-faq', 'FAQ', base_url('admin/konten/faq'), 'bi-question-circle') ?>
-                <?= $sidebarNav('konten-kebijakan-privasi', 'Kebijakan Privasi', base_url('admin/konten/kebijakan-privasi'), 'bi-shield-lock') ?>
                 <?= $sidebarNav('mod-ppid', 'Informasi Publik', base_url('admin/konten/informasi-publik'), 'bi-journal-text') ?>
                 <p class="admin-sidebar-label px-3 mb-2 mt-4">Layanan PPID</p>
                 <?= $sidebarNav('konten-alur-informasi', 'Alur Informasi Publik', base_url('admin/konten/alur-informasi'), 'bi-signpost-split') ?>
@@ -113,8 +111,6 @@
                     <?= $sidebarNav('pengumuman', 'Pengumuman', base_url('admin/pengumuman'), 'bi-megaphone') ?>
                     <?= $sidebarNav('konten-galeri-foto', 'Galeri Foto', base_url('admin/konten/galeri-foto'), 'bi-images') ?>
                     <?= $sidebarNav('konten-galeri-video', 'Galeri Video', base_url('admin/konten/galeri-video'), 'bi-camera-video') ?>
-                    <?= $sidebarNav('konten-faq', 'FAQ', base_url('admin/konten/faq'), 'bi-question-circle') ?>
-                    <?= $sidebarNav('konten-kebijakan-privasi', 'Kebijakan Privasi', base_url('admin/konten/kebijakan-privasi'), 'bi-shield-lock') ?>
                     <?= $sidebarNav('mod-ppid', 'Informasi Publik', base_url('admin/konten/informasi-publik'), 'bi-journal-text') ?>
                     <p class="admin-sidebar-label px-3 mb-2 mt-3">Layanan PPID</p>
                     <?= $sidebarNav('konten-alur-informasi', 'Alur Informasi Publik', base_url('admin/konten/alur-informasi'), 'bi-signpost-split') ?>

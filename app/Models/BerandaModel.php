@@ -94,15 +94,7 @@ class BerandaModel
                     // ['nama' => 'Laporan Layanan Informasi', 'link' => base_url('informasi/laporan-layanan-informasi')],
                 ],
             ],
-            [
-                'nama' => 'Menu Lainnya',
-                'link' => '#',
-                'aktif' => 'lainnya',
-                'submenu' => [
-                    ['nama' => 'FAQ', 'link' => base_url('faq')],
-                    ['nama' => 'Kebijakan Privasi', 'link' => base_url('kebijakan-privasi')],
-                ],
-            ],
+
         ];
     }
 
@@ -235,14 +227,7 @@ class BerandaModel
                 'title' => 'Pengumuman',
                 'description' => 'Pengumuman resmi dan edaran terkait layanan Dinas Kelautan dan Perikanan Provinsi Papua Tengah.',
             ],
-            'faq' => [
-                'title' => 'FAQ',
-                'description' => 'Pertanyaan yang sering diajukan seputar layanan dinas dan informasi publik.',
-            ],
-            'kebijakan-privasi' => [
-                'title' => 'Kebijakan Privasi',
-                'description' => 'Ketentuan perlindungan data pengguna dan kebijakan penggunaan situs resmi dinas.',
-            ],
+
         ];
 
         if (!isset($pages[$path])) {

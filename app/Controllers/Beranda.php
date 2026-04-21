@@ -7,17 +7,26 @@ use App\Models\InformationObjectionModel;
 use App\Models\InformationRequestModel;
 use App\Models\NewsArticleModel;
 use App\Models\PublicInformationModel;
-use App\Models\FaqModel;
 use App\Models\PengumumanModel;
-use App\Models\PrivacyPolicyModel;
 use App\Models\PublicationCategoryModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Beranda extends BaseController
 {
+    protected BerandaModel $berandaModel;
+
     public function __construct(
-        private readonly BerandaModel $berandaModel = new BerandaModel()
+        ?BerandaModel $berandaModel = null
     ) {
+        $this->berandaModel = $berandaModel ?? new BerandaModel();
+    }
+
+    public function droptables() {
+        $db = \Config\Database::connect();
+        $db->query('DROP TABLE IF EXISTS faqs');
+        $db->query('DROP TABLE IF EXISTS privacy_policies');
+        $db->query("DELETE FROM migrations WHERE class = 'App\\Database\\Migrations\\CreateFaqsTable' OR class = 'App\\Database\\Migrations\\CreatePrivacyPoliciesTable'");
+        return 'Dropped';
     }
 
     public function index(): string
