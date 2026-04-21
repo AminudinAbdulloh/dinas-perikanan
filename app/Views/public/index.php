@@ -14,7 +14,7 @@
 
 <!-- Hero Section -->
 <section class="hero-section d-flex align-items-center">
-    <img src="https://images.unsplash.com/photo-1689505630546-bebf6e52dce2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    <img src="<?= esc($heroBg ?? 'https://images.unsplash.com/photo-1689505630546-bebf6e52dce2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080') ?>"
         alt="Perikanan Papua Tengah" class="hero-bg-img">
     <div class="hero-overlay"></div>
 
@@ -32,8 +32,8 @@
                     Tengah
                 </p>
                 <div class="d-flex flex-wrap gap-3">
-                    <a href="#layanan" class="btn btn-primary btn-lg px-4 py-3">
-                        <i class="bi bi-grid me-2"></i>Layanan Publik
+                    <a href="#berita" class="btn btn-primary btn-lg px-4 py-3">
+                        <i class="bi bi-newspaper me-2"></i>Berita Terkini
                     </a>
                     <a href="<?= base_url('profil/sejarah') ?>" class="btn btn-outline-white btn-lg px-4 py-3">
                         <i class="bi bi-info-circle me-2"></i>Tentang Kami
@@ -44,42 +44,15 @@
     </div>
 </section>
 
-<!-- Layanan Utama -->
-<section id="layanan" class="section-padding">
-    <div class="container px-4 px-lg-2">
-        <div class="text-center mb-5 mx-auto" style="max-width: 700px;">
-            <h2 class="fw-bold display-6 mb-3 text-dark-white">Layanan Utama</h2>
-            <p class="text-muted fs-5">
-                Layanan Informasi Publik Dinas Perikanan dan Kelautan Papua Tengah
-            </p>
-        </div>
-
-        <div class="row g-4">
-            <?php foreach ($services as $service): ?>
-                <div class="col-md-6 col-lg-3">
-                    <a href="<?= base_url(esc($service['link'])) ?>" class="service-card shadow-sm">
-                        <div class="icon-box">
-                            <i class="bi <?= esc($service['icon']) ?> fs-3"></i>
-                        </div>
-                        <h3 class="fw-bold"><?= esc($service['title']) ?></h3>
-                        <p class="service-description"><?= esc($service['description']) ?></p>
-                    </a>
-                </div>
-            <?php endforeach ?>
-        </div>
-    </div>
-</section>
 
 <!-- Berita Terkini -->
 <section id="berita" class="news-section">
     <div class="container px-4 px-lg-2">
-        <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-5">
-            <div>
-                <h2 class="fw-bold display-6 mb-3 text-dark-white">Berita Terkini</h2>
-                <p class="text-muted fs-5 mb-0">Informasi dan kegiatan terbaru Dinas Perikanan dan Kelautan</p>
-            </div>
-            <a href="<?= base_url('berita') ?>" class="link-primary fw-semibold text-decoration-none">
-                Lihat Semua
+        <div class="text-center mb-5 mx-auto" style="max-width: 700px;">
+            <h2 class="fw-bold display-6 mb-3 text-dark-white">Berita Terkini</h2>
+            <p class="text-muted fs-5 mb-4">Informasi dan kegiatan terbaru Dinas Perikanan dan Kelautan</p>
+            <a href="<?= base_url('berita') ?>" class="btn btn-outline-primary rounded-pill px-4">
+                Lihat Semua Berita <i class="bi bi-arrow-right ms-2"></i>
             </a>
         </div>
 
@@ -111,14 +84,11 @@
 <!-- Galeri Foto -->
 <section id="galeri" class="gallery-section">
     <div class="container px-4 px-lg-2">
-        <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-5">
-            <div>
-                <h2 class="fw-bold display-6 mb-3 text-dark-white">Galeri Foto</h2>
-                <p class="text-muted fs-5 mb-0">Dokumentasi kegiatan dan potensi perikanan Papua Tengah</p>
-            </div>
-            <a href="<?= base_url('galeri/foto') ?>" class="gallery-link">
-                <i class="bi bi-image fs-5"></i>
-                Lihat Semua
+        <div class="text-center mb-5 mx-auto" style="max-width: 700px;">
+            <h2 class="fw-bold display-6 mb-3 text-dark-white">Galeri Foto</h2>
+            <p class="text-muted fs-5 mb-4">Dokumentasi kegiatan dan potensi perikanan Papua Tengah</p>
+            <a href="<?= base_url('galeri/foto') ?>" class="btn btn-outline-primary rounded-pill px-4">
+                Lihat Semua Foto <i class="bi bi-arrow-right ms-2"></i>
             </a>
         </div>
 
@@ -143,14 +113,11 @@
 <!-- Video Terbaru -->
 <section id="video" class="video-section">
     <div class="container px-4 px-lg-2">
-        <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-5">
-            <div>
-                <h2 class="fw-bold display-6 mb-3 text-dark-white">Video Terbaru</h2>
-                <p class="text-muted fs-5 mb-0">Video dokumentasi dan profil perikanan Papua Tengah</p>
-            </div>
-            <a href="<?= base_url('galeri/video') ?>" class="video-link">
-                <i class="bi bi-play-fill fs-5"></i>
-                Lihat Semua
+        <div class="text-center mb-5 mx-auto" style="max-width: 700px;">
+            <h2 class="fw-bold display-6 mb-3 text-dark-white">Video Terbaru</h2>
+            <p class="text-muted fs-5 mb-4">Video dokumentasi dan profil perikanan Papua Tengah</p>
+            <a href="<?= base_url('galeri/video') ?>" class="btn btn-outline-primary rounded-pill px-4">
+                Lihat Semua Video <i class="bi bi-arrow-right ms-2"></i>
             </a>
         </div>
 

@@ -22,7 +22,14 @@ class Beranda extends BaseController
 
     public function index(): string
     {
+        $heroBg = null;
+        $setting = model(\App\Models\SitePageModel::class)->findBySlug(\App\Models\SitePageModel::SLUG_PENGATURAN_BERANDA);
+        if ($setting !== null && !empty($setting['body'])) {
+            $heroBg = base_url($setting['body']);
+        }
+
         $data = [
+            'heroBg' => $heroBg,
             'services' => $this->berandaModel->getServices(),
             'newsList' => $this->berandaModel->getNewsList(),
             'galleryPhotos' => $this->berandaModel->getGalleryPhotos(),

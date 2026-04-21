@@ -112,6 +112,9 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->post('pengumuman/(:num)/update', 'Pengumuman::update/$1', ['filter' => 'csrf']);
         $routes->post('pengumuman/(:num)/hapus', 'Pengumuman::delete/$1', ['filter' => 'csrf']);
 
+        $routes->get('pengaturan-beranda', 'PengaturanBeranda::index');
+        $routes->post('pengaturan-beranda/update', 'PengaturanBeranda::update', ['filter' => 'csrf']);
+
         $routes->get('manajemen-user', 'ManajemenUser::index');
         $routes->get('manajemen-user/tambah', 'ManajemenUser::create');
         $routes->post('manajemen-user/simpan', 'ManajemenUser::store', ['filter' => 'csrf']);
