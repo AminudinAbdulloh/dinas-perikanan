@@ -174,22 +174,6 @@ class BerandaModel
                 'title' => 'Alamat dan Kontak',
                 'description' => 'Informasi alamat kantor, email, dan kanal komunikasi resmi layanan dinas.',
             ],
-            // 'publikasi/renstra' => [
-            //     'title' => 'Rencana Strategis (Renstra)',
-            //     'description' => 'Dokumen arah kebijakan jangka menengah sektor kelautan dan perikanan.',
-            // ],
-            // 'publikasi/renja' => [
-            //     'title' => 'Rencana Kerja (Renja)',
-            //     'description' => 'Program kerja tahunan sebagai turunan dari Renstra dan prioritas daerah.',
-            // ],
-            // 'publikasi/lakip' => [
-            //     'title' => 'Laporan Kinerja (LAKIP)',
-            //     'description' => 'Laporan akuntabilitas kinerja instansi pemerintah bidang kelautan dan perikanan.',
-            // ],
-            // 'publikasi/pk' => [
-            //     'title' => 'Perjanjian Kinerja',
-            //     'description' => 'Komitmen target kinerja antara pimpinan unit kerja dan kepala perangkat daerah.',
-            // ],
             'layanan/alur-permohonan-informasi' => [
                 'title' => 'Alur Permohonan Informasi',
                 'description' => 'Langkah-langkah pengajuan permohonan informasi publik secara mudah dan transparan.',
@@ -202,7 +186,6 @@ class BerandaModel
                 'title' => 'Form Keberatan Informasi',
                 'description' => 'Formulir pengajuan keberatan atas layanan informasi publik yang telah diberikan.',
             ],
-            // 'informasi/daftar-informasi-publik' dihapus — sekarang menggunakan route publikasi/daftar-informasi-publik
             'informasi/informasi-dikecualikan' => [
                 'title' => 'Informasi yang Dikecualikan',
                 'description' => 'Informasi yang dikecualikan sesuai ketentuan peraturan perundang-undangan.',

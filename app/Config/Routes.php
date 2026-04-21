@@ -132,13 +132,6 @@ $routes->group('profil', static function ($routes) {
     $routes->get('kontak', 'Beranda::page/profil/kontak');
 });
 
-// $routes->group('publikasi', static function ($routes) {
-//     $routes->get('renstra', 'Beranda::page/publikasi/renstra');
-//     $routes->get('renja', 'Beranda::page/publikasi/renja');
-//     $routes->get('lakip', 'Beranda::page/publikasi/lakip');
-//     $routes->get('pk', 'Beranda::page/publikasi/pk');
-// });
-
 $routes->group('layanan', static function ($routes) {
     $routes->get('alur-permohonan-informasi', 'Beranda::page/layanan/alur-permohonan-informasi');
     $routes->get('form-permohonan-informasi', 'Beranda::page/layanan/form-permohonan-informasi');
