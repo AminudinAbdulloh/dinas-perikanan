@@ -73,7 +73,7 @@
                 <?= $sidebarNav('konten-pegawai', 'Daftar Pegawai', base_url('admin/konten/pegawai'), 'bi-people') ?>
                 <?= $sidebarNav('konten-kontak', 'Alamat dan Kontak', base_url('admin/konten/kontak'), 'bi-geo-alt') ?>
                 <?= $sidebarNav('konten-berita', 'Berita', base_url('admin/konten/berita'), 'bi-newspaper') ?>
-                <?= $sidebarNav('mod-pengumuman', 'Pengumuman', '#', 'bi-megaphone', true) ?>
+                <?= $sidebarNav('pengumuman', 'Pengumuman', base_url('admin/pengumuman'), 'bi-megaphone') ?>
                 <?= $sidebarNav('konten-galeri-foto', 'Galeri Foto', base_url('admin/konten/galeri-foto'), 'bi-images') ?>
                 <?= $sidebarNav('konten-galeri-video', 'Galeri Video', base_url('admin/konten/galeri-video'), 'bi-camera-video') ?>
                 <?= $sidebarNav('konten-faq', 'FAQ', base_url('admin/konten/faq'), 'bi-question-circle') ?>
@@ -109,7 +109,7 @@
                     <?= $sidebarNav('konten-pegawai', 'Daftar Pegawai', base_url('admin/konten/pegawai'), 'bi-people') ?>
                     <?= $sidebarNav('konten-kontak', 'Alamat dan Kontak', base_url('admin/konten/kontak'), 'bi-geo-alt') ?>
                     <?= $sidebarNav('konten-berita', 'Berita', base_url('admin/konten/berita'), 'bi-newspaper') ?>
-                    <?= $sidebarNav('mod-pengumuman', 'Pengumuman', '#', 'bi-megaphone', true) ?>
+                    <?= $sidebarNav('pengumuman', 'Pengumuman', base_url('admin/pengumuman'), 'bi-megaphone') ?>
                     <?= $sidebarNav('konten-galeri-foto', 'Galeri Foto', base_url('admin/konten/galeri-foto'), 'bi-images') ?>
                     <?= $sidebarNav('konten-galeri-video', 'Galeri Video', base_url('admin/konten/galeri-video'), 'bi-camera-video') ?>
                     <?= $sidebarNav('konten-faq', 'FAQ', base_url('admin/konten/faq'), 'bi-question-circle') ?>

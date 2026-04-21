@@ -105,6 +105,13 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->get('konten/kebijakan-privasi/edit', 'KontenKebijakanPrivasi::edit');
         $routes->post('konten/kebijakan-privasi/update', 'KontenKebijakanPrivasi::update', ['filter' => 'csrf']);
 
+        $routes->get('pengumuman', 'Pengumuman::index');
+        $routes->get('pengumuman/tambah', 'Pengumuman::create');
+        $routes->post('pengumuman/simpan', 'Pengumuman::store', ['filter' => 'csrf']);
+        $routes->get('pengumuman/(:num)/edit', 'Pengumuman::edit/$1');
+        $routes->post('pengumuman/(:num)/update', 'Pengumuman::update/$1', ['filter' => 'csrf']);
+        $routes->post('pengumuman/(:num)/hapus', 'Pengumuman::delete/$1', ['filter' => 'csrf']);
+
         $routes->get('manajemen-user', 'ManajemenUser::index');
         $routes->get('manajemen-user/tambah', 'ManajemenUser::create');
         $routes->post('manajemen-user/simpan', 'ManajemenUser::store', ['filter' => 'csrf']);
@@ -115,7 +122,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
 });
 $routes->get('berita', 'Beranda::berita');
 $routes->get('berita/(:num)', 'Beranda::beritaDetail/$1');
-$routes->get('pengumuman', 'Beranda::page/pengumuman');
+$routes->get('pengumuman', 'Beranda::pengumuman');
+$routes->get('pengumuman/(:num)', 'Beranda::pengumumanDetail/$1');
 $routes->group('galeri', static function ($routes) {
     $routes->get('foto', 'Beranda::galeriFoto');
     $routes->get('foto/(:num)', 'Beranda::galeriFotoDetail/$1');

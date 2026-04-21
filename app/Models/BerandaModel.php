@@ -141,7 +141,7 @@ class BerandaModel
                 ['icon' => 'bi-eye', 'label' => 'Total Views', 'value' => '35.232', 'colorClass' => 'stat-color-indigo'],
                 ['icon' => 'bi-clock', 'label' => 'Terakhir Diperbarui', 'value' => '16 Apr 2026', 'colorClass' => 'stat-color-teal', 'small' => true],
             ],
-            'copyright' => '2026 Dislautkan Papua Tengah. All rights reserved.',
+            'copyright' => '2026 Dinas Kelautan dan Perikanan Papua Tengah. All rights reserved.',
         ];
     }
 

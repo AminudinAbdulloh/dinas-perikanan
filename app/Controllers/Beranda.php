@@ -8,6 +8,7 @@ use App\Models\InformationRequestModel;
 use App\Models\NewsArticleModel;
 use App\Models\PublicInformationModel;
 use App\Models\FaqModel;
+use App\Models\PengumumanModel;
 use App\Models\PrivacyPolicyModel;
 use App\Models\PublicationCategoryModel;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -167,6 +168,63 @@ class Beranda extends BaseController
         ];
 
         return view('public/galeri_video', $data);
+    }
+
+    public function pengumuman(): string
+    {
+        $pengumuman = [];
+        try {
+            $pengumuman = model(PengumumanModel::class)->orderBy('id', 'DESC')->findAll();
+        } catch (\Throwable) {
+        }
+
+        $data = [
+            'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData'   => $this->berandaModel->getPublicFooterData(),
+            'pengumuman'   => $pengumuman,
+            'pageData'     => [
+                'title'       => 'Pengumuman',
+                'description' => 'Pengumuman resmi dan edaran terkait layanan Dinas Kelautan dan Perikanan Provinsi Papua Tengah.',
+                'breadcrumbs' => [
+                    ['label' => 'Beranda', 'href' => base_url('/')],
+                    ['label' => 'Pengumuman', 'href' => null],
+                ],
+            ],
+        ];
+
+        return view('public/pengumuman', $data);
+    }
+
+    public function pengumumanDetail(int $id): string
+    {
+        $pengumuman = null;
+        try {
+            $pengumuman = model(PengumumanModel::class)->find($id);
+        } catch (\Throwable) {
+        }
+
+        if ($pengumuman === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $title = (string) ($pengumuman['judul'] ?? 'Detail Pengumuman');
+
+        $data = [
+            'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData'   => $this->berandaModel->getPublicFooterData(),
+            'pengumuman'   => $pengumuman,
+            'pageData'     => [
+                'title'       => $title,
+                'description' => 'Detail pengumuman resmi Dinas Kelautan dan Perikanan Provinsi Papua Tengah.',
+                'breadcrumbs' => [
+                    ['label' => 'Beranda', 'href' => base_url('/')],
+                    ['label' => 'Pengumuman', 'href' => base_url('pengumuman')],
+                    ['label' => $title, 'href' => null],
+                ],
+            ],
+        ];
+
+        return view('public/pengumuman_detail', $data);
     }
 
     public function faq(): string
