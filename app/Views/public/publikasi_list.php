@@ -48,7 +48,7 @@
                     <?php else : ?>
                         <div class="pub-document-list">
                             <?php foreach ($documents as $doc) : ?>
-                                <a href="<?= base_url('publikasi/' . esc($currentCategorySlug ?? '') . '/' . (int) $doc['id']) ?>"
+                                <a href="<?= base_url('publikasi/' . esc($currentTypeSlug ?? '') . '/' . (int) $doc['id']) ?>"
                                     class="pub-doc-card">
                                     <div class="pub-doc-card-body">
                                         <h3 class="pub-doc-title"><?= esc((string) ($doc['title'] ?? '')) ?></h3>
@@ -74,9 +74,9 @@
                     <div class="sidebar-card">
                         <h3 class="sidebar-title">Kategori Publikasi</h3>
                         <nav class="sidebar-nav">
-                            <?php foreach ($allPubCategories ?? [] as $pc) : ?>
+                            <?php foreach ($allPubTypes ?? [] as $pc) : ?>
                                 <a href="<?= base_url('publikasi/' . esc((string) ($pc['slug'] ?? ''))) ?>"
-                                    class="sidebar-link <?= (isset($currentCategorySlug) && $currentCategorySlug === (string) ($pc['slug'] ?? '')) ? 'active' : '' ?>">
+                                    class="sidebar-link <?= (isset($currentTypeSlug) && $currentTypeSlug === (string) ($pc['slug'] ?? '')) ? 'active' : '' ?>">
                                     <?= esc((string) ($pc['name'] ?? '')) ?>
                                 </a>
                             <?php endforeach; ?>

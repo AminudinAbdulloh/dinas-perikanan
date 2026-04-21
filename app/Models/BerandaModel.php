@@ -19,6 +19,21 @@ class BerandaModel
      */
     public function getPublicNavigationMenu(): array
     {
+        $pubTypes = [];
+        try {
+            if (\Config\Database::connect()->tableExists('publication_types')) {
+                $pubTypes = model(\App\Models\PublicationTypeModel::class)->orderBy('sort_order', 'ASC')->findAll();
+            }
+        } catch (\Throwable $e) {}
+
+        $publikasiSubmenu = [];
+        foreach ($pubTypes as $type) {
+            $publikasiSubmenu[] = [
+                'nama' => $type['name'],
+                'link' => base_url('publikasi/' . $type['slug']),
+            ];
+        }
+
         return [
             [
                 'nama' => 'Beranda',
@@ -55,6 +70,12 @@ class BerandaModel
                         ],
                     ],
                 ],
+            ],
+            [
+                'nama' => 'Publikasi',
+                'link' => '#',
+                'aktif' => 'publikasi',
+                'submenu' => count($publikasiSubmenu) > 0 ? $publikasiSubmenu : [['nama' => 'Belum ada publikasi', 'link' => '#']],
             ],
             [
                 'nama' => 'PPID',

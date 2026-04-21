@@ -133,6 +133,22 @@ class PublicInformationModel extends Model
     }
 
     /**
+     * Get published items by publication type.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public function getPublishedByPubType(string $pubTypeSlug): array
+    {
+        return $this->select('public_informations.*, publication_categories.name as pub_cat_name, publication_categories.slug as pub_cat_slug')
+            ->join('publication_categories', 'publication_categories.id = public_informations.publication_category_id', 'left')
+            ->where('public_informations.is_published', 1)
+            ->where('public_informations.publication_type', $pubTypeSlug)
+            ->orderBy('public_informations.year', 'DESC')
+            ->orderBy('public_informations.created_at', 'DESC')
+            ->findAll();
+    }
+
+    /**
      * Get a single published item by ID with category info.
      *
      * @return array<string, mixed>|null

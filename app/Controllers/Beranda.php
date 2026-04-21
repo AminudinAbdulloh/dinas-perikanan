@@ -423,23 +423,22 @@ class Beranda extends BaseController
     }
 
     /**
-     * Publikasi – list documents by sub-category.
+     * Publikasi – list documents by type.
      */
-    public function publikasiList(string $categorySlug): string
+    public function publikasiList(string $typeSlug): string
     {
-        $pubCatModel = model(PublicationCategoryModel::class);
-        $pubCategory = $pubCatModel->findBySlug($categorySlug);
+        $pubTypeModel = model(\App\Models\PublicationTypeModel::class);
+        $pubType = $pubTypeModel->findBySlug($typeSlug);
 
-        if ($pubCategory === null) {
+        if ($pubType === null) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        $pubTypeName = PublicationCategoryModel::publicationTypeLabel((string) ($pubCategory['publication_type'] ?? ''));
-        $catName = (string) ($pubCategory['name'] ?? '');
+        $typeName = (string) ($pubType['name'] ?? '');
 
         $documents = [];
         if (PublicInformationModel::tableReady()) {
-            $documents = model(PublicInformationModel::class)->getPublishedByPubCategory((int) $pubCategory['id']);
+            $documents = model(PublicInformationModel::class)->getPublishedByPubType($typeSlug);
         }
 
         // Search filter
@@ -451,27 +450,26 @@ class Beranda extends BaseController
             }));
         }
 
-        $allPubCategories = $pubCatModel->getAllForSelect();
+        $allPubTypes = $pubTypeModel->getAllForAdmin();
 
         $data = [
             'menuNavigasi'       => $this->berandaModel->getPublicNavigationMenu(),
             'footerData'         => $this->berandaModel->getPublicFooterData(),
             'documents'          => $documents,
-            'currentCategorySlug' => $categorySlug,
-            'allPubCategories'   => $allPubCategories,
+            'currentTypeSlug'    => $typeSlug,
+            'allPubTypes'        => $allPubTypes,
             'searchQuery'        => $searchQuery,
             'breadcrumbs'        => [
                 ['label' => 'Beranda', 'href' => base_url('/')],
                 ['label' => 'Publikasi', 'href' => null],
-                ['label' => $pubTypeName, 'href' => null],
-                ['label' => $catName, 'href' => null],
+                ['label' => $typeName, 'href' => null],
             ],
             'pageData'           => [
                 'title'       => 'Publikasi',
-                'description' => 'Daftar dokumen publikasi ' . $catName . '.',
+                'description' => 'Daftar dokumen publikasi ' . $typeName . '.',
                 'breadcrumbs' => [
                     ['label' => 'Beranda', 'href' => base_url('/')],
-                    ['label' => $catName, 'href' => null],
+                    ['label' => $typeName, 'href' => null],
                 ],
             ],
         ];
@@ -482,17 +480,16 @@ class Beranda extends BaseController
     /**
      * Publikasi – detail view of a single document.
      */
-    public function publikasiDetail(string $categorySlug, int $id): string
+    public function publikasiDetail(string $typeSlug, int $id): string
     {
-        $pubCatModel = model(PublicationCategoryModel::class);
-        $pubCategory = $pubCatModel->findBySlug($categorySlug);
+        $pubTypeModel = model(\App\Models\PublicationTypeModel::class);
+        $pubType = $pubTypeModel->findBySlug($typeSlug);
 
-        if ($pubCategory === null) {
+        if ($pubType === null) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        $pubTypeName = PublicationCategoryModel::publicationTypeLabel((string) ($pubCategory['publication_type'] ?? ''));
-        $catName = (string) ($pubCategory['name'] ?? '');
+        $typeName = (string) ($pubType['name'] ?? '');
 
         $document = null;
         if (PublicInformationModel::tableReady()) {
@@ -503,19 +500,19 @@ class Beranda extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        $docTitle = (string) ($document['title'] ?? $catName);
-        $allPubCategories = $pubCatModel->getAllForSelect();
+        $docTitle = (string) ($document['title'] ?? $typeName);
+        $allPubTypes = $pubTypeModel->getAllForAdmin();
 
         $data = [
             'menuNavigasi'       => $this->berandaModel->getPublicNavigationMenu(),
             'footerData'         => $this->berandaModel->getPublicFooterData(),
             'document'           => $document,
-            'currentCategorySlug' => $categorySlug,
-            'allPubCategories'   => $allPubCategories,
+            'currentTypeSlug'    => $typeSlug,
+            'allPubTypes'        => $allPubTypes,
             'breadcrumbs'        => [
                 ['label' => 'Beranda', 'href' => base_url('/')],
                 ['label' => 'Publikasi', 'href' => null],
-                ['label' => $catName, 'href' => base_url('publikasi/' . $categorySlug)],
+                ['label' => $typeName, 'href' => base_url('publikasi/' . $typeSlug)],
                 ['label' => $docTitle, 'href' => null],
             ],
             'pageData'           => [

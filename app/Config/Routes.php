@@ -91,6 +91,13 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->post('konten/kategori-publikasi/(:num)/update', 'KontenKategoriPublikasi::update/$1', ['filter' => 'csrf']);
         $routes->post('konten/kategori-publikasi/(:num)/hapus', 'KontenKategoriPublikasi::delete/$1', ['filter' => 'csrf']);
 
+        $routes->get('konten/tipe-publikasi', 'KontenTipePublikasi::index');
+        $routes->get('konten/tipe-publikasi/tambah', 'KontenTipePublikasi::create');
+        $routes->post('konten/tipe-publikasi/simpan', 'KontenTipePublikasi::store', ['filter' => 'csrf']);
+        $routes->get('konten/tipe-publikasi/(:num)/edit', 'KontenTipePublikasi::edit/$1');
+        $routes->post('konten/tipe-publikasi/(:num)/update', 'KontenTipePublikasi::update/$1', ['filter' => 'csrf']);
+        $routes->post('konten/tipe-publikasi/(:num)/hapus', 'KontenTipePublikasi::delete/$1', ['filter' => 'csrf']);
+
         $routes->post('konten/upload-image', 'KontenMedia::uploadImage');
         $routes->post('konten/delete-image', 'KontenMedia::deleteImage');
 

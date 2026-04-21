@@ -77,6 +77,8 @@
                 <?= $sidebarNav('konten-galeri-foto', 'Galeri Foto', base_url('admin/konten/galeri-foto'), 'bi-images') ?>
                 <?= $sidebarNav('konten-galeri-video', 'Galeri Video', base_url('admin/konten/galeri-video'), 'bi-camera-video') ?>
                 <?= $sidebarNav('mod-ppid', 'Informasi Publik', base_url('admin/konten/informasi-publik'), 'bi-journal-text') ?>
+                <?= $sidebarNav('tipe-publikasi', 'Kategori Publikasi', base_url('admin/konten/tipe-publikasi'), 'bi-folder') ?>
+                <?= $sidebarNav('kategori-publikasi', 'Sub-Kategori Publikasi', base_url('admin/konten/kategori-publikasi'), 'bi-folder2-open') ?>
                 <p class="admin-sidebar-label px-3 mb-2 mt-4">Layanan PPID</p>
                 <?= $sidebarNav('konten-alur-informasi', 'Alur Informasi Publik', base_url('admin/konten/alur-informasi'), 'bi-signpost-split') ?>
                 <?= $sidebarNav('konten-permohonan-informasi', 'Permohonan Informasi', base_url('admin/konten/permohonan-informasi'), 'bi-envelope-paper') ?>
@@ -112,6 +114,8 @@
                     <?= $sidebarNav('konten-galeri-foto', 'Galeri Foto', base_url('admin/konten/galeri-foto'), 'bi-images') ?>
                     <?= $sidebarNav('konten-galeri-video', 'Galeri Video', base_url('admin/konten/galeri-video'), 'bi-camera-video') ?>
                     <?= $sidebarNav('mod-ppid', 'Informasi Publik', base_url('admin/konten/informasi-publik'), 'bi-journal-text') ?>
+                    <?= $sidebarNav('tipe-publikasi', 'Kategori Publikasi', base_url('admin/konten/tipe-publikasi'), 'bi-folder') ?>
+                    <?= $sidebarNav('kategori-publikasi', 'Sub-Kategori Publikasi', base_url('admin/konten/kategori-publikasi'), 'bi-folder2-open') ?>
                     <p class="admin-sidebar-label px-3 mb-2 mt-3">Layanan PPID</p>
                     <?= $sidebarNav('konten-alur-informasi', 'Alur Informasi Publik', base_url('admin/konten/alur-informasi'), 'bi-signpost-split') ?>
                     <?= $sidebarNav('konten-permohonan-informasi', 'Permohonan Informasi', base_url('admin/konten/permohonan-informasi'), 'bi-envelope-paper') ?>

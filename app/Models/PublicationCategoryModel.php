@@ -27,20 +27,26 @@ class PublicationCategoryModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
-    /** Publication type constants */
-    public const TYPE_PERENCANAAN = 'perencanaan';
-    public const TYPE_KEUANGAN    = 'keuangan';
-    public const TYPE_PELAPORAN   = 'pelaporan';
-
     /**
      * @return array<string, string>
      */
     public static function publicationTypeLabels(): array
     {
+        if (\App\Models\PublicationTypeModel::tableReady()) {
+            $types = model(\App\Models\PublicationTypeModel::class)->orderBy('sort_order', 'ASC')->findAll();
+            $labels = [];
+            foreach ($types as $type) {
+                $labels[(string) $type['slug']] = (string) $type['name'];
+            }
+            if (!empty($labels)) {
+                return $labels;
+            }
+        }
+        
         return [
-            self::TYPE_PERENCANAAN => 'Perencanaan',
-            self::TYPE_KEUANGAN    => 'Keuangan',
-            self::TYPE_PELAPORAN   => 'Pelaporan',
+            'perencanaan' => 'Perencanaan',
+            'keuangan'    => 'Keuangan',
+            'pelaporan'   => 'Pelaporan',
         ];
     }
 
