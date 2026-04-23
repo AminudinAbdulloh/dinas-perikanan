@@ -136,7 +136,7 @@ class Dashboard extends BaseController
 
         // Urutkan gabungan berdasarkan waktu terbaru
         usort($aktivitas, fn($a, $b) => strtotime($b['created_at']) - strtotime($a['created_at']));
-        $aktivitas = array_slice($aktivitas, 0, 15);
+        $aktivitas = array_slice($aktivitas, 0, 7);
 
         // Format label waktu
         $now = time();
