@@ -61,6 +61,39 @@
         font-size: 1.5rem;
     }
 }
+
+/* Dark Mode Styles */
+[data-bs-theme="dark"] .pengumuman-detail-card {
+    background: var(--bs-gray-800);
+    border-color: var(--bs-gray-700);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+[data-bs-theme="dark"] .pengumuman-detail-title,
+[data-bs-theme="dark"] .pengumuman-detail-section h3 {
+    color: var(--bs-light);
+}
+
+[data-bs-theme="dark"] .pengumuman-detail-desc {
+    color: var(--bs-gray-300);
+}
+
+[data-bs-theme="dark"] .pengumuman-detail-section,
+[data-bs-theme="dark"] .pengumuman-detail-card .border-top {
+    border-color: var(--bs-gray-700) !important;
+}
+
+[data-bs-theme="dark"] .table-attachment th {
+    background-color: var(--bs-gray-700);
+    color: var(--bs-light);
+    border-color: var(--bs-gray-600);
+}
+
+[data-bs-theme="dark"] .table-attachment td {
+    background-color: var(--bs-gray-800);
+    color: var(--bs-gray-300);
+    border-color: var(--bs-gray-600);
+}
 </style>
 <?= $this->endSection() ?>
 
@@ -111,11 +144,35 @@
                         <?php if (!empty($pengumuman['berkas'])) : ?>
                             <div class="pengumuman-detail-section">
                                 <h3>Berkas Lampiran</h3>
-                                <div class="mt-3">
-                                    <a href="<?= base_url('uploads/pengumuman/' . $pengumuman['berkas']) ?>" target="_blank" class="btn btn-primary rounded-pill px-4 py-2 d-inline-flex align-items-center">
-                                        <i class="bi bi-download me-2 fs-5"></i>
-                                        <span>Unduh Berkas</span>
-                                    </a>
+                                <div class="table-responsive mt-3">
+                                    <table class="table table-bordered table-attachment align-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Nama Dokumen</th>
+                                                <th style="width: 250px;">Waktu Unggah</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <a href="<?= base_url('uploads/pengumuman/' . $pengumuman['berkas']) ?>" target="_blank" class="text-decoration-none fw-medium text-primary d-flex align-items-center gap-2">
+                                                        <i class="bi bi-file-earmark-pdf fs-4"></i>
+                                                        <span class="text-break"><?= esc($pengumuman['berkas']) ?></span>
+                                                    </a>
+                                                </td>
+                                                <td class="text-secondary">
+                                                    <?php
+                                                        $fullDate = (string) ($pengumuman['created_at'] ?? '');
+                                                        if ($fullDate !== '') {
+                                                            echo date('d/m/Y H:i', strtotime($fullDate)) . ' WIT';
+                                                        } else {
+                                                            echo '-';
+                                                        }
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         <?php endif; ?>

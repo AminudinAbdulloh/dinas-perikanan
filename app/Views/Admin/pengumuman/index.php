@@ -42,7 +42,12 @@
                             </td>
                         </tr>
                     <?php else : ?>
-                        <?php foreach ($pengumuman as $index => $row) : ?>
+                        <?php 
+                        $currentPage = isset($pager) ? $pager->getCurrentPage('admin') : 1;
+                        $perPage = isset($pager) ? $pager->getPerPage('admin') : 10;
+                        $startNo = ($currentPage - 1) * $perPage + 1;
+                        foreach ($pengumuman as $index => $row) : 
+                        ?>
                             <?php
                             $createdAt = (string) ($row['created_at'] ?? '');
                             $dateLabel = '';
@@ -52,7 +57,7 @@
                             ?>
                             <tr>
                                 <td class="ps-4 text-center">
-                                    <span class="text-secondary"><?= $index + 1 ?></span>
+                                    <span class="text-secondary"><?= $startNo + $index ?></span>
                                 </td>
                                 <td>
                                     <span class="fw-medium"><?= esc((string) ($row['judul'] ?? '')) ?></span>

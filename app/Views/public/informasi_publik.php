@@ -73,7 +73,7 @@
                                     <tbody>
                                         <?php foreach ($infoItems as $idx => $row) : ?>
                                             <tr>
-                                                <td class="col-no"><?= $idx + 1 ?></td>
+                                                <td class="col-no"><?= (isset($startNo) ? $startNo : 1) + $idx ?></td>
                                                 <td class="col-detail">
                                                      <?php
                                                     // Detail link handling

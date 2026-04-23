@@ -94,7 +94,7 @@ if (is_array($errs) && $errs !== []) { ?>
             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
             'searchreplace', 'visualblocks', 'code', 'fullscreen',
             'insertdatetime', 'media', 'table', 'help', 'wordcount',
-            'hr', 'pagebreak', 'nonbreaking', 'emoticons',
+            'pagebreak', 'nonbreaking', 'emoticons',
         ].join(' '),
         toolbar: [
             'undo redo | blocks | bold italic underline strikethrough subscript superscript | removeformat removefont',

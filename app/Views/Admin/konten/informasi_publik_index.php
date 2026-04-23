@@ -69,14 +69,19 @@
                             </td>
                         </tr>
                     <?php else : ?>
-                        <?php foreach ($items as $idx => $row) : ?>
+                        <?php 
+                        $currentPage = isset($pager) ? $pager->getCurrentPage('admin') : 1;
+                        $perPage = isset($pager) ? $pager->getPerPage('admin') : 10;
+                        $startNo = ($currentPage - 1) * $perPage + 1;
+                        foreach ($items as $idx => $row) : 
+                        ?>
                             <?php
                             $pub = (int) ($row['is_published'] ?? 0) === 1;
                             $catLabel = \App\Models\PublicInformationModel::categoryLabel((string) ($row['category'] ?? ''));
                             $pubCatName = (string) ($row['pub_cat_name'] ?? '');
                             ?>
                             <tr>
-                                <td class="ps-4 text-secondary small"><?= $idx + 1 ?></td>
+                                <td class="ps-4 text-secondary small"><?= $startNo + $idx ?></td>
                                 <td>
                                     <span class="fw-medium"><?= esc((string) ($row['title'] ?? '')) ?></span>
                                     <?php if (trim((string) ($row['description'] ?? '')) !== '') : ?>

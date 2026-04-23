@@ -60,7 +60,12 @@
                             </td>
                         </tr>
                     <?php else : ?>
-                        <?php foreach ($items as $idx => $row) : ?>
+                        <?php 
+                        $currentPage = isset($pager) ? $pager->getCurrentPage('admin') : 1;
+                        $perPage = isset($pager) ? $pager->getPerPage('admin') : 10;
+                        $startNo = ($currentPage - 1) * $perPage + 1;
+                        foreach ($items as $idx => $row) : 
+                        ?>
                             <?php
                             $status = (string) ($row['status'] ?? 'diterima');
                             $badgeClass = \App\Models\InformationRequestModel::statusBadgeClass($status);
@@ -68,7 +73,7 @@
                             $dateLabel = \App\Models\InformationRequestModel::displayDateFromRow($row);
                             ?>
                             <tr>
-                                <td class="ps-4 text-secondary small"><?= $idx + 1 ?></td>
+                                <td class="ps-4 text-secondary small"><?= $startNo + $idx ?></td>
                                 <td>
                                     <a href="<?= base_url('admin/konten/permohonan-informasi/' . (int) $row['id']) ?>"
                                         class="fw-medium text-decoration-none">

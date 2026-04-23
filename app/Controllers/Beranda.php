@@ -71,6 +71,7 @@ class Beranda extends BaseController
 
     public function berita(): string
     {
+        $newsList = $this->berandaModel->getNewsList(9);
         $pager = null;
         if (NewsArticleModel::tableReady()) {
             $pager = model(NewsArticleModel::class)->pager;
@@ -79,7 +80,7 @@ class Beranda extends BaseController
         $data = [
             'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
             'footerData' => $this->berandaModel->getPublicFooterData(),
-            'newsList' => $this->berandaModel->getNewsList(9),
+            'newsList' => $newsList,
             'pager' => $pager,
             'pageData' => [
                 'title' => 'Berita',
@@ -129,6 +130,7 @@ class Beranda extends BaseController
 
     public function galeriFoto(): string
     {
+        $galleryPhotos = $this->berandaModel->getGalleryPhotos(12);
         $pager = null;
         if (model(\App\Models\GalleryPhotoModel::class)->tableReady()) {
             $pager = model(\App\Models\GalleryPhotoModel::class)->pager;
@@ -137,7 +139,7 @@ class Beranda extends BaseController
         $data = [
             'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
             'footerData' => $this->berandaModel->getPublicFooterData(),
-            'galleryPhotos' => $this->berandaModel->getGalleryPhotos(9),
+            'galleryPhotos' => $galleryPhotos,
             'pager' => $pager,
             'pageData' => [
                 'title' => 'Galeri Foto',
@@ -182,6 +184,7 @@ class Beranda extends BaseController
 
     public function galeriVideo(): string
     {
+        $latestVideos = $this->berandaModel->getLatestVideos(6);
         $pager = null;
         if (model(\App\Models\GalleryVideoModel::class)->tableReady()) {
             $pager = model(\App\Models\GalleryVideoModel::class)->pager;
@@ -190,7 +193,7 @@ class Beranda extends BaseController
         $data = [
             'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
             'footerData' => $this->berandaModel->getPublicFooterData(),
-            'latestVideos' => $this->berandaModel->getLatestVideos(6),
+            'latestVideos' => $latestVideos,
             'pager' => $pager,
             'pageData' => [
                 'title' => 'Galeri Video',
@@ -442,6 +445,7 @@ class Beranda extends BaseController
             'footerData'        => $this->berandaModel->getPublicFooterData(),
             'infoItems'         => $infoItemsPaginated,
             'pagerLinks'        => $pagerLinks,
+            'startNo'           => ($page - 1) * $perPage + 1,
             'currentCategory'   => $modelCategory,
             'currentCategorySlug' => $categorySlug,
             'searchQuery'       => $searchQuery,
@@ -474,6 +478,14 @@ class Beranda extends BaseController
         $documents = [];
         if (PublicInformationModel::tableReady()) {
             $documents = model(PublicInformationModel::class)->getPublishedByPubType($typeSlug);
+        }
+
+        // Sub-category filter
+        $subCatSlug = trim((string) $this->request->getGet('sub'));
+        if ($subCatSlug !== '' && $documents !== []) {
+            $documents = array_values(array_filter($documents, static function (array $doc) use ($subCatSlug): bool {
+                return ((string) ($doc['pub_cat_slug'] ?? '')) === $subCatSlug;
+            }));
         }
 
         // Search filter
@@ -514,6 +526,7 @@ class Beranda extends BaseController
             'pagerLinks'        => $pagerLinks,
             'currentTypeSlug'   => $typeSlug,
             'currentTypeName'   => $typeName,
+            'currentSubSlug'    => $subCatSlug,
             'allPubCategories'  => $allPubCategories,
             'searchQuery'       => $searchQuery,
             'breadcrumbs'       => [

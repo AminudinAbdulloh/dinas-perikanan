@@ -27,7 +27,12 @@
                             <td colspan="5" class="text-center py-4 text-secondary">Belum ada data user.</td>
                         </tr>
                     <?php else : ?>
-                        <?php $no = 1; foreach ($users as $user) : ?>
+                        <?php 
+                        $currentPage = isset($pager) ? $pager->getCurrentPage('admin') : 1;
+                        $perPage = isset($pager) ? $pager->getPerPage('admin') : 10;
+                        $no = ($currentPage - 1) * $perPage + 1;
+                        foreach ($users as $user) : 
+                        ?>
                             <tr>
                                 <td class="px-4 py-3"><?= $no++ ?></td>
                                 <td class="px-4 py-3 fw-medium"><?= esc($user['name']) ?></td>

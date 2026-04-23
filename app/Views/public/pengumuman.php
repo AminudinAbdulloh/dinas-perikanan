@@ -16,7 +16,7 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-10">
                     <?php if (($pengumuman ?? []) === []) : ?>
-                        <div class="info-publik-empty text-center py-5 bg-white rounded-4 border shadow-sm">
+                        <div class="info-publik-empty text-center py-5 bg-body rounded-4 border shadow-sm">
                             <i class="bi bi-megaphone fs-1 text-secondary mb-3 d-inline-block"></i>
                             <h3 class="h4">Belum Ada Pengumuman</h3>
                             <p class="text-secondary">Saat ini tidak ada pengumuman terbaru yang dipublikasikan.</p>
