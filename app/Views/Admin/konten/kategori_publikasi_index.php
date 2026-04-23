@@ -21,57 +21,60 @@
     </a>
 </div>
 
-<?php foreach ($typeLabels as $typeSlug => $typeLabel) : ?>
-    <div class="card border-0 shadow-sm rounded-4 mb-4">
-        <div class="card-header bg-body-tertiary border-0 rounded-top-4 px-4 py-3">
-            <h2 class="h6 fw-bold mb-0">
-                <i class="bi bi-folder2 me-1 text-primary"></i><?= esc($typeLabel) ?>
-            </h2>
-        </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="table-light">
+<div class="card border-0 shadow-sm rounded-4 mb-4">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4" style="width: 50px;">Urutan</th>
+                        <th>Kategori Utama</th>
+                        <th>Sub-Kategori</th>
+                        <th class="d-none d-md-table-cell">Slug</th>
+                        <th class="pe-4 text-end">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (($items ?? []) === []) : ?>
                         <tr>
-                            <th class="ps-4" style="width: 50px;">Urutan</th>
-                            <th>Nama Kategori</th>
-                            <th class="d-none d-md-table-cell">Slug</th>
-                            <th class="pe-4 text-end">Aksi</th>
+                            <td colspan="5" class="px-4 py-4 text-center text-secondary small">
+                                Belum ada sub-kategori publikasi.
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (($grouped[$typeSlug] ?? []) === []) : ?>
+                    <?php else : ?>
+                        <?php foreach ($items as $row) : ?>
+                            <?php $typeSlug = (string) ($row['publication_type'] ?? ''); ?>
                             <tr>
-                                <td colspan="4" class="px-4 py-4 text-center text-secondary small">
-                                    Belum ada kategori untuk <?= esc($typeLabel) ?>.
+                                <td class="ps-4 text-secondary"><?= (int) ($row['sort_order'] ?? 0) ?></td>
+                                <td>
+                                    <span class="badge text-bg-light border text-secondary"><?= esc($typeLabels[$typeSlug] ?? $typeSlug) ?></span>
+                                </td>
+                                <td>
+                                    <span class="fw-medium"><?= esc((string) ($row['name'] ?? '')) ?></span>
+                                </td>
+                                <td class="d-none d-md-table-cell small font-monospace text-secondary">
+                                    <?= esc((string) ($row['slug'] ?? '')) ?>
+                                </td>
+                                <td class="pe-4 text-end text-nowrap">
+                                    <a class="btn btn-sm btn-outline-primary rounded-3"
+                                        href="<?= base_url('admin/konten/kategori-publikasi/' . (int) $row['id'] . '/edit') ?>">Edit</a>
+                                    <form method="post" action="<?= base_url('admin/konten/kategori-publikasi/' . (int) $row['id'] . '/hapus') ?>"
+                                        class="d-inline" onsubmit="return confirm('Hapus kategori ini? Dokumen yang terhubung tidak akan dihapus.');">
+                                        <?= csrf_field() ?>
+                                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-3">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
-                        <?php else : ?>
-                            <?php foreach ($grouped[$typeSlug] as $row) : ?>
-                                <tr>
-                                    <td class="ps-4 text-secondary"><?= (int) ($row['sort_order'] ?? 0) ?></td>
-                                    <td>
-                                        <span class="fw-medium"><?= esc((string) ($row['name'] ?? '')) ?></span>
-                                    </td>
-                                    <td class="d-none d-md-table-cell small font-monospace text-secondary">
-                                        <?= esc((string) ($row['slug'] ?? '')) ?>
-                                    </td>
-                                    <td class="pe-4 text-end text-nowrap">
-                                        <a class="btn btn-sm btn-outline-primary rounded-3"
-                                            href="<?= base_url('admin/konten/kategori-publikasi/' . (int) $row['id'] . '/edit') ?>">Edit</a>
-                                        <form method="post" action="<?= base_url('admin/konten/kategori-publikasi/' . (int) $row['id'] . '/hapus') ?>"
-                                            class="d-inline" onsubmit="return confirm('Hapus kategori ini? Dokumen yang terhubung tidak akan dihapus.');">
-                                            <?= csrf_field() ?>
-                                            <button type="submit" class="btn btn-sm btn-outline-danger rounded-3">Hapus</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
+        <?php if (isset($pager) && $pager !== null): ?>
+            <div class="mt-4 pb-3 d-flex justify-content-center">
+                <?= $pager->links('admin', 'bootstrap_pagination') ?>
+            </div>
+        <?php endif; ?>
     </div>
-<?php endforeach; ?>
+</div>
 <?= $this->endSection() ?>

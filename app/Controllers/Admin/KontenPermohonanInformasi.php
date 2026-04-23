@@ -29,6 +29,7 @@ class KontenPermohonanInformasi extends BaseController
             'items'        => $rows,
             'activeStatus' => $status,
             'statuses'     => InformationRequestModel::statusLabels(),
+            'pager'        => $model->pager,
         ]);
     }
 

@@ -49,6 +49,11 @@
                                 </a>
                             <?php endforeach; ?>
                         </div>
+                        <?php if (isset($pager) && $pager !== null): ?>
+                            <div class="mt-5 d-flex justify-content-center">
+                                <?= $pager->links('public', 'bootstrap_pagination') ?>
+                            </div>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
             </div>

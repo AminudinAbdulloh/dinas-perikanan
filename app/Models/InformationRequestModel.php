@@ -117,7 +117,7 @@ class InformationRequestModel extends Model
      *
      * @return array<int, array<string, mixed>>
      */
-    public function getAllForAdmin(?string $status = null): array
+    public function getAllForAdmin(?string $status = null, int $limit = 10): array
     {
         $builder = $this->orderBy('created_at', 'DESC')->orderBy('id', 'DESC');
 
@@ -125,7 +125,7 @@ class InformationRequestModel extends Model
             $builder->where('status', $status);
         }
 
-        return $builder->findAll();
+        return $builder->paginate($limit, 'admin');
     }
 
     /**

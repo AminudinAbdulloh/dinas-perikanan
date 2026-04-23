@@ -15,12 +15,13 @@ class ManajemenUser extends BaseController
     public function index(): string
     {
         $model = model(AdminUserModel::class);
-        $users = $model->findAll();
+        $users = $model->paginate(10, 'admin');
 
         return view('admin/users/index', [
             'title'    => 'Manajemen User Admin',
             'adminNav' => 'manajemen-user',
             'users'    => $users,
+            'pager'    => $model->pager,
         ]);
     }
 

@@ -86,12 +86,12 @@ class PublicationCategoryModel extends Model
     /**
      * @return array<int, array<string, mixed>>
      */
-    public function getAllForAdmin(): array
+    public function getAllForAdmin(int $limit = 10): array
     {
         return $this->orderBy('publication_type', 'ASC')
             ->orderBy('sort_order', 'ASC')
             ->orderBy('name', 'ASC')
-            ->findAll();
+            ->paginate($limit, 'admin');
     }
 
     /**

@@ -29,6 +29,7 @@ class KontenKeberatanInformasi extends BaseController
             'items'        => $rows,
             'activeStatus' => $status,
             'statuses'     => InformationObjectionModel::statusLabels(),
+            'pager'        => $model->pager,
         ]);
     }
 

@@ -15,12 +15,13 @@ class Pengumuman extends BaseController
     public function index(): string
     {
         $model = model(PengumumanModel::class);
-        $rows  = $model->orderBy('id', 'DESC')->findAll();
+        $rows  = $model->orderBy('id', 'DESC')->paginate(10, 'admin');
 
         return view('admin/pengumuman/index', [
             'title'      => 'Pengumuman',
             'adminNav'   => 'pengumuman',
             'pengumuman' => $rows,
+            'pager'      => $model->pager,
         ]);
     }
 

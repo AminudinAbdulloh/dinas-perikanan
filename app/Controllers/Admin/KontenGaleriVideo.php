@@ -14,12 +14,14 @@ class KontenGaleriVideo extends BaseController
 
     public function index(): string
     {
-        $rows = model(GalleryVideoModel::class)->getAllForAdmin();
+        $model = model(GalleryVideoModel::class);
+        $rows = $model->getAllForAdmin();
 
         return view('admin/konten/galeri_video_index', [
             'title'    => 'Galeri Video',
             'adminNav' => 'konten-galeri-video',
             'videos'   => $rows,
+            'pager'    => $model->pager,
         ]);
     }
 

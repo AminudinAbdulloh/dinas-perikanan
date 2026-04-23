@@ -71,10 +71,16 @@ class Beranda extends BaseController
 
     public function berita(): string
     {
+        $pager = null;
+        if (NewsArticleModel::tableReady()) {
+            $pager = model(NewsArticleModel::class)->pager;
+        }
+
         $data = [
             'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
             'footerData' => $this->berandaModel->getPublicFooterData(),
-            'newsList' => $this->berandaModel->getNewsList(),
+            'newsList' => $this->berandaModel->getNewsList(9),
+            'pager' => $pager,
             'pageData' => [
                 'title' => 'Berita',
                 'description' => 'Informasi dan kegiatan terbaru Dinas Kelautan dan Perikanan Provinsi Papua Tengah.',
@@ -123,10 +129,16 @@ class Beranda extends BaseController
 
     public function galeriFoto(): string
     {
+        $pager = null;
+        if (model(\App\Models\GalleryPhotoModel::class)->tableReady()) {
+            $pager = model(\App\Models\GalleryPhotoModel::class)->pager;
+        }
+
         $data = [
             'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
             'footerData' => $this->berandaModel->getPublicFooterData(),
-            'galleryPhotos' => $this->berandaModel->getGalleryPhotos(),
+            'galleryPhotos' => $this->berandaModel->getGalleryPhotos(9),
+            'pager' => $pager,
             'pageData' => [
                 'title' => 'Galeri Foto',
                 'description' => 'Dokumentasi visual kegiatan dan potensi sektor kelautan dan perikanan Papua Tengah.',
@@ -170,10 +182,16 @@ class Beranda extends BaseController
 
     public function galeriVideo(): string
     {
+        $pager = null;
+        if (model(\App\Models\GalleryVideoModel::class)->tableReady()) {
+            $pager = model(\App\Models\GalleryVideoModel::class)->pager;
+        }
+
         $data = [
             'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
             'footerData' => $this->berandaModel->getPublicFooterData(),
-            'latestVideos' => $this->berandaModel->getLatestVideos(),
+            'latestVideos' => $this->berandaModel->getLatestVideos(6),
+            'pager' => $pager,
             'pageData' => [
                 'title' => 'Galeri Video',
                 'description' => 'Kumpulan video kegiatan, edukasi, dan profil sektor kelautan serta perikanan Papua Tengah.',
@@ -190,8 +208,11 @@ class Beranda extends BaseController
     public function pengumuman(): string
     {
         $pengumuman = [];
+        $pager = null;
         try {
-            $pengumuman = model(PengumumanModel::class)->orderBy('id', 'DESC')->findAll();
+            $model = model(PengumumanModel::class);
+            $pengumuman = $model->orderBy('id', 'DESC')->paginate(10, 'public');
+            $pager = $model->pager;
         } catch (\Throwable) {
         }
 
@@ -199,6 +220,7 @@ class Beranda extends BaseController
             'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
             'footerData'   => $this->berandaModel->getPublicFooterData(),
             'pengumuman'   => $pengumuman,
+            'pager'        => $pager,
             'pageData'     => [
                 'title'       => 'Pengumuman',
                 'description' => 'Pengumuman resmi dan edaran terkait layanan Dinas Kelautan dan Perikanan Provinsi Papua Tengah.',
@@ -406,10 +428,20 @@ class Beranda extends BaseController
             $breadcrumbs[] = ['label' => $pageTitle, 'href' => null];
         }
 
+        $page = (int) ($this->request->getGet('page_public') ?? 1);
+        if ($page < 1) $page = 1;
+        $perPage = 10;
+        $total = count($infoItems);
+        $pager = \Config\Services::pager();
+        $pagerLinks = $pager->makeLinks($page, $perPage, $total, 'bootstrap_pagination', 0, 'public');
+
+        $infoItemsPaginated = array_slice($infoItems, ($page - 1) * $perPage, $perPage);
+
         $data = [
             'menuNavigasi'      => $this->berandaModel->getPublicNavigationMenu(),
             'footerData'        => $this->berandaModel->getPublicFooterData(),
-            'infoItems'         => $infoItems,
+            'infoItems'         => $infoItemsPaginated,
+            'pagerLinks'        => $pagerLinks,
             'currentCategory'   => $modelCategory,
             'currentCategorySlug' => $categorySlug,
             'searchQuery'       => $searchQuery,
@@ -453,6 +485,15 @@ class Beranda extends BaseController
             }));
         }
 
+        $page = (int) ($this->request->getGet('page_public') ?? 1);
+        if ($page < 1) $page = 1;
+        $perPage = 10;
+        $total = count($documents);
+        $pager = \Config\Services::pager();
+        $pagerLinks = $pager->makeLinks($page, $perPage, $total, 'bootstrap_pagination', 0, 'public');
+
+        $documentsPaginated = array_slice($documents, ($page - 1) * $perPage, $perPage);
+
         // Sub-kategori publikasi untuk sidebar (difilter berdasarkan tipe aktif)
         $allPubCategories = [];
         try {
@@ -469,7 +510,8 @@ class Beranda extends BaseController
         $data = [
             'menuNavigasi'      => $this->berandaModel->getPublicNavigationMenu(),
             'footerData'        => $this->berandaModel->getPublicFooterData(),
-            'documents'         => $documents,
+            'documents'         => $documentsPaginated,
+            'pagerLinks'        => $pagerLinks,
             'currentTypeSlug'   => $typeSlug,
             'currentTypeName'   => $typeName,
             'allPubCategories'  => $allPubCategories,

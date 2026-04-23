@@ -66,6 +66,11 @@
                                 </a>
                             <?php endforeach; ?>
                         </div>
+                        <?php if (isset($pagerLinks) && $pagerLinks !== ''): ?>
+                            <div class="mt-4 d-flex justify-content-center">
+                                <?= $pagerLinks ?>
+                            </div>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
 

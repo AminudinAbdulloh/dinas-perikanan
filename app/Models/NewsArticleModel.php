@@ -105,12 +105,12 @@ class NewsArticleModel extends Model
     /**
      * @return array<int, array<string, mixed>>
      */
-    public function getPublishedForPublic(): array
+    public function getPublishedForPublic(int $limit = 9): array
     {
         $rows = $this->where('is_published', 1)
             ->orderBy('created_at', 'DESC')
             ->orderBy('id', 'DESC')
-            ->findAll();
+            ->paginate($limit, 'public');
 
         $out = [];
         foreach ($rows as $row) {
@@ -158,11 +158,11 @@ class NewsArticleModel extends Model
     /**
      * @return array<int, array<string, mixed>>
      */
-    public function getAllForAdmin(): array
+    public function getAllForAdmin(int $limit = 10): array
     {
         return $this->orderBy('created_at', 'DESC')
             ->orderBy('id', 'DESC')
-            ->findAll();
+            ->paginate($limit, 'admin');
     }
 
     public static function formatIndonesianDate(string $ymd): string

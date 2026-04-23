@@ -85,9 +85,10 @@
                                                         // Item profil/statis → gunakan custom_url langsung
                                                         $detailUrl  = $customUrl;
                                                         $hasDetail  = true;
-                                                    } elseif ($pubType !== '' && $itemId > 0) {
+                                                    } elseif (($pubType !== '' || ($row['category'] ?? '') === 'dikecualikan') && $itemId > 0) {
                                                         // Item database → arahkan ke detail dokumen
-                                                        $detailUrl  = base_url('publikasi/' . $pubType . '/' . $itemId);
+                                                        $slugToUse = $pubType !== '' ? $pubType : 'informasi-dikecualikan';
+                                                        $detailUrl  = base_url('publikasi/' . $slugToUse . '/' . $itemId);
                                                         $hasDetail  = true;
                                                     } else {
                                                         $detailUrl  = '#';
@@ -116,6 +117,11 @@
                                 </table>
                             </div>
                         </div>
+                        <?php if (isset($pagerLinks) && $pagerLinks !== ''): ?>
+                            <div class="mt-4 d-flex justify-content-center">
+                                <?= $pagerLinks ?>
+                            </div>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
 

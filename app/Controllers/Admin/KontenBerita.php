@@ -14,12 +14,14 @@ class KontenBerita extends BaseController
 
     public function index(): string
     {
-        $rows = model(NewsArticleModel::class)->getAllForAdmin();
+        $model = model(NewsArticleModel::class);
+        $rows = $model->getAllForAdmin();
 
         return view('admin/konten/berita_index', [
             'title'    => 'Kelola Berita',
             'adminNav' => 'konten-berita',
             'articles' => $rows,
+            'pager'    => $model->pager,
         ]);
     }
 

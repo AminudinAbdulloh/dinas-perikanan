@@ -70,11 +70,11 @@ class GalleryPhotoModel extends Model
     /**
      * @return array<int, array<string, int|string>>
      */
-    public function getForPublic(): array
+    public function getForPublic(int $limit = 9): array
     {
         $rows = $this->orderBy('created_at', 'DESC')
             ->orderBy('id', 'DESC')
-            ->findAll();
+            ->paginate($limit, 'public');
 
         $out = [];
         foreach ($rows as $row) {
@@ -115,11 +115,11 @@ class GalleryPhotoModel extends Model
     /**
      * @return array<int, array<string, mixed>>
      */
-    public function getAllForAdmin(): array
+    public function getAllForAdmin(int $limit = 10): array
     {
         return $this->orderBy('created_at', 'DESC')
             ->orderBy('id', 'DESC')
-            ->findAll();
+            ->paginate($limit, 'admin');
     }
 
     public static function displayDateFromRow(array $row): string

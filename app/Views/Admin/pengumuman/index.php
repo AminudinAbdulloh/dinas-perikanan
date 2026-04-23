@@ -83,6 +83,11 @@
                 </tbody>
             </table>
         </div>
+        <?php if (isset($pager) && $pager !== null): ?>
+            <div class="mt-4 pb-3 d-flex justify-content-center">
+                <?= $pager->links('admin', 'bootstrap_pagination') ?>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 <?= $this->endSection() ?>

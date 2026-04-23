@@ -30,6 +30,7 @@ class KontenInformasiPublik extends BaseController
             'items'          => $rows,
             'activeCategory' => $category,
             'categories'     => PublicInformationModel::categoryLabels(),
+            'pager'          => $model->pager,
         ]);
     }
 

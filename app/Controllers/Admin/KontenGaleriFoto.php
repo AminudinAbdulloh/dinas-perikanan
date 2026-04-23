@@ -14,12 +14,14 @@ class KontenGaleriFoto extends BaseController
 
     public function index(): string
     {
-        $rows = model(GalleryPhotoModel::class)->getAllForAdmin();
+        $model = model(GalleryPhotoModel::class);
+        $rows = $model->getAllForAdmin();
 
         return view('admin/konten/galeri_foto_index', [
             'title'    => 'Galeri Foto',
             'adminNav' => 'konten-galeri-foto',
             'photos'   => $rows,
+            'pager'    => $model->pager,
         ]);
     }
 

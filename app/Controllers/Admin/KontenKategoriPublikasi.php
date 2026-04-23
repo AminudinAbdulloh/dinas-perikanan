@@ -15,12 +15,13 @@ class KontenKategoriPublikasi extends BaseController
     public function index(): string
     {
         $model = model(PublicationCategoryModel::class);
-        $grouped = $model->getAllGroupedByType();
+        $items = $model->getAllForAdmin();
 
         return view('admin/konten/kategori_publikasi_index', [
-            'title'    => 'Kelola Kategori Publikasi',
-            'adminNav' => 'kategori-publikasi',
-            'grouped'  => $grouped,
+            'title'      => 'Kelola Kategori Publikasi',
+            'adminNav'   => 'kategori-publikasi',
+            'items'      => $items,
+            'pager'      => $model->pager,
             'typeLabels' => PublicationCategoryModel::publicationTypeLabels(),
         ]);
     }

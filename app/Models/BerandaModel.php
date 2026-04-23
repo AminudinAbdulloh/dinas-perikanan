@@ -428,10 +428,10 @@ class BerandaModel
      *
      * @return array<int, array<string, int|string>>
      */
-    public function getNewsList(): array
+    public function getNewsList(int $limit = 9): array
     {
         if ($this->isNewsArticlesTablePresent()) {
-            return model(NewsArticleModel::class)->getPublishedForPublic();
+            return model(NewsArticleModel::class)->getPublishedForPublic($limit);
         }
 
         return $this->getStaticNewsListFallback();
@@ -494,10 +494,10 @@ class BerandaModel
      *
      * @return array<int, array<string, int|string>>
      */
-    public function getGalleryPhotos(): array
+    public function getGalleryPhotos(int $limit = 9): array
     {
         if ($this->isGalleryPhotosTablePresent()) {
-            return model(GalleryPhotoModel::class)->getForPublic();
+            return model(GalleryPhotoModel::class)->getForPublic($limit);
         }
 
         return $this->getStaticGalleryPhotosFallback();
@@ -550,10 +550,10 @@ class BerandaModel
      *
      * @return array<int, array<string, int|string>>
      */
-    public function getLatestVideos(): array
+    public function getLatestVideos(int $limit = 6): array
     {
         if ($this->isGalleryVideosTablePresent()) {
-            return model(GalleryVideoModel::class)->getForPublic();
+            return model(GalleryVideoModel::class)->getForPublic($limit);
         }
 
         return $this->getStaticGalleryVideosFallback();

@@ -21,6 +21,7 @@ class KontenTipePublikasi extends BaseController
             'title'    => 'Kelola Kategori Publikasi',
             'adminNav' => 'tipe-publikasi',
             'types'  => $types,
+            'pager'  => $model->pager,
         ]);
     }
 
