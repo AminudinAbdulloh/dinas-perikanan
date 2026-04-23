@@ -19,7 +19,7 @@ class KontenKategoriPublikasi extends BaseController
 
         return view('admin/konten/kategori_publikasi_index', [
             'title'    => 'Kelola Kategori Publikasi',
-            'adminNav' => 'mod-ppid',
+            'adminNav' => 'kategori-publikasi',
             'grouped'  => $grouped,
             'typeLabels' => PublicationCategoryModel::publicationTypeLabels(),
         ]);
@@ -29,7 +29,7 @@ class KontenKategoriPublikasi extends BaseController
     {
         return view('admin/konten/kategori_publikasi_form', [
             'title'      => 'Tambah Kategori Publikasi',
-            'adminNav'   => 'mod-ppid',
+            'adminNav'   => 'kategori-publikasi',
             'item'       => null,
             'formAction' => base_url('admin/konten/kategori-publikasi/simpan'),
             'typeLabels' => PublicationCategoryModel::publicationTypeLabels(),
@@ -63,7 +63,7 @@ class KontenKategoriPublikasi extends BaseController
 
         return view('admin/konten/kategori_publikasi_form', [
             'title'      => 'Edit Kategori Publikasi',
-            'adminNav'   => 'mod-ppid',
+            'adminNav'   => 'kategori-publikasi',
             'item'       => $row,
             'formAction' => base_url('admin/konten/kategori-publikasi/' . $id . '/update'),
             'typeLabels' => PublicationCategoryModel::publicationTypeLabels(),

@@ -35,15 +35,20 @@
 }
 
 .admin-shell {
-    min-height: calc(100vh - 4.5rem);
+    height: calc(100vh - 4.5rem);
+    overflow: hidden;
 }
 
 .admin-sidebar {
     width: 17rem;
-    min-height: calc(100vh - 4.5rem);
+    height: calc(100vh - 4.5rem);
     position: sticky;
     top: 4.5rem;
     align-self: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-slate-200) transparent;
 }
 
 .admin-sidebar-label {
@@ -108,6 +113,69 @@
 
 .admin-main {
     max-width: 1280px;
+    height: calc(100vh - 4.5rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Sidebar dropdown */
+.admin-sidebar-dropdown {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.25s ease;
+}
+
+.admin-sidebar-dropdown.open {
+    max-height: 20rem;
+}
+
+.admin-sidebar-dropdown .admin-sidebar-link {
+    padding-left: 2.5rem;
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+.admin-sidebar-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 0.85rem;
+    margin-bottom: 0.15rem;
+    border-radius: 0.65rem;
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    background: none;
+    border: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    text-align: left;
+}
+
+.admin-sidebar-dropdown-toggle:hover,
+.admin-sidebar-dropdown-toggle.active {
+    background-color: var(--overlay-blue-15);
+    color: var(--color-primary-700);
+}
+
+.admin-sidebar-dropdown-toggle.active {
+    border: 1px solid var(--color-slate-150);
+}
+
+.admin-sidebar-dropdown-toggle .admin-sidebar-caret {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+    font-size: 0.75rem;
+    opacity: 0.6;
+}
+
+.admin-sidebar-dropdown-toggle.open .admin-sidebar-caret {
+    transform: rotate(90deg);
 }
 
 .letter-spacing-tight {
@@ -240,9 +308,14 @@ body.admin-app-body .tox-tinymce {
 [data-bs-theme="dark"] .admin-sidebar {
     background-color: var(--color-slate-850, #1e293b) !important;
     border-color: var(--color-slate-700) !important;
+    scrollbar-color: var(--color-slate-700) transparent;
 }
 
 [data-bs-theme="dark"] .admin-sidebar-link.active {
+    border-color: var(--color-slate-600);
+}
+
+[data-bs-theme="dark"] .admin-sidebar-dropdown-toggle.active {
     border-color: var(--color-slate-600);
 }
 

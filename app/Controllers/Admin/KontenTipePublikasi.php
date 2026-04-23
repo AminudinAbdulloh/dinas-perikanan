@@ -19,7 +19,7 @@ class KontenTipePublikasi extends BaseController
 
         return view('admin/konten/tipe_publikasi_index', [
             'title'    => 'Kelola Kategori Publikasi',
-            'adminNav' => 'mod-ppid',
+            'adminNav' => 'tipe-publikasi',
             'types'  => $types,
         ]);
     }
@@ -28,7 +28,7 @@ class KontenTipePublikasi extends BaseController
     {
         return view('admin/konten/tipe_publikasi_form', [
             'title'      => 'Tambah Kategori Publikasi',
-            'adminNav'   => 'mod-ppid',
+            'adminNav'   => 'tipe-publikasi',
             'item'       => null,
             'formAction' => base_url('admin/konten/tipe-publikasi/simpan'),
         ]);
@@ -60,7 +60,7 @@ class KontenTipePublikasi extends BaseController
 
         return view('admin/konten/tipe_publikasi_form', [
             'title'      => 'Edit Kategori Publikasi',
-            'adminNav'   => 'mod-ppid',
+            'adminNav'   => 'tipe-publikasi',
             'item'       => $row,
             'formAction' => base_url('admin/konten/tipe-publikasi/' . $id . '/update'),
         ]);

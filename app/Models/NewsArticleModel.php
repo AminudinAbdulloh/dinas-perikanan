@@ -56,14 +56,17 @@ class NewsArticleModel extends Model
     }
 
     /**
-     * Satu kali per sesi per artikel: menambah hitungan tayangan pembaca.
+     * Menambah hitungan tayangan pembaca.
+     * Akan bertambah setiap kali halaman dimuat, kecuali oleh bot.
      */
     public function recordReaderVisitIfNewSession(int $id): void
     {
-        $session = session();
-        $key = 'news_view_recorded_' . $id;
-        if ($session->get($key)) {
-            return;
+        $request = \Config\Services::request();
+        if ($request instanceof \CodeIgniter\HTTP\IncomingRequest) {
+            $agent = $request->getUserAgent();
+            if ($agent->isRobot()) {
+                return;
+            }
         }
 
         $row = $this->where('id', $id)->where('is_published', 1)->first();
@@ -72,7 +75,6 @@ class NewsArticleModel extends Model
         }
 
         $this->db->table($this->table)->where('id', $id)->increment('views', 1);
-        $session->set($key, true);
     }
 
     /**
