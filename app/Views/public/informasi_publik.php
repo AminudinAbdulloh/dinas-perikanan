@@ -75,20 +75,26 @@
                                             <tr>
                                                 <td class="col-no"><?= $idx + 1 ?></td>
                                                 <td class="col-detail">
-                                                    <?php
+                                                     <?php
                                                     // Detail link handling
-                                                    $customUrl = (string) ($row['custom_url'] ?? '');
-                                                    $pubCatSlug = (string) ($row['pub_cat_slug'] ?? '');
-                                                    
+                                                    $customUrl   = (string) ($row['custom_url'] ?? '');
+                                                    $pubType     = (string) ($row['publication_type'] ?? '');
+                                                    $itemId      = (int) ($row['id'] ?? 0);
+
                                                     if ($customUrl !== '') {
-                                                        $detailUrl = $customUrl;
+                                                        // Item profil/statis → gunakan custom_url langsung
+                                                        $detailUrl  = $customUrl;
+                                                        $hasDetail  = true;
+                                                    } elseif ($pubType !== '' && $itemId > 0) {
+                                                        // Item database → arahkan ke detail dokumen
+                                                        $detailUrl  = base_url('publikasi/' . $pubType . '/' . $itemId);
+                                                        $hasDetail  = true;
                                                     } else {
-                                                        $detailUrl = $pubCatSlug !== ''
-                                                            ? base_url('publikasi/' . $pubCatSlug)
-                                                            : '#';
+                                                        $detailUrl  = '#';
+                                                        $hasDetail  = false;
                                                     }
                                                     ?>
-                                                    <?php if ($customUrl !== '' || $pubCatSlug !== '') : ?>
+                                                    <?php if ($hasDetail) : ?>
                                                         <a href="<?= esc($detailUrl) ?>" class="detail-link">Detail</a>
                                                     <?php else : ?>
                                                         <span class="detail-link-muted">—</span>

@@ -99,17 +99,23 @@
                     </div>
                 </div>
 
-                <!-- Sidebar: Kategori Publikasi -->
+                <!-- Sidebar: Sub-Kategori Publikasi -->
                 <aside class="info-publik-sidebar">
                     <div class="sidebar-card">
                         <h3 class="sidebar-title">Kategori Publikasi</h3>
                         <nav class="sidebar-nav">
-                            <?php foreach ($allPubTypes ?? [] as $pc) : ?>
-                                <a href="<?= base_url('publikasi/' . esc((string) ($pc['slug'] ?? ''))) ?>"
-                                    class="sidebar-link <?= (isset($currentTypeSlug) && $currentTypeSlug === (string) ($pc['slug'] ?? '')) ? 'active' : '' ?>">
-                                    <?= esc((string) ($pc['name'] ?? '')) ?>
-                                </a>
-                            <?php endforeach; ?>
+                            <?php if (($allPubCategories ?? []) !== []) : ?>
+                                <?php foreach ($allPubCategories as $pc) : ?>
+                                    <?php $isActive = (isset($currentPubCategoryId) && $currentPubCategoryId > 0 && $currentPubCategoryId === (int) ($pc['id'] ?? 0)); ?>
+                                    <a href="<?= base_url('publikasi/' . esc($currentTypeSlug ?? '') . '?sub=' . esc((string) ($pc['slug'] ?? ''))) ?>"
+                                        class="sidebar-link <?= $isActive ? 'active' : '' ?>">
+                                        <i class="bi bi-folder<?= $isActive ? '-fill' : '' ?>"></i>
+                                        <?= esc((string) ($pc['name'] ?? '')) ?>
+                                    </a>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <p class="sidebar-empty-note">Belum ada sub-kategori.</p>
+                            <?php endif; ?>
                         </nav>
                     </div>
                 </aside>
