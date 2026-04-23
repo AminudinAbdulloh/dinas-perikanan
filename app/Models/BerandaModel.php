@@ -167,6 +167,28 @@ class BerandaModel
             }
         }
 
+        $stats = [
+            ['icon' => 'bi-people', 'label' => 'Pengunjung Hari Ini', 'value' => '0', 'colorClass' => 'stat-color-blue'],
+            ['icon' => 'bi-file-earmark-text', 'label' => 'Tayangan Hari Ini', 'value' => '0', 'colorClass' => 'stat-color-green'],
+            ['icon' => 'bi-people-fill', 'label' => 'Pengunjung 7 Hari', 'value' => '0', 'colorClass' => 'stat-color-amber'],
+            ['icon' => 'bi-bar-chart-line', 'label' => 'Total Pengunjung', 'value' => '0', 'colorClass' => 'stat-color-purple'],
+            ['icon' => 'bi-eye', 'label' => 'Total Tayangan', 'value' => '0', 'colorClass' => 'stat-color-indigo'],
+            ['icon' => 'bi-clock', 'label' => 'Terakhir Diperbarui', 'value' => date('d M Y'), 'colorClass' => 'stat-color-teal', 'small' => true],
+        ];
+
+        if (class_exists(\App\Models\VisitorModel::class) && \App\Models\VisitorModel::tableReady()) {
+            $visitorModel = new \App\Models\VisitorModel();
+            $stats[0]['value'] = number_format($visitorModel->getTodayVisitors(), 0, ',', '.');
+            $stats[2]['value'] = number_format($visitorModel->get7DaysVisitors(), 0, ',', '.');
+            $stats[3]['value'] = number_format($visitorModel->getTotalVisitors(), 0, ',', '.');
+        }
+
+        if (class_exists(\App\Models\PageViewModel::class) && \App\Models\PageViewModel::tableReady()) {
+            $pageViewModel = new \App\Models\PageViewModel();
+            $stats[1]['value'] = number_format($pageViewModel->getTodayViews(), 0, ',', '.');
+            $stats[4]['value'] = number_format($pageViewModel->getTotalViews(), 0, ',', '.');
+        }
+
         return [
             'agency' => [
                 'icon' => 'bi-building',
@@ -184,14 +206,7 @@ class BerandaModel
                 ['label' => 'Pengumuman', 'url' => base_url('pengumuman')],
             ],
             'socialLinks' => $socials,
-            'stats' => [
-                ['icon' => 'bi-people', 'label' => 'Pengunjung Hari Ini', 'value' => '6', 'colorClass' => 'stat-color-blue'],
-                ['icon' => 'bi-file-earmark-text', 'label' => 'Views Hari Ini', 'value' => '24', 'colorClass' => 'stat-color-green'],
-                ['icon' => 'bi-people-fill', 'label' => 'Pengunjung 7 Hari', 'value' => '121', 'colorClass' => 'stat-color-amber'],
-                ['icon' => 'bi-bar-chart-line', 'label' => 'Total Pengunjung', 'value' => '4.350', 'colorClass' => 'stat-color-purple'],
-                ['icon' => 'bi-eye', 'label' => 'Total Views', 'value' => '35.232', 'colorClass' => 'stat-color-indigo'],
-                ['icon' => 'bi-clock', 'label' => 'Terakhir Diperbarui', 'value' => '16 Apr 2026', 'colorClass' => 'stat-color-teal', 'small' => true],
-            ],
+            'stats' => $stats,
             'copyright' => '2026 Dinas Kelautan dan Perikanan Papua Tengah. All rights reserved.',
         ];
     }
