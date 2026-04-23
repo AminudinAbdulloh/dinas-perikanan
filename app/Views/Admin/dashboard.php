@@ -104,33 +104,45 @@
 </div>
 
 <div class="row g-4">
-    <!-- Akses Cepat -->
+    <!-- Aktivitas Terbaru -->
     <div class="col-xl-7">
         <div class="card border-0 shadow-sm rounded-4 mb-4">
-            <div class="card-header bg-transparent border-0 pt-4 px-4 pb-0">
-                <h2 class="h5 fw-bold mb-0">Akses Cepat</h2>
-                <p class="small text-secondary mb-0 mt-1">Navigasi cepat ke modul pengelolaan utama.</p>
-            </div>
-            <div class="card-body p-4">
-                <div class="row g-3">
-                    <?php foreach ($quickLinks as $link) : ?>
-                        <div class="col-md-6">
-                            <a href="<?= esc($link['href'], 'attr') ?>"
-                                class="admin-quick-link card h-100 border rounded-4 text-decoration-none text-body">
-                                <div class="card-body p-3 d-flex align-items-center gap-3">
-                                    <span class="admin-quick-icon rounded-3 d-inline-flex align-items-center justify-content-center flex-shrink-0">
-                                        <i class="bi <?= esc($link['icon'], 'attr') ?> fs-5 text-primary"></i>
-                                    </span>
-                                    <div class="min-w-0">
-                                        <span class="fw-semibold d-block text-truncate"><?= esc($link['label']) ?></span>
-                                        <span class="small text-secondary"><?= esc($link['description']) ?></span>
-                                    </div>
-                                    <i class="bi bi-chevron-right text-secondary small ms-auto flex-shrink-0"></i>
-                                </div>
-                            </a>
-                        </div>
-                    <?php endforeach; ?>
+            <div class="card-header bg-transparent border-0 pt-4 px-4 pb-0 d-flex align-items-center justify-content-between">
+                <div>
+                    <h2 class="h5 fw-bold mb-0">
+                        <i class="bi bi-activity text-primary me-2 fs-6"></i>Aktivitas Terbaru
+                    </h2>
+                    <p class="small text-secondary mb-0 mt-1">Konten yang baru ditambahkan atau diperbarui.</p>
                 </div>
+            </div>
+            <div class="card-body px-4 pb-4 pt-3">
+                <?php if (empty($aktivitasTerbaru)) : ?>
+                    <div class="text-center py-5">
+                        <i class="bi bi-inbox text-secondary fs-1 d-block mb-2"></i>
+                        <p class="text-secondary small mb-0">Belum ada aktivitas konten.</p>
+                    </div>
+                <?php else : ?>
+                    <ul class="list-unstyled mb-0 dashboard-activity-feed">
+                        <?php foreach ($aktivitasTerbaru as $item) : ?>
+                            <li class="d-flex gap-3 pb-3 mb-3 border-bottom border-light-subtle">
+                                <span class="dashboard-activity-icon rounded-3 d-inline-flex align-items-center justify-content-center flex-shrink-0"
+                                      style="background:<?= esc($item['color_bg']) ?>; color:<?= esc($item['color']) ?>; width:38px; height:38px;">
+                                    <i class="bi <?= esc($item['icon']) ?> fs-6"></i>
+                                </span>
+                                <div class="min-w-0 flex-grow-1 overflow-hidden">
+                                    <p class="fw-semibold mb-0 text-truncate small"><?= esc($item['title']) ?></p>
+                                    <p class="mb-0 small text-secondary">
+                                        <span class="badge rounded-pill" style="background:<?= esc($item['color_bg']) ?>; color:<?= esc($item['color']) ?>; font-weight:600;"><?= esc($item['type_label']) ?></span>
+                                        &nbsp;<?= esc($item['time_label']) ?>
+                                    </p>
+                                </div>
+                                <?php if (!empty($item['url'])) : ?>
+                                    <a href="<?= esc($item['url'], 'attr') ?>" class="btn btn-sm btn-outline-secondary rounded-3 py-0 px-2 flex-shrink-0 align-self-center">Lihat</a>
+                                <?php endif; ?>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
             </div>
         </div>
     </div>

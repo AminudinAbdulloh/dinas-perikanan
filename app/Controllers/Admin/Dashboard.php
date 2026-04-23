@@ -9,6 +9,7 @@ use App\Models\InformationObjectionModel;
 use App\Models\NewsArticleModel;
 use App\Models\GalleryPhotoModel;
 use App\Models\GalleryVideoModel;
+use App\Models\PengumumanModel;
 
 class Dashboard extends BaseController
 {
@@ -61,69 +62,115 @@ class Dashboard extends BaseController
             ? $objectionModel->whereIn('status', ['diterima', 'diproses'])->orderBy('created_at', 'ASC')->findAll(10)
             : [];
 
+        // ---- Aktivitas Terbaru ----
+        $aktivitas = [];
+
+        // Berita terbaru
+        if (\App\Models\NewsArticleModel::tableReady()) {
+            $beritaList = $newsModel->orderBy('created_at', 'DESC')->findAll(5);
+            foreach ($beritaList as $row) {
+                $aktivitas[] = [
+                    'title'      => $row['title'] ?? '(Tanpa Judul)',
+                    'type_label' => 'Berita',
+                    'icon'       => 'bi-newspaper',
+                    'color'      => '#0d6efd',
+                    'color_bg'   => 'rgba(13,110,253,.12)',
+                    'created_at' => $row['created_at'],
+                    'url'        => base_url('admin/konten/berita'),
+                ];
+            }
+        }
+
+        // Galeri foto terbaru
+        if (\App\Models\GalleryPhotoModel::tableReady()) {
+            $fotoList = $photoModel->orderBy('created_at', 'DESC')->findAll(5);
+            foreach ($fotoList as $row) {
+                $aktivitas[] = [
+                    'title'      => $row['title'] ?? '(Tanpa Judul)',
+                    'type_label' => 'Galeri Foto',
+                    'icon'       => 'bi-images',
+                    'color'      => '#198754',
+                    'color_bg'   => 'rgba(25,135,84,.12)',
+                    'created_at' => $row['created_at'],
+                    'url'        => base_url('admin/konten/galeri-foto'),
+                ];
+            }
+        }
+
+        // Galeri video terbaru
+        if (\App\Models\GalleryVideoModel::tableReady()) {
+            $videoList = $videoModel->orderBy('created_at', 'DESC')->findAll(5);
+            foreach ($videoList as $row) {
+                $aktivitas[] = [
+                    'title'      => $row['title'] ?? '(Tanpa Judul)',
+                    'type_label' => 'Galeri Video',
+                    'icon'       => 'bi-camera-video',
+                    'color'      => '#dc3545',
+                    'color_bg'   => 'rgba(220,53,69,.12)',
+                    'created_at' => $row['created_at'],
+                    'url'        => base_url('admin/konten/galeri-video'),
+                ];
+            }
+        }
+
+        // Pengumuman terbaru
+        if (class_exists(PengumumanModel::class)) {
+            try {
+                $pengumumanModel = new PengumumanModel();
+                $pengumumanList  = $pengumumanModel->orderBy('created_at', 'DESC')->findAll(5);
+                foreach ($pengumumanList as $row) {
+                    $aktivitas[] = [
+                        'title'      => $row['judul'] ?? $row['title'] ?? '(Tanpa Judul)',
+                        'type_label' => 'Pengumuman',
+                        'icon'       => 'bi-megaphone',
+                        'color'      => '#fd7e14',
+                        'color_bg'   => 'rgba(253,126,20,.12)',
+                        'created_at' => $row['created_at'],
+                        'url'        => base_url('admin/pengumuman'),
+                    ];
+                }
+            } catch (\Throwable $e) {
+                // tabel belum siap, lewati
+            }
+        }
+
+        // Urutkan gabungan berdasarkan waktu terbaru
+        usort($aktivitas, fn($a, $b) => strtotime($b['created_at']) - strtotime($a['created_at']));
+        $aktivitas = array_slice($aktivitas, 0, 15);
+
+        // Format label waktu
+        $now = time();
+        foreach ($aktivitas as &$item) {
+            $ts   = strtotime($item['created_at']);
+            $diff = $now - $ts;
+            if ($diff < 60) {
+                $item['time_label'] = 'Baru saja';
+            } elseif ($diff < 3600) {
+                $item['time_label'] = floor($diff / 60) . ' menit lalu';
+            } elseif ($diff < 86400) {
+                $item['time_label'] = floor($diff / 3600) . ' jam lalu';
+            } elseif ($diff < 604800) {
+                $item['time_label'] = floor($diff / 86400) . ' hari lalu';
+            } else {
+                $item['time_label'] = date('d M Y', $ts);
+            }
+        }
+        unset($item);
+
         return view('admin/dashboard', [
-            'title'    => 'Dashboard Admin',
-            'adminNav' => 'dashboard',
-            'stats'    => [
-                'permohonan_masuk'      => $permohonanMasuk,
-                'keberatan_aktif'       => $keberatanAktif,
-                'permohonan_bulan_ini'  => $permohonanBulanIni,
-                'berita'                => $totalBerita,
-                'galeri_foto'           => $totalGaleriFoto,
-                'galeri_video'          => $totalGaleriVideo,
+            'title'              => 'Dashboard Admin',
+            'adminNav'           => 'dashboard',
+            'stats'              => [
+                'permohonan_masuk'     => $permohonanMasuk,
+                'keberatan_aktif'      => $keberatanAktif,
+                'permohonan_bulan_ini' => $permohonanBulanIni,
+                'berita'               => $totalBerita,
+                'galeri_foto'          => $totalGaleriFoto,
+                'galeri_video'         => $totalGaleriVideo,
             ],
-            'antrianPermohonan' => $antrianPermohonan,
-            'antrianKeberatan'  => $antrianKeberatan,
-            'quickLinks' => [
-                [
-                    'label'       => 'Permohonan Informasi',
-                    'description' => 'Kelola permohonan masuk',
-                    'href'        => base_url('admin/konten/permohonan-informasi'),
-                    'icon'        => 'bi-envelope-paper',
-                ],
-                [
-                    'label'       => 'Keberatan Informasi',
-                    'description' => 'Tindak keberatan aktif',
-                    'href'        => base_url('admin/konten/keberatan-informasi'),
-                    'icon'        => 'bi-exclamation-triangle',
-                ],
-                [
-                    'label'       => 'Kelola Berita',
-                    'description' => 'Tambah dan edit artikel',
-                    'href'        => base_url('admin/konten/berita'),
-                    'icon'        => 'bi-pencil-square',
-                ],
-                [
-                    'label'       => 'Galeri Foto',
-                    'description' => 'Unggah dan urutkan album',
-                    'href'        => base_url('admin/konten/galeri-foto'),
-                    'icon'        => 'bi-image',
-                ],
-                [
-                    'label'       => 'Galeri Video',
-                    'description' => 'Daftar video kegiatan',
-                    'href'        => base_url('admin/konten/galeri-video'),
-                    'icon'        => 'bi-collection-play',
-                ],
-                [
-                    'label'       => 'Pengumuman',
-                    'description' => 'Kelola pengumuman resmi',
-                    'href'        => base_url('admin/pengumuman'),
-                    'icon'        => 'bi-megaphone',
-                ],
-                [
-                    'label'       => 'Informasi Publik',
-                    'description' => 'Daftar informasi PPID',
-                    'href'        => base_url('admin/konten/informasi-publik'),
-                    'icon'        => 'bi-journal-text',
-                ],
-                [
-                    'label'       => 'Beranda Situs',
-                    'description' => 'Tampilan pengunjung publik',
-                    'href'        => base_url('/'),
-                    'icon'        => 'bi-house-door',
-                ],
-            ],
+            'antrianPermohonan'  => $antrianPermohonan,
+            'antrianKeberatan'   => $antrianKeberatan,
+            'aktivitasTerbaru'   => $aktivitas,
         ]);
     }
 }
