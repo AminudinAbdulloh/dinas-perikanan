@@ -50,7 +50,6 @@ class BerandaModel
                     ['nama' => 'Tugas Pokok dan Fungsi', 'link' => base_url('profil/tupoksi')],
                     ['nama' => 'Struktur Organisasi', 'link' => base_url('profil/struktur')],
                     ['nama' => 'Profil Pejabat Struktural', 'link' => base_url('profil/pejabat')],
-                    ['nama' => 'Daftar Pegawai', 'link' => base_url('profil/pegawai')],
                     ['nama' => 'Alamat dan Kontak', 'link' => base_url('profil/kontak')],
                 ],
             ],
@@ -240,10 +239,6 @@ class BerandaModel
                 'title' => 'Profil Pejabat Struktural',
                 'description' => 'Informasi singkat pejabat struktural dan ruang lingkup tanggung jawabnya.',
             ],
-            'profil/pegawai' => [
-                'title' => 'Daftar Pegawai',
-                'description' => 'Data pegawai berdasarkan unit kerja sebagai bagian dari keterbukaan informasi publik.',
-            ],
             'profil/kontak' => [
                 'title' => 'Alamat dan Kontak',
                 'description' => 'Informasi alamat kantor, email, dan kanal komunikasi resmi layanan dinas.',
@@ -302,7 +297,6 @@ class BerandaModel
             'profil/tupoksi' => SitePageModel::SLUG_PROFIL_TUPOKSI,
             'profil/struktur' => SitePageModel::SLUG_PROFIL_STRUKTUR,
             'profil/pejabat' => SitePageModel::SLUG_PROFIL_PEJABAT,
-            'profil/pegawai' => SitePageModel::SLUG_PROFIL_PEGAWAI,
             'profil/kontak' => SitePageModel::SLUG_PROFIL_KONTAK,
             'layanan/alur-permohonan-informasi' => SitePageModel::SLUG_LAYANAN_ALUR_INFORMASI,
             default => null,

@@ -35,9 +35,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
         $routes->get('konten/pejabat', 'KontenPejabat::index');
         $routes->get('konten/pejabat/edit', 'KontenPejabat::edit');
         $routes->post('konten/pejabat/update', 'KontenPejabat::update', ['filter' => 'csrf']);
-        $routes->get('konten/pegawai', 'KontenPegawai::index');
-        $routes->get('konten/pegawai/edit', 'KontenPegawai::edit');
-        $routes->post('konten/pegawai/update', 'KontenPegawai::update', ['filter' => 'csrf']);
         $routes->get('konten/kontak', 'KontenKontak::index');
         $routes->get('konten/kontak/edit', 'KontenKontak::edit');
         $routes->post('konten/kontak/update', 'KontenKontak::update', ['filter' => 'csrf']);
@@ -135,7 +132,6 @@ $routes->group('profil', static function ($routes) {
     $routes->get('tupoksi', 'Beranda::page/profil/tupoksi');
     $routes->get('struktur', 'Beranda::page/profil/struktur');
     $routes->get('pejabat', 'Beranda::page/profil/pejabat');
-    $routes->get('pegawai', 'Beranda::page/profil/pegawai');
     $routes->get('kontak', 'Beranda::page/profil/kontak');
 });
 

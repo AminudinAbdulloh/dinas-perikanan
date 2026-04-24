@@ -11,7 +11,6 @@ class SitePageModel extends Model
     public const SLUG_PROFIL_TUPOKSI = 'profil/tupoksi';
     public const SLUG_PROFIL_STRUKTUR = 'profil/struktur';
     public const SLUG_PROFIL_PEJABAT = 'profil/pejabat';
-    public const SLUG_PROFIL_PEGAWAI = 'profil/pegawai';
     public const SLUG_PROFIL_KONTAK = 'profil/kontak';
     public const SLUG_LAYANAN_ALUR_INFORMASI = 'layanan/alur-permohonan-informasi';
     public const SLUG_PENGATURAN_BERANDA = 'pengaturan/beranda';

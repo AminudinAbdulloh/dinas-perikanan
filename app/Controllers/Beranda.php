@@ -389,15 +389,6 @@ class Beranda extends BaseController
                     'year' => date('Y'),
                 ],
                 [
-                    'custom_url' => base_url('profil/pegawai'),
-                    'title' => 'Profil Pegawai',
-                    'description' => 'Data pegawai Dinas Kelautan dan Perikanan Papua Tengah',
-                    'responsible_party' => 'Bagian Kepegawaian',
-                    'time_period' => 'Setiap Saat',
-                    'information_format' => 'Teks',
-                    'year' => date('Y'),
-                ],
-                [
                     'custom_url' => base_url('profil/kontak'),
                     'title' => 'Alamat dan Kontak',
                     'description' => 'Informasi alamat kantor, email, dan telepon Dinas',

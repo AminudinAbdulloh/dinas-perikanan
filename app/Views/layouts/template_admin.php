@@ -87,7 +87,6 @@
                 <?= $sidebarNav('konten-tupoksi',  'Tupoksi',             base_url('admin/konten/tupoksi'),   'bi-list-check') ?>
                 <?= $sidebarNav('konten-struktur', 'Struktur Organisasi', base_url('admin/konten/struktur'),  'bi-diagram-3') ?>
                 <?= $sidebarNav('konten-pejabat',  'Profil Pejabat',      base_url('admin/konten/pejabat'),   'bi-person-vcard') ?>
-                <?= $sidebarNav('konten-pegawai',  'Daftar Pegawai',      base_url('admin/konten/pegawai'),   'bi-people') ?>
                 <?= $sidebarNav('konten-kontak',   'Alamat dan Kontak',   base_url('admin/konten/kontak'),    'bi-geo-alt') ?>
 
                 <!-- Informasi -->
@@ -153,7 +152,6 @@
                     <?= $sidebarNav('konten-tupoksi',  'Tupoksi',             base_url('admin/konten/tupoksi'),   'bi-list-check') ?>
                     <?= $sidebarNav('konten-struktur', 'Struktur Organisasi', base_url('admin/konten/struktur'),  'bi-diagram-3') ?>
                     <?= $sidebarNav('konten-pejabat',  'Profil Pejabat',      base_url('admin/konten/pejabat'),   'bi-person-vcard') ?>
-                    <?= $sidebarNav('konten-pegawai',  'Daftar Pegawai',      base_url('admin/konten/pegawai'),   'bi-people') ?>
                     <?= $sidebarNav('konten-kontak',   'Alamat dan Kontak',   base_url('admin/konten/kontak'),    'bi-geo-alt') ?>
 
                     <!-- Informasi -->
