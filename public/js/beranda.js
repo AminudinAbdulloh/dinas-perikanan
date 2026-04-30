@@ -1,67 +1,88 @@
 /**
- * Beranda (Homepage) - Video Player Modal
+ * Beranda (Homepage) Scripts
  *
- * Menangani klik pada kartu video untuk membuka YouTube di dalam modal Bootstrap.
+ * 1. Hero Carousel — animasi konten slide via class .do-anim (no double-fire)
+ * 2. Video Player Modal
  */
 document.addEventListener('DOMContentLoaded', function () {
-    const videoModalEl = document.getElementById('videoPlayerModal');
-    const playerFrame = document.getElementById('youtubePlayerFrame');
-    const modalTitle = document.getElementById('videoPlayerModalLabel');
-    const triggers = document.querySelectorAll('.js-video-trigger');
 
-    if (!videoModalEl || !playerFrame || !modalTitle || !triggers.length) {
-        return;
-    }
+    /* ============================================================
+       1. HERO CAROUSEL
+       ============================================================ */
+    (function () {
+        var carouselEl = document.getElementById('heroCarousel');
+        if (!carouselEl) return;
 
-    if (typeof bootstrap === 'undefined') {
-        console.warn('Bootstrap JS belum dimuat. Video modal tidak akan berfungsi.');
-        return;
-    }
+        /**
+         * Trigger animasi fadeInUp pada .hero-anim-el di slide yang aktif.
+         * Animasi HANYA dikontrol lewat class .do-anim — tidak ada CSS auto-play
+         * di .hero-anim-el, sehingga tidak ada double-animation.
+         */
+        function playSlideAnim() {
+            // Hapus do-anim dari semua element dulu
+            carouselEl.querySelectorAll('.hero-anim-el').forEach(function (el) {
+                el.classList.remove('do-anim');
+            });
 
-    const videoModal = new bootstrap.Modal(videoModalEl);
+            var activeItem = carouselEl.querySelector('.carousel-item.active');
+            if (!activeItem) return;
 
-    /**
-     * Membangun URL embed YouTube dengan parameter autoplay.
-     *
-     * @param {string} youtubeId
-     * @returns {string}
-     */
-    function buildEmbedUrl(youtubeId) {
-        return 'https://www.youtube.com/embed/' + encodeURIComponent(youtubeId) + '?autoplay=1&rel=0';
-    }
+            var animEl = activeItem.querySelector('.hero-anim-el');
+            if (!animEl) return;
 
-    /**
-     * Membuka modal dan memuat video yang dipilih.
-     *
-     * @param {Event} event
-     */
-    function onVideoTriggerClick(event) {
-        event.preventDefault();
+            // Force reflow agar animasi restart dari awal
+            void animEl.offsetWidth;
+            animEl.classList.add('do-anim');
+        }
 
-        const youtubeId = this.dataset.youtubeId;
-        const videoTitle = this.dataset.videoTitle || 'Video';
+        // Animasi slide pertama saat halaman dimuat
+        playSlideAnim();
 
-        if (!youtubeId) {
+        // Animasi ulang setiap kali slide selesai berganti
+        carouselEl.addEventListener('slid.bs.carousel', function () {
+            playSlideAnim();
+        });
+    })();
+
+
+    /* ============================================================
+       2. VIDEO PLAYER MODAL
+       ============================================================ */
+    (function () {
+        var videoModalEl = document.getElementById('videoPlayerModal');
+        var playerFrame  = document.getElementById('youtubePlayerFrame');
+        var modalTitle   = document.getElementById('videoPlayerModalLabel');
+        var triggers     = document.querySelectorAll('.js-video-trigger');
+
+        if (!videoModalEl || !playerFrame || !modalTitle || !triggers.length) return;
+
+        if (typeof bootstrap === 'undefined') {
+            console.warn('Bootstrap JS belum dimuat. Video modal tidak akan berfungsi.');
             return;
         }
 
-        modalTitle.textContent = videoTitle;
-        playerFrame.src = buildEmbedUrl(youtubeId);
+        var videoModal = new bootstrap.Modal(videoModalEl);
 
-        videoModal.show();
-    }
+        function buildEmbedUrl(id) {
+            return 'https://www.youtube.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0';
+        }
 
-    /**
-     * Menghentikan video dan mereset modal saat ditutup.
-     */
-    function onModalHidden() {
-        playerFrame.src = '';
-        modalTitle.textContent = 'Video';
-    }
+        function onTriggerClick(e) {
+            e.preventDefault();
+            var youtubeId = this.dataset.youtubeId;
+            if (!youtubeId) return;
+            modalTitle.textContent = this.dataset.videoTitle || 'Video';
+            playerFrame.src = buildEmbedUrl(youtubeId);
+            videoModal.show();
+        }
 
-    triggers.forEach(function (trigger) {
-        trigger.addEventListener('click', onVideoTriggerClick);
-    });
+        function onModalHidden() {
+            playerFrame.src = '';
+            modalTitle.textContent = 'Video';
+        }
 
-    videoModalEl.addEventListener('hidden.bs.modal', onModalHidden);
+        triggers.forEach(function (t) { t.addEventListener('click', onTriggerClick); });
+        videoModalEl.addEventListener('hidden.bs.modal', onModalHidden);
+    })();
+
 });

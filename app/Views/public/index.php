@@ -13,36 +13,101 @@
 <?= $this->section('content') ?>
 
 <!-- Hero Section -->
-<section class="hero-section d-flex align-items-center">
-    <img src="<?= esc($heroBg ?? 'https://images.unsplash.com/photo-1689505630546-bebf6e52dce2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080') ?>"
-        alt="Perikanan Papua Tengah" class="hero-bg-img">
-    <div class="hero-overlay"></div>
+<?php
+$defaultBg   = $heroBg ?? 'https://images.unsplash.com/photo-1689505630546-bebf6e52dce2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxmaXNoZXJtYW4lMjBvY2VhbiUyMGluZG9uZXNpYXxlbnwxfHx8fDE3NzU4MzcwNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080';
+$slides      = $heroSlides ?? [];
+$hasSlides   = ! empty($slides);
+$totalSlides = $hasSlides ? count($slides) + 1 : 1;
+?>
+<section class="hero-section hero-carousel-wrap" aria-label="Hero Beranda">
+    <div id="heroCarousel" class="carousel slide carousel-fade h-100"
+         data-bs-ride="carousel" data-bs-interval="5000">
 
-    <div class="container px-4 px-lg-2">
-        <div class="row">
-            <div class="col-lg-8 animate-up">
-                <div class="mb-4">
-                    <span class="badge-custom">Pemerintah Provinsi Papua Tengah</span>
-                </div>
-                <h1 class="display-4 fw-bold text-white mb-4">
-                    Dinas Kelautan dan Perikanan Provinsi Papua Tengah
-                </h1>
-                <p class="text-light mb-5 fs-5">
-                    Mengelola dan mengembangkan potensi perikanan dan kelautan untuk kesejahteraan masyarakat Papua
-                    Tengah
-                </p>
-                <div class="d-flex flex-wrap gap-3">
-                    <a href="#berita" class="btn btn-primary btn-lg px-4 py-3">
-                        <i class="bi bi-newspaper me-2"></i>Berita Terkini
-                    </a>
-                    <a href="<?= base_url('profil/sejarah') ?>" class="btn btn-outline-white btn-lg px-4 py-3">
-                        <i class="bi bi-info-circle me-2"></i>Tentang Kami
-                    </a>
+        <div class="carousel-inner h-100">
+
+            <!-- Slide 0: Utama Dinas -->
+            <div class="carousel-item active h-100">
+                <img src="<?= esc($defaultBg) ?>" alt="Perikanan Papua Tengah" class="hero-bg-img">
+                <div class="hero-overlay"></div>
+                <div class="hero-slide-content d-flex align-items-center h-100">
+                    <div class="container px-4 px-lg-2">
+                        <div class="col-lg-8 hero-anim-el">
+                            <div class="mb-4">
+                                <span class="badge-custom">Pemerintah Provinsi Papua Tengah</span>
+                            </div>
+                            <h1 class="display-4 fw-bold text-white mb-4">
+                                Dinas Kelautan dan Perikanan Provinsi Papua Tengah
+                            </h1>
+                            <p class="text-light mb-5 fs-5">
+                                Mengelola dan mengembangkan potensi perikanan dan kelautan untuk kesejahteraan masyarakat Papua Tengah
+                            </p>
+                            <a href="<?= base_url('profil/sejarah') ?>" class="btn btn-primary btn-lg px-4 py-3">
+                                <i class="bi bi-info-circle me-2"></i>Tentang Kami
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Slide 1-3: Berita -->
+            <?php foreach ($slides as $slide) : ?>
+                <?php
+                $sImg     = ! empty($slide['image']) ? $slide['image'] : $defaultBg;
+                $sTitle   = $slide['title'] ?? '';
+                $sId      = (int) ($slide['id'] ?? 0);
+                $sExcerpt = $slide['excerpt'] ?? '';
+                ?>
+                <div class="carousel-item h-100">
+                    <img src="<?= esc($sImg) ?>" alt="<?= esc($sTitle) ?>" class="hero-bg-img">
+                    <div class="hero-overlay hero-overlay-news"></div>
+                    <div class="hero-slide-content d-flex align-items-center h-100">
+                        <div class="container px-4 px-lg-2">
+                            <div class="col-lg-7 hero-anim-el">
+                                <div class="mb-3">
+                                    <span class="badge-custom">
+                                        <i class="bi bi-newspaper me-1"></i>Berita Terkini
+                                    </span>
+                                </div>
+                                <h2 class="hero-news-title fw-bold text-white mb-3"><?= esc($sTitle) ?></h2>
+                                <?php if ($sExcerpt !== '') : ?>
+                                    <p class="hero-news-excerpt text-light mb-4"><?= esc($sExcerpt) ?></p>
+                                <?php endif; ?>
+                                <?php if ($sId > 0) : ?>
+                                    <a href="<?= base_url('berita/' . $sId) ?>" class="btn btn-primary btn-lg px-4 py-3">
+                                        <i class="bi bi-arrow-right me-2"></i>Selengkapnya
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
+
+        <?php if ($hasSlides) : ?>
+            <!-- Tombol panah -->
+            <button class="carousel-control-prev hero-carousel-btn" type="button"
+                    data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Slide sebelumnya">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next hero-carousel-btn" type="button"
+                    data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Slide berikutnya">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+
+            <!-- Indicator bar -->
+            <div class="carousel-indicators hero-carousel-indicators">
+                <?php for ($d = 0; $d < $totalSlides; $d++) : ?>
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="<?= $d ?>"
+                            <?= $d === 0 ? 'class="active" aria-current="true"' : '' ?>
+                            aria-label="Slide <?= $d + 1 ?>"></button>
+                <?php endfor; ?>
+            </div>
+        <?php endif; ?>
     </div>
 </section>
+
+
 
 
 <!-- Berita Terkini -->

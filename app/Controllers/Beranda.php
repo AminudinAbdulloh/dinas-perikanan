@@ -38,18 +38,22 @@ class Beranda extends BaseController
             $heroBg = base_url($setting['body']);
         }
 
+        $newsList = $this->berandaModel->getNewsList(3);
+
         $data = [
-            'heroBg' => $heroBg,
-            'services' => $this->berandaModel->getServices(),
-            'newsList' => $this->berandaModel->getNewsList(3),
+            'heroBg'        => $heroBg,
+            'heroSlides'    => $newsList,
+            'services'      => $this->berandaModel->getServices(),
+            'newsList'      => $newsList,
             'galleryPhotos' => $this->berandaModel->getGalleryPhotos(8),
-            'latestVideos' => $this->berandaModel->getLatestVideos(),
-            'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
-            'footerData' => $this->berandaModel->getPublicFooterData(),
+            'latestVideos'  => $this->berandaModel->getLatestVideos(),
+            'menuNavigasi'  => $this->berandaModel->getPublicNavigationMenu(),
+            'footerData'    => $this->berandaModel->getPublicFooterData(),
         ];
 
         return view('public/index', $data);
     }
+
 
     public function page(string $slug, ?string $subSlug = null): string
     {
