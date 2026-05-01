@@ -1,7 +1,7 @@
 <?php $menuNavigasi = $menuNavigasi ?? []; ?>
 <nav class="navbar navbar-expand-lg bg-white sticky-top">
     <div class="container-fluid px-lg-5">
-        <a class="navbar-brand d-flex align-items-center" href="<?= base_url('/') ?>">
+        <a class="navbar-brand d-flex align-items-center" href="<?= base_url('beranda') ?>">
             <div class="logo-box d-flex align-items-center justify-content-center me-3">
                 <img src="<?= base_url('images/logo_prov_papua_tengah.png') ?>" alt="Logo" class="h-100">
             </div>

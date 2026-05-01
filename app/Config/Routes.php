@@ -5,7 +5,9 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Beranda::index');
+$routes->get('/', 'Beranda::portal');
+$routes->get('beranda', 'Beranda::index');
+
 
 $routes->get('login', static fn () => redirect()->to(base_url('admin/login')));
 

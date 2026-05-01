@@ -30,6 +30,21 @@ class Beranda extends BaseController
         return 'Dropped';
     }
 
+    public function portal(): string
+    {
+        $heroBg  = null;
+        $setting = model(\App\Models\SitePageModel::class)->findBySlug(\App\Models\SitePageModel::SLUG_PENGATURAN_BERANDA);
+        if ($setting !== null && ! empty($setting['body'])) {
+            $heroBg = base_url($setting['body']);
+        }
+
+        return view('public/portal', [
+            'heroBg'       => $heroBg,
+            'footerData'   => $this->berandaModel->getPublicFooterData(),
+            'menuNavigasi' => $this->berandaModel->getPublicNavigationMenu(),
+        ]);
+    }
+
     public function index(): string
     {
         $heroBg = null;
