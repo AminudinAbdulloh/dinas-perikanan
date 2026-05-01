@@ -20,7 +20,7 @@
                     <?php
                     $crumbs = [
                         ['label' => 'BERANDA', 'href' => base_url('/')],
-                        ['label' => 'INFORMASI PUBLIK', 'href' => base_url('informasi/daftar-informasi-publik')],
+                        ['label' => 'INFORMASI PUBLIK', 'href' => base_url('publikasi/pelaporan?sub=daftar-informasi-publik')],
                     ];
                     if (isset($currentCategory) && $currentCategory !== null) {
                         $crumbs[] = ['label' => strtoupper(\App\Models\PublicInformationModel::categoryLabel($currentCategory)), 'href' => null];
@@ -139,7 +139,7 @@
                                 'dikecualikan' => 'informasi-dikecualikan',
                             ];
                             ?>
-                            <a href="<?= base_url('publikasi/daftar-informasi-publik') ?>"
+                            <a href="<?= base_url('publikasi/pelaporan?sub=daftar-informasi-publik') ?>"
                                 class="sidebar-link">
                                 <i class="bi bi-folder2-open"></i>
                                 Daftar Informasi Publik

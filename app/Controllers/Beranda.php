@@ -482,8 +482,11 @@ class Beranda extends BaseController
             // tabel belum siap, lanjut
         }
 
-        // Fallback: humanize slug jika tidak ada di tabel
-        $typeName = (string) ($pubType['name'] ?? ucwords(str_replace('-', ' ', $typeSlug)));
+        if ($pubType === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $typeName = (string) $pubType['name'];
 
         $documents = [];
         if (PublicInformationModel::tableReady()) {

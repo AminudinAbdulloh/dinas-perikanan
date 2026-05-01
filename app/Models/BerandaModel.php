@@ -104,7 +104,7 @@ class BerandaModel
                         'nama' => 'Informasi Publik',
                         'link' => '#',
                         'submenu' => [
-                            ['nama' => 'Daftar Informasi Publik', 'link' => base_url('publikasi/daftar-informasi-publik')],
+                            ['nama' => 'Daftar Informasi Publik', 'link' => base_url('publikasi/pelaporan?sub=daftar-informasi-publik')],
                             ['nama' => 'Informasi Berkala', 'link' => base_url('informasi/informasi-berkala')],
                             ['nama' => 'Informasi Serta Merta', 'link' => base_url('informasi/informasi-serta-merta')],
                             ['nama' => 'Informasi Setiap Saat', 'link' => base_url('informasi/informasi-setiap-saat')],
