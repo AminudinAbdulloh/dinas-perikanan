@@ -37,7 +37,7 @@ class BerandaModel
         return [
             [
                 'nama' => 'Beranda',
-                'link' => base_url('/'),
+                'link' => base_url('/beranda'),
                 'aktif' => 'home',
             ],
             [

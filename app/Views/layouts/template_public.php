@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?= base_url('css/theme-tokens.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/navbar-public.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/footer-public.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/scroll-to-top.css') ?>">
 
     <!-- Page-specific CSS -->
     <?= $this->renderSection('styles') ?>
@@ -27,9 +28,32 @@
 
     <?= $this->include('layouts/partials/footer') ?>
 
-    <!-- jQuery & Bootstrap JS -->
-    <script src="<?= base_url('js/jquery.min.js') ?>"></script>
-    <script src="<?= base_url('js/bootstrap.min.js') ?>"></script>
+    <!-- Scroll to Top Button -->
+    <a href="#" id="scrollToTop" class="scroll-to-top" title="Kembali ke atas">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="<?= base_url('js/bootstrap.bundle.min.js') ?>"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('scrollToTop');
+            if (btn) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        btn.classList.add('show');
+                    } else {
+                        btn.classList.remove('show');
+                    }
+                });
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
 
     <!-- Page-specific JS -->
     <?= $this->renderSection('scripts') ?>
