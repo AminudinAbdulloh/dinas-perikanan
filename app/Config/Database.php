@@ -27,9 +27,9 @@ class Database extends Config
     public array $default = [
         'DSN'          => '',
         'hostname'     => 'localhost',
-        'username'     => 'root',
-        'password'     => 'root',
-        'database'     => 'dinas_kelautan_perikanan_db',
+        'username'     => '',
+        'password'     => '',
+        'database'     => '',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,

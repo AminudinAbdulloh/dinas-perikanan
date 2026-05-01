@@ -39,6 +39,12 @@ class Auth extends BaseController
         $email    = strtolower(trim((string) $this->request->getPost('email')));
         $password = (string) $this->request->getPost('password');
 
+        // Throttling: Max 5 attempts per minute per IP
+        $throttler = service('throttler');
+        if ($throttler->check(md5($this->request->getIPAddress()), 5, MINUTE) === false) {
+            return redirect()->back()->withInput()->with('error', 'Terlalu banyak percobaan login. Silakan coba lagi dalam satu menit.');
+        }
+
         $model = new AdminUserModel();
         $user  = $model->where('email', $email)->first();
 

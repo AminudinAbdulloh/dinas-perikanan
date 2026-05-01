@@ -22,13 +22,7 @@ class Beranda extends BaseController
         $this->berandaModel = $berandaModel ?? new BerandaModel();
     }
 
-    public function droptables() {
-        $db = \Config\Database::connect();
-        $db->query('DROP TABLE IF EXISTS faqs');
-        $db->query('DROP TABLE IF EXISTS privacy_policies');
-        $db->query("DELETE FROM migrations WHERE class = 'App\\Database\\Migrations\\CreateFaqsTable' OR class = 'App\\Database\\Migrations\\CreatePrivacyPoliciesTable'");
-        return 'Dropped';
-    }
+
 
     public function portal(): string
     {
@@ -288,6 +282,7 @@ class Beranda extends BaseController
         return view('public/pengumuman_detail', $data);
     }
 
+    /* 
     public function faq(): string
     {
         $faqs = [];
@@ -333,6 +328,7 @@ class Beranda extends BaseController
 
         return view('public/kebijakan_privasi', $data);
     }
+    */
 
     /**
      * Informasi Publik – list by category.
