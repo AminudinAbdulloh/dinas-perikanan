@@ -21,6 +21,26 @@
     </a>
 </div>
 
+<div class="row mb-3">
+    <div class="col-12 col-md-6 col-lg-4">
+        <form action="" method="get" class="d-flex gap-2">
+            <div class="input-group">
+                <span class="input-group-text bg-white border-end-0 text-secondary">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text" name="q" class="form-control border-start-0 ps-0 rounded-end-3" 
+                    placeholder="Cari kategori..." value="<?= esc($searchQuery ?? '') ?>">
+            </div>
+            <?php if (($searchQuery ?? '') !== ''): ?>
+                <a href="<?= base_url('admin/konten/kategori-publikasi') ?>" class="btn btn-outline-secondary rounded-3">
+                    <i class="bi bi-x-lg"></i>
+                </a>
+            <?php endif; ?>
+            <button type="submit" class="btn btn-light border rounded-3 px-3">Cari</button>
+        </form>
+    </div>
+</div>
+
 <div class="card border-0 shadow-sm rounded-4 mb-4">
     <div class="card-body p-0">
         <div class="table-responsive">

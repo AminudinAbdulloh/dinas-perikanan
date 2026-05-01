@@ -15,13 +15,22 @@ class KontenGaleriVideo extends BaseController
     public function index(): string
     {
         $model = model(GalleryVideoModel::class);
-        $rows = $model->getAllForAdmin();
+        $q = (string) $this->request->getGet('q');
+
+        if ($q !== '') {
+            $model->like('title', $q);
+        }
+
+        $rows = $model->orderBy('created_at', 'DESC')
+            ->orderBy('id', 'DESC')
+            ->paginate(10, 'admin');
 
         return view('admin/konten/galeri_video_index', [
-            'title'    => 'Galeri Video',
-            'adminNav' => 'konten-galeri-video',
-            'videos'   => $rows,
-            'pager'    => $model->pager,
+            'title'       => 'Galeri Video',
+            'adminNav'    => 'konten-galeri-video',
+            'videos'      => $rows,
+            'pager'       => $model->pager,
+            'searchQuery' => $q,
         ]);
     }
 

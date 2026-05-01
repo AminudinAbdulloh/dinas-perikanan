@@ -21,18 +21,40 @@
 <!-- Status filter tabs -->
 <div class="card border-0 shadow-sm rounded-4 mb-3">
     <div class="card-body py-2 px-3">
-        <div class="d-flex flex-wrap gap-2 align-items-center">
-            <span class="small text-secondary me-1">Filter:</span>
-            <a href="<?= base_url('admin/konten/permohonan-informasi') ?>"
-                class="btn btn-sm rounded-pill <?= ($activeStatus ?? null) === null ? 'btn-primary' : 'btn-outline-secondary' ?>">
-                Semua
-            </a>
-            <?php foreach ($statuses as $slug => $label) : ?>
-                <a href="<?= base_url('admin/konten/permohonan-informasi?status=' . $slug) ?>"
-                    class="btn btn-sm rounded-pill <?= ($activeStatus ?? '') === $slug ? 'btn-primary' : 'btn-outline-secondary' ?>">
-                    <?= esc($label) ?>
+        <div class="d-flex flex-wrap gap-3 align-items-center justify-content-between">
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+                <span class="small text-secondary me-1">Filter:</span>
+                <a href="<?= base_url('admin/konten/permohonan-informasi' . (($searchQuery ?? '') !== '' ? '?q=' . urlencode($searchQuery) : '')) ?>"
+                    class="btn btn-sm rounded-pill <?= ($activeStatus ?? null) === null ? 'btn-primary' : 'btn-outline-secondary' ?>">
+                    Semua
                 </a>
-            <?php endforeach; ?>
+                <?php foreach ($statuses as $slug => $label) : ?>
+                    <a href="<?= base_url('admin/konten/permohonan-informasi?status=' . $slug . (($searchQuery ?? '') !== '' ? '&q=' . urlencode($searchQuery) : '')) ?>"
+                        class="btn btn-sm rounded-pill <?= ($activeStatus ?? '') === $slug ? 'btn-primary' : 'btn-outline-secondary' ?>">
+                        <?= esc($label) ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+
+            <form action="" method="get" class="d-flex gap-2">
+                <?php if (($activeStatus ?? null) !== null): ?>
+                    <input type="hidden" name="status" value="<?= esc($activeStatus) ?>">
+                <?php endif; ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text bg-white border-end-0 text-secondary">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" name="q" class="form-control border-start-0 ps-0 rounded-end-3" 
+                        placeholder="Cari nama atau no. reg..." value="<?= esc($searchQuery ?? '') ?>" style="max-width: 200px;">
+                </div>
+                <?php if (($searchQuery ?? '') !== ''): ?>
+                    <a href="<?= base_url('admin/konten/permohonan-informasi' . (($activeStatus ?? null) !== null ? '?status=' . urlencode($activeStatus) : '')) ?>" 
+                        class="btn btn-sm btn-outline-secondary rounded-3">
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+                <?php endif; ?>
+                <button type="submit" class="btn btn-sm btn-light border rounded-3 px-3">Cari</button>
+            </form>
         </div>
     </div>
 </div>

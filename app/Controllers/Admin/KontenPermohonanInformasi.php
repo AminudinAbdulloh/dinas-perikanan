@@ -15,13 +15,29 @@ class KontenPermohonanInformasi extends BaseController
     public function index(): string
     {
         $status = $this->request->getGet('status');
+        $q = (string) $this->request->getGet('q');
         $model = model(InformationRequestModel::class);
 
         if ($status !== null && !in_array($status, InformationRequestModel::validStatuses(), true)) {
             $status = null;
         }
 
-        $rows = $model->getAllForAdmin($status);
+        if ($q !== '') {
+            $model->groupStart()
+                ->like('registration_number', $q)
+                ->orLike('name', $q)
+                ->orLike('email', $q)
+                ->orLike('phone', $q)
+                ->groupEnd();
+        }
+
+        if ($status !== null) {
+            $model->where('status', $status);
+        }
+
+        $rows = $model->orderBy('created_at', 'DESC')
+            ->orderBy('id', 'DESC')
+            ->paginate(15, 'admin');
 
         return view('admin/konten/permohonan_informasi_index', [
             'title'        => 'Kelola Permohonan Informasi',
@@ -30,6 +46,7 @@ class KontenPermohonanInformasi extends BaseController
             'activeStatus' => $status,
             'statuses'     => InformationRequestModel::statusLabels(),
             'pager'        => $model->pager,
+            'searchQuery'  => $q,
         ]);
     }
 

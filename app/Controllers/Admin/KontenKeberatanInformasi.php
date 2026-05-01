@@ -15,13 +15,28 @@ class KontenKeberatanInformasi extends BaseController
     public function index(): string
     {
         $status = $this->request->getGet('status');
+        $q = (string) $this->request->getGet('q');
         $model = model(InformationObjectionModel::class);
 
         if ($status !== null && !in_array($status, InformationObjectionModel::validStatuses(), true)) {
             $status = null;
         }
 
-        $rows = $model->getAllForAdmin($status);
+        if ($q !== '') {
+            $model->groupStart()
+                ->like('registration_number', $q)
+                ->orLike('name', $q)
+                ->orLike('objection_reason', $q)
+                ->groupEnd();
+        }
+
+        if ($status !== null) {
+            $model->where('status', $status);
+        }
+
+        $rows = $model->orderBy('created_at', 'DESC')
+            ->orderBy('id', 'DESC')
+            ->paginate(15, 'admin');
 
         return view('admin/konten/keberatan_informasi_index', [
             'title'        => 'Kelola Keberatan Informasi',
@@ -30,6 +45,7 @@ class KontenKeberatanInformasi extends BaseController
             'activeStatus' => $status,
             'statuses'     => InformationObjectionModel::statusLabels(),
             'pager'        => $model->pager,
+            'searchQuery'  => $q,
         ]);
     }
 

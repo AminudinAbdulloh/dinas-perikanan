@@ -16,13 +16,28 @@ class KontenInformasiPublik extends BaseController
     public function index(): string
     {
         $category = $this->request->getGet('kategori');
+        $q = (string) $this->request->getGet('q');
         $model = model(PublicInformationModel::class);
 
         if ($category !== null && !in_array($category, PublicInformationModel::validCategories(), true)) {
             $category = null;
         }
 
-        $rows = $model->getAllForAdmin($category);
+        if ($q !== '') {
+            $model->groupStart()
+                ->like('title', $q)
+                ->orLike('description', $q)
+                ->orLike('responsible_party', $q)
+                ->groupEnd();
+        }
+
+        if ($category !== null) {
+            $model->where('category', $category);
+        }
+
+        $rows = $model->orderBy('created_at', 'DESC')
+            ->orderBy('id', 'DESC')
+            ->paginate(15, 'admin');
 
         return view('admin/konten/informasi_publik_index', [
             'title'          => 'Kelola Informasi Publik',
@@ -31,6 +46,7 @@ class KontenInformasiPublik extends BaseController
             'activeCategory' => $category,
             'categories'     => PublicInformationModel::categoryLabels(),
             'pager'          => $model->pager,
+            'searchQuery'    => $q,
         ]);
     }
 

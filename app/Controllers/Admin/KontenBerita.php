@@ -15,13 +15,26 @@ class KontenBerita extends BaseController
     public function index(): string
     {
         $model = model(NewsArticleModel::class);
-        $rows = $model->getAllForAdmin();
+        $q = (string) $this->request->getGet('q');
+
+        if ($q !== '') {
+            $model->groupStart()
+                ->like('title', $q)
+                ->orLike('excerpt', $q)
+                ->orLike('author', $q)
+                ->groupEnd();
+        }
+
+        $rows = $model->orderBy('created_at', 'DESC')
+            ->orderBy('id', 'DESC')
+            ->paginate(10, 'admin');
 
         return view('admin/konten/berita_index', [
-            'title'    => 'Kelola Berita',
-            'adminNav' => 'konten-berita',
-            'articles' => $rows,
-            'pager'    => $model->pager,
+            'title'       => 'Kelola Berita',
+            'adminNav'    => 'konten-berita',
+            'articles'    => $rows,
+            'pager'       => $model->pager,
+            'searchQuery' => $q,
         ]);
     }
 

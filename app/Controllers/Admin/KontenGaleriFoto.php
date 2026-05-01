@@ -19,13 +19,22 @@ class KontenGaleriFoto extends BaseController
     public function index(): string
     {
         $model = model(GalleryPhotoModel::class);
-        $rows = $model->getAllForAdmin();
+        $q = (string) $this->request->getGet('q');
+
+        if ($q !== '') {
+            $model->like('title', $q);
+        }
+
+        $rows = $model->orderBy('created_at', 'DESC')
+            ->orderBy('id', 'DESC')
+            ->paginate(12, 'admin');
 
         return view('admin/konten/galeri_foto_index', [
-            'title'    => 'Galeri Foto',
-            'adminNav' => 'konten-galeri-foto',
-            'photos'   => $rows,
-            'pager'    => $model->pager,
+            'title'       => 'Galeri Foto',
+            'adminNav'    => 'konten-galeri-foto',
+            'photos'      => $rows,
+            'pager'       => $model->pager,
+            'searchQuery' => $q,
         ]);
     }
 

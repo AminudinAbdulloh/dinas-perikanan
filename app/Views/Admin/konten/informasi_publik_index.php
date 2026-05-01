@@ -29,18 +29,40 @@
 <!-- Category filter tabs -->
 <div class="card border-0 shadow-sm rounded-4 mb-3">
     <div class="card-body py-2 px-3">
-        <div class="d-flex flex-wrap gap-2 align-items-center">
-            <span class="small text-secondary me-1">Filter:</span>
-            <a href="<?= base_url('admin/konten/informasi-publik') ?>"
-                class="btn btn-sm rounded-pill <?= ($activeCategory ?? null) === null ? 'btn-primary' : 'btn-outline-secondary' ?>">
-                Semua
-            </a>
-            <?php foreach ($categories as $slug => $label) : ?>
-                <a href="<?= base_url('admin/konten/informasi-publik?kategori=' . $slug) ?>"
-                    class="btn btn-sm rounded-pill <?= ($activeCategory ?? '') === $slug ? 'btn-primary' : 'btn-outline-secondary' ?>">
-                    <?= esc($label) ?>
+        <div class="d-flex flex-wrap gap-3 align-items-center justify-content-between">
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+                <span class="small text-secondary me-1">Filter:</span>
+                <a href="<?= base_url('admin/konten/informasi-publik' . (($searchQuery ?? '') !== '' ? '?q=' . urlencode($searchQuery) : '')) ?>"
+                    class="btn btn-sm rounded-pill <?= ($activeCategory ?? null) === null ? 'btn-primary' : 'btn-outline-secondary' ?>">
+                    Semua
                 </a>
-            <?php endforeach; ?>
+                <?php foreach ($categories as $slug => $label) : ?>
+                    <a href="<?= base_url('admin/konten/informasi-publik?kategori=' . $slug . (($searchQuery ?? '') !== '' ? '&q=' . urlencode($searchQuery) : '')) ?>"
+                        class="btn btn-sm rounded-pill <?= ($activeCategory ?? '') === $slug ? 'btn-primary' : 'btn-outline-secondary' ?>">
+                        <?= esc($label) ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+            
+            <form action="" method="get" class="d-flex gap-2">
+                <?php if (($activeCategory ?? null) !== null): ?>
+                    <input type="hidden" name="kategori" value="<?= esc($activeCategory) ?>">
+                <?php endif; ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text bg-white border-end-0 text-secondary">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" name="q" class="form-control border-start-0 ps-0 rounded-end-3" 
+                        placeholder="Cari judul..." value="<?= esc($searchQuery ?? '') ?>" style="max-width: 200px;">
+                </div>
+                <?php if (($searchQuery ?? '') !== ''): ?>
+                    <a href="<?= base_url('admin/konten/informasi-publik' . (($activeCategory ?? null) !== null ? '?kategori=' . urlencode($activeCategory) : '')) ?>" 
+                        class="btn btn-sm btn-outline-secondary rounded-3">
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+                <?php endif; ?>
+                <button type="submit" class="btn btn-sm btn-light border rounded-3 px-3">Cari</button>
+            </form>
         </div>
     </div>
 </div>
