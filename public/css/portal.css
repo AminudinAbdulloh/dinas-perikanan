@@ -41,7 +41,6 @@ body {
 .portal-hero-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(10, 22, 60, 0.55);
     z-index: 1;
 }
 
