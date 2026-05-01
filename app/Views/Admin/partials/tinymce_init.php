@@ -1,81 +1,160 @@
+<?php
+/**
+ * Reusable TinyMCE Initialization Partial
+ *
+ * Variables:
+ * @var string $selector     CSS selector (default: .admin-richtext-source)
+ * @var int    $height       Editor height (default: 500)
+ * @var string $uploadUrl    URL for image upload
+ * @var string $deleteUrl    URL for image deletion
+ */
+
+$selector  = $selector ?? '.admin-richtext-source';
+$height    = $height ?? 520;
+$uploadUrl = $uploadUrl ?? base_url('admin/konten/upload-image');
+$deleteUrl = $deleteUrl ?? base_url('admin/konten/delete-image');
+?>
+
+<!-- Load TinyMCE only once -->
 <script src="https://cdn.jsdelivr.net/npm/tinymce@7.6.1/tinymce.min.js" referrerpolicy="origin"></script>
+
 <script>
-    tinymce.init({
-        selector: '<?= $selector ?? "#editor" ?>',
-        height: <?= $height ?? 500 ?>,
-        plugins: [
-            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-            'insertdatetime', 'media', 'table', 'help', 'wordcount'
-        ],
-        toolbar: 'undo redo | blocks | ' +
-            'bold italic underline strikethrough | alignleft aligncenter ' +
-            'alignright alignjustify | bullist numlist outdent indent | ' +
-            'removeformat | link image media table | help',
-        content_style: 'body { font-family:Inter,Helvetica,Arial,sans-serif; font-size:16px; line-height: 1.6; }',
-        relative_urls: false,
-        remove_script_host: false,
-        convert_urls: true,
-        image_title: true,
-        images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-            xhr.withCredentials = false;
-            xhr.open('POST', '<?= base_url("admin/konten/upload-image") ?>');
+(function () {
+    const initRichText = () => {
+        // Check if selector exists in DOM
+        if (!document.querySelector('<?= $selector ?>')) return;
 
-            xhr.upload.onprogress = (e) => {
-                progress(e.loaded / e.total * 100);
-            };
-
-            xhr.onload = () => {
-                if (xhr.status < 200 || xhr.status >= 300) {
-                    reject('HTTP Error: ' + xhr.status);
-                    return;
-                }
-
-                const json = JSON.parse(xhr.responseText);
-
-                if (!json || typeof json.location != 'string') {
-                    reject('Invalid JSON: ' + xhr.responseText);
-                    return;
-                }
-
-                resolve(json.location);
-            };
-
-            xhr.onerror = () => {
-                reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
-            };
-
-            const formData = new FormData();
-            formData.append('file', blobInfo.blob(), blobInfo.filename());
-
-            xhr.send(formData);
-        }),
-        file_picker_callback: (cb, value, meta) => {
-            const input = document.createElement('input');
-            input.setAttribute('type', 'file');
-            input.setAttribute('accept', 'image/*');
-            input.onchange = function() {
-                const file = this.files[0];
-                const reader = new FileReader();
-                reader.onload = function() {
-                    const id = 'blobid' + (new Date()).getTime();
-                    const blobCache = tinymce.activeEditor.editorUpload.blobCache;
-                    const base64 = reader.result.split(',')[1];
-                    const blobInfo = blobCache.create(id, file, base64);
-                    blobCache.add(blobInfo);
-                    cb(blobInfo.blobUri(), { title: file.name });
-                };
-                reader.readAsDataURL(file);
-            };
-            input.click();
-        }
-    });
-
-    // Helper function to handle form submission with TinyMCE
-    function syncTinyMCE() {
+        // Remove existing instances to prevent conflicts
         if (typeof tinymce !== 'undefined') {
-            tinymce.triggerSave();
+            tinymce.remove('<?= $selector ?>');
         }
+
+        tinymce.init({
+            selector: '<?= $selector ?>',
+            height: <?= $height ?>,
+            menubar: true,
+            license_key: 'gpl',
+            branding: false,
+            promotion: false,
+            resize: true,
+            toolbar_mode: 'wrap',
+            toolbar_sticky: true,
+            plugins: [
+                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                'insertdatetime', 'media', 'table', 'help', 'wordcount',
+                'pagebreak', 'nonbreaking', 'emoticons'
+            ].join(' '),
+            toolbar: [
+                'undo redo | blocks | bold italic underline strikethrough subscript superscript | removeformat removefont',
+                'fontfamily fontsize lineheight | forecolor backcolor | emoticons',
+                'alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent | hr',
+                'table | link image media | charmap pagebreak nonbreaking',
+                'fullscreen code preview | help'
+            ].join(' | '),
+            block_formats: 'Paragraf=p; Judul 2=h2; Judul 3=h3; Judul 4=h4; Judul 5=h5; Judul 6=h6',
+            font_family_formats: 'Public Sans=Public Sans,system-ui,sans-serif;Arial=arial,helvetica,sans-serif;Georgia=georgia,serif;Times New Roman=times new roman,times,serif;Verdana=verdana,geneva,sans-serif;Courier New=courier new,monospace;',
+            font_size_formats: '8pt 10pt 11pt 12pt 14pt 15pt 16pt 18pt 20pt 24pt 28pt 32pt 36pt',
+            line_height_formats: '1 1.15 1.3 1.5 1.75 2 2.5 3',
+            link_default_protocol: 'https',
+            relative_urls: false,
+            remove_script_host: false,
+            image_title: true,
+            image_description: true,
+            automatic_uploads: true,
+            file_picker_types: 'image',
+            
+            // Image Upload Handler
+            images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '<?= $uploadUrl ?>');
+                xhr.withCredentials = true;
+                
+                xhr.upload.onprogress = (event) => {
+                    if (event.lengthComputable) {
+                        progress((event.loaded / event.total) * 100);
+                    }
+                };
+
+                xhr.onload = () => {
+                    if (xhr.status < 200 || xhr.status >= 300) {
+                        reject('Upload gagal. Coba lagi.');
+                        return;
+                    }
+                    let json = null;
+                    try { json = JSON.parse(xhr.responseText); } catch (e) {
+                        reject('Respons upload tidak valid.');
+                        return;
+                    }
+                    if (!json || typeof json.location !== 'string') {
+                        reject((json && json.error) ? json.error : 'Upload gagal.');
+                        return;
+                    }
+                    resolve(json.location);
+                };
+                
+                xhr.onerror = () => reject('Koneksi upload gagal.');
+                const formData = new FormData();
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
+                xhr.send(formData);
+            }),
+
+            media_live_embeds: true,
+            content_css: [
+                'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap',
+            ],
+            content_style: 'body { font-family: "Public Sans", system-ui, sans-serif; font-size: 15px; line-height: 1.65; margin: 1rem; max-width: 52rem; }',
+            extended_valid_elements: 'iframe[src|width|height|frameborder|allowfullscreen|title|loading|referrerpolicy|sandbox|class],img[src|alt|title|width|height|loading|class],span[style|class]',
+            
+            setup: function (editor) {
+                editor.ui.registry.addButton('removefont', {
+                    tooltip: 'Hapus gaya font',
+                    text: 'Remove font style',
+                    onAction: function () {
+                        editor.formatter.remove('fontname');
+                        editor.formatter.remove('fontsize');
+                        editor.formatter.remove('lineheight');
+                        editor.execCommand('RemoveFormat');
+                    },
+                });
+
+                editor.on('change input undo redo', function () {
+                    editor.save();
+                });
+
+                // Auto-delete logic
+                let _prevEditorImages = [];
+                const getEditorImages = () =>
+                    editor.dom.select('img')
+                        .map(img => img.getAttribute('src') || '')
+                        .filter(src => src.includes('/uploads/editor/'));
+
+                editor.on('init', function () {
+                    _prevEditorImages = getEditorImages();
+                });
+
+                editor.on('change undo redo', function () {
+                    const current = getEditorImages();
+                    const removed = _prevEditorImages.filter(src => !current.includes(src));
+                    removed.forEach(src => {
+                        fetch('<?= $deleteUrl ?>', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            credentials: 'same-origin',
+                            body: JSON.stringify({ src }),
+                        }).catch(() => { });
+                    });
+                    _prevEditorImages = current;
+                });
+            }
+        });
+    };
+
+    // Initialize on load
+    if (document.readyState === 'complete') {
+        initRichText();
+    } else {
+        window.addEventListener('load', initRichText);
     }
+})();
 </script>
